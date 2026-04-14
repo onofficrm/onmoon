@@ -1794,3 +1794,208 @@ box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1)}
 .contents_wrap .rb_bbs_wrap .rb_bbs_for_cont_txt {
     color: #6b7280 !important;
 }
+
+/* -------------------------------------------------------------------------
+   글보기(boon-build): 흰 배경 · 댓글/이전다음 제거 버전 (.bb-view-clean-*)
+   ------------------------------------------------------------------------- */
+.bb-view-clean-wrap {
+    background: #fff !important;
+    margin-top: 0 !important;
+    padding: 0 0 48px;
+    border-radius: 0;
+    box-shadow: none !important;
+}
+
+.bb-view-clean {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 20px 0;
+    background: #fff;
+    color: #111827;
+}
+
+.bb-view-toolbar {
+    margin: 0 0 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.bb-view-toolbar__inner {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.bb-view-toolbar__sp {
+    flex: 1;
+    min-width: 8px;
+}
+
+.bb-view-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none !important;
+    border: 1px solid transparent;
+    cursor: pointer;
+    background: #fff;
+    color: #374151;
+}
+
+.bb-view-btn--ghost {
+    border-color: #e5e7eb;
+    color: #4b5563;
+}
+
+.bb-view-btn--ghost:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    color: #111827;
+}
+
+.bb-view-btn--primary {
+    background: #111827;
+    color: #fff !important;
+    border-color: #111827;
+}
+
+.bb-view-btn--primary:hover {
+    background: #1f2937;
+}
+
+.bb-view-head {
+    margin-bottom: 28px;
+}
+
+.bb-view-title {
+    margin: 0 0 12px;
+    font-size: 1.75rem;
+    font-weight: 800;
+    line-height: 1.35;
+    color: #0f172a;
+    word-break: keep-all;
+}
+
+.bb-view-meta {
+    margin: 0;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.bb-view-meta a {
+    color: #4b5563;
+    text-decoration: none;
+}
+
+.bb-view-meta a:hover {
+    text-decoration: underline;
+}
+
+.bb-view-meta__sep {
+    margin: 0 8px;
+    color: #d1d5db;
+}
+
+.bb-view-section {
+    margin-bottom: 24px;
+    padding: 16px 18px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+
+.bb-view-section__tit {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #374151;
+    padding-left: 10px;
+    border-left: 3px solid #ef4444;
+}
+
+.bb-view-files__row,
+.bb-view-links__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+}
+
+.bb-view-files__row:last-child,
+.bb-view-links__row:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.bb-view-files__row a,
+.bb-view-links__row a {
+    color: #2563eb;
+    word-break: break-all;
+}
+
+.bb-view-files__meta,
+.bb-view-links__meta {
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.bb-view-body {
+    margin: 0 0 32px;
+    padding: 0;
+    background: #fff;
+}
+
+.bb-view-body #bo_v_img {
+    margin-bottom: 20px;
+}
+
+.bb-view-body #bo_v_img img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.bb-view-body #bo_v_con {
+    margin: 0;
+    min-height: 0;
+    line-height: 1.75;
+    font-size: 16px;
+    color: #1f2937;
+    word-break: break-word;
+}
+
+.bb-view-body #bo_v_con img {
+    max-width: 100%;
+    height: auto;
+}
+
+.bb-view-foot {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.bb-view-foot__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+@media (max-width: 767px) {
+    .bb-view-clean {
+        padding: 16px 14px 0;
+    }
+
+    .bb-view-title {
+        font-size: 1.35rem;
+    }
+}

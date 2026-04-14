@@ -360,3 +360,188 @@
     border-radius:8px !important;
     border-color:#d1d5db !important;
 }
+
+/* 글보기(boon-build_mo): 흰 배경 · 댓글/이전다음 제거 */
+.bb-mo-view-toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 10px 0;
+    padding: 10px 12px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.bb-mo-view-toolbar__sp {
+    flex: 1;
+}
+
+.bb-mo-view-toolbar__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151 !important;
+    text-decoration: none !important;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+.bb-mo-view-toolbar__btn--icon {
+    min-width: 40px;
+    padding: 8px 10px;
+}
+
+.bb-mo-share,
+.bb-mo-more {
+    position: relative;
+}
+
+.bb-mo-share__panel {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 6px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    z-index: 200;
+    min-width: 160px;
+    text-align: right;
+}
+
+.bb-mo-more__list {
+    top: 100%;
+    right: 0;
+    margin-top: 6px;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+#bo_v.bb-view-clean-mo {
+    background: #fff !important;
+    color: #111827;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    margin: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.bb-view-clean-mo__head {
+    padding: 20px 16px 16px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.bb-view-clean-mo__title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.4;
+    color: #0f172a;
+    word-break: break-word;
+}
+
+.bb-view-clean-mo__cate {
+    display: inline-block;
+    margin-bottom: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #4b5563;
+    background: #f3f4f6;
+    border-radius: 6px;
+}
+
+.bb-view-clean-mo__meta {
+    margin: 12px 0 0;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.bb-view-clean-mo__meta-sep {
+    margin: 0 6px;
+    color: #d1d5db;
+}
+
+.bb-view-clean-mo__body {
+    padding: 16px;
+    background: #fff;
+}
+
+.bb-view-clean-mo__body #bo_v_img img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.bb-view-clean-mo__body #bo_v_con {
+    margin: 0;
+    min-height: 0;
+    line-height: 1.75;
+    font-size: 15px;
+    color: #1f2937;
+    word-break: break-word;
+}
+
+.bb-view-clean-mo__body #bo_v_con img {
+    max-width: 100%;
+    height: auto;
+}
+
+.bb-view-clean-mo__sig {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #f3f4f6;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.bb-view-clean-mo__section {
+    padding: 0 16px 16px;
+    border-top: 1px solid #f3f4f6;
+}
+
+.bb-view-clean-mo__filelist,
+.bb-view-clean-mo__linklist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.bb-view-clean-mo__filelist li,
+.bb-view-clean-mo__linklist li {
+    padding: 12px 0;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 14px;
+}
+
+.bb-view-clean-mo__filelist li:last-child,
+.bb-view-clean-mo__linklist li:last-child {
+    border-bottom: 0;
+}
+
+.bb-view-clean-mo__filelist a,
+.bb-view-clean-mo__linklist a {
+    color: #2563eb;
+    word-break: break-all;
+}
+
+.bb-view-clean-mo__filemeta {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.btn_top.top.btn_bo_user {
+    display: none !important;
+}
