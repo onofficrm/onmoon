@@ -79,61 +79,40 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_THEME_URL.'/rb.layout_hd/'.$rb
                 <nav id="cbp-hrmenu" class="cbp-hrmenu pc">
                     <ul>
                     <?php
-                    if(IS_MOBILE()) {
-                        $menu_datas = get_menu_db(1, true);
-                    } else {
-                        $menu_datas = get_menu_db(0, true);
-                    }
-
-                    $gnb_zindex = 999;
+                    $menu_datas = get_menu_db(0, true);
+                    $gnb_zindex = 999; // gnb_1dli z-index 값 설정용
                     $i = 0;
-                    foreach($menu_datas as $row) {
-                        if(empty($row)) continue;
-
-                        // 1차 메뉴 권한 체크
-                        if (!$is_admin && isset($row['me_level']) && $row['me_level'] > 0) {
-                            if (isset($row['me_level_opt']) && $row['me_level_opt'] == 2) {
-                                if ($row['me_level'] != $member['mb_level']) continue;
-                            } else {
-                                if ($row['me_level'] > $member['mb_level']) continue;
-                            }
-                        }
+                    foreach( $menu_datas as $row ){
+                        if( empty($row) ) continue;
+                        $has_sub = !empty($row['sub']);
                     ?>
-                        <li>
-                            <a href="<?php echo $row['me_link']; ?>" target="_<?php echo $row['me_target']; ?>" class="font-B"><?php echo $row['me_name'] ?></a>
-                            <?php
-                            $k = 0;
-                            foreach((array)$row['sub'] as $row2) {
-                                if(empty($row2)) continue;
+                    <li class="<?php echo $has_sub ? 'has-sub' : ''; ?>">
+                        <a href="<?php echo $row['me_link']; ?>" target="_<?php echo $row['me_target']; ?>" class="font-B"><?php echo $row['me_name'] ?></a>
+                        <?php
+                        $k = 0;
+                        foreach( (array) $row['sub'] as $row2 ){
 
-                                // 2차 메뉴 권한 체크
-                                if (!$is_admin && isset($row2['me_level']) && $row2['me_level'] > 0) {
-                                    if (isset($row2['me_level_opt']) && $row2['me_level_opt'] == 2) {
-                                        if ($row2['me_level'] != $member['mb_level']) continue;
-                                    } else {
-                                        if ($row2['me_level'] > $member['mb_level']) continue;
-                                    }
-                                }
+                            if( empty($row2) ) continue; 
 
-                                if($k == 0)
-                                    echo '<div class="cbp-hrsub"><div class="cbp-hrsub-inner"><div><ul>'.PHP_EOL;
-                            ?>
-                                <li><a href="<?php echo $row2['me_link']; ?>" target="_<?php echo $row2['me_target']; ?>"><?php echo $row2['me_name'] ?></a></li>
-                            <?php
-                                $k++;
-                            }
+                            if($k == 0)
+                                echo '<div class="cbp-hrsub"><div class="cbp-hrsub-inner"><div><!--<h4 class="font-B">그룹</h4>--><ul>'.PHP_EOL;
+                        ?>
+                            <li><a href="<?php echo $row2['me_link']; ?>" target="_<?php echo $row2['me_target']; ?>"><?php echo $row2['me_name'] ?></a></li>
+                        <?php
+                        $k++;
+                        }   //end foreach $row2
 
-                            if($k > 0)
-                                echo '</ul></div></div></div>'.PHP_EOL;
-                            ?>
-                        </li>
+                        if($k > 0)
+                            echo '</ul></div></div></div>'.PHP_EOL;
+                        ?>
+                    </li>
                     <?php
-                        $i++;
-                    }
-
-                    if ($i == 0) {
+                    $i++;
+                    }   //end foreach $row
                     ?>
-                        <li><a href="javascript:void(0);">메뉴 준비 중입니다.</a></li>
+                    
+                    <?php if ($i == 0) {  ?>
+                    <li><a href="javascript:void(0);">메뉴 준비 중입니다.</a></li>
                     <?php } ?>
                     </ul>
                 </nav>
@@ -288,12 +267,10 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_THEME_URL.'/rb.layout_hd/'.$rb
                             <button type="button" alt="로그아웃" class="btn_round" onclick="location.href='<?php echo G5_BBS_URL ?>/logout.php';">로그아웃</button>
                             <button type="button" alt="마이페이지" class="btn_round arr_bg font-B" onclick="location.href='<?php echo G5_URL; ?>/rb/home.php?mb_id=<?php echo $member['mb_id']; ?>';">My</button>
                         <?php } else { ?>
-                            <button type="button" alt="로그인" class="btn_round"  onclick="location.href='<?php echo G5_BBS_URL ?>/login.php?url=<?php echo urlencode(getCurrentUrl()); ?>';">로그인</button>
+                            <button type="button" alt="로그인" class="btn_round"  onclick="location.href='<?php echo G5_BBS_URL ?>/login.php';">로그인</button>
                             <button type="button" alt="회원가입" class="btn_round arr_bg font-B" onclick="location.href='<?php echo G5_BBS_URL ?>/register.php';">회원가입</button>
                         <?php } ?>
                     </li>
-                    
-                    <div class="cb"></li>
                 </ul>
                 <!-- } -->
                 

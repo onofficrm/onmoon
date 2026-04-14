@@ -11,36 +11,11 @@ if(G5_COMMUNITY_USE === false) {
     return;
 }
 ?>
-<?php if (!defined("_INDEX_")) { ?>
-    <?php if(isset($bo_table) && $bo_table) { ?>
-    <div class="rb_bo_btm flex_box rb_sub_module" data-layout="rb_bo_btm_<?php echo $bo_table ?>"></div>
-    <?php } ?>
-    <?php if(isset($co_id) && $co_id) { ?>
-    <div class="rb_co_btm flex_box rb_sub_module" data-layout="rb_co_btm_<?php echo $co_id ?>"></div>
-    <?php } ?>
-    <?php if(isset($fr_id) && $fr_id) { ?>
-    <div class="rb_fr_btm flex_box rb_sub_module" data-layout="rb_fr_btm_<?php echo $fr_id ?>"></div>
-    <?php } ?>
-<?php } ?>
-
-<?php if (!defined('_INDEX_') && !$sidebar_hidden) { ?>
-   
-    <?php if (!empty($side_float)) { ?>
+        </section>
     </div>
-    <?php } ?>
-    <?php if (isset($rb_core['sidemenu']) && $rb_core['sidemenu'] == "left" || isset($rb_core['sidemenu']) && $rb_core['sidemenu'] == "right") { ?>
-    <div id="rb_sidemenu" class="rb_sidemenu rb_sidemenu_<?php echo isset($rb_core['sidemenu']) ? $rb_core['sidemenu'] : ''; ?> <?php if (isset($rb_core['sidemenu_hide']) && $rb_core['sidemenu_hide'] == "1") { ?>pc<?php } ?>" style="width:<?php echo isset($rb_core['sidemenu_width']) ? $rb_core['sidemenu_width'] : '200'; ?>px; <?php if (isset($rb_core['sidemenu']) && $rb_core['sidemenu'] == "left") { ?>padding-right:<?php echo isset($rb_core['sidemenu_padding']) ? $rb_core['sidemenu_padding'] : '0'; ?>px;<?php } else if (isset($rb_core['sidemenu']) && $rb_core['sidemenu'] == "right") { ?>padding-left:<?php echo isset($rb_core['sidemenu_padding']) ? $rb_core['sidemenu_padding'] : '0'; ?>px;<?php } ?>"><div class="flex_box" data-layout="rb_sidemenu"></div></div>
-    <?php } ?>
-
-    <div class="cb"></div>
-
-<?php } ?>
-
-</section>
-</div>
-
-
-<?php 
+    
+    
+    <?php 
 
     if (isset($rb_core['layout_ft']) && $rb_core['layout_ft'] == "") {
         echo "<div class='no_data' style='padding:30px 0 !important; margin-top:0px; border:0px !important; background-color:#f9f9f9;'><span class='no_data_section_ul1 font-B color-000'>선택된 푸터 레이아웃이 없습니다.</span><br>환경설정 패널에서 먼저 푸터 레이아웃을 설정해주세요.</div>";
@@ -52,110 +27,80 @@ if(G5_COMMUNITY_USE === false) {
     }
 
     ?>
+    
+    
 
 
+                <!-- 전체메뉴 { -->
+                <nav id="cbp-hrmenu-btm" class="cbp-hrmenu cbp-hrmenu-btm mobile">
+                   
+                    <div class="user_prof_bg">
+                        <?php if($is_member) { ?>
+                            <li class="user_prof_bg_info font-B"><?php echo $member['mb_nick'] ?></li>
+                            <li class="user_prof_bg_info font-B"><span><?php echo $member['mb_level'] ?> Lv</span> <a href="<?php echo G5_BBS_URL; ?>/point.php" target="_blank" class="win_point font-B"><span><?php echo number_format($member['mb_point']); ?> P</span></a></li>
+                        <?php } else { ?>
+                            <li class="user_prof_bg_info font-B">Guest</li>
+                        <?php } ?>
+                    </div>
+                    <div class="user_prof">
+                        <?php if($is_member) { ?>
+                        <a href="<?php echo G5_BBS_URL ?>/member_confirm.php?url=<?php echo G5_BBS_URL ?>/register_form.php" class="font-B"><?php echo get_member_profile_img($member['mb_id']); ?></a>
+                        <?php } else { ?>
+                        <?php echo get_member_profile_img($member['mb_id']); ?>
+                        <?php } ?>
+                    </div>
+                    <div class="user_prof_btns">
+                        <li class="">
+                            <?php if($is_member) { ?>
+                            <button type="button" alt="로그아웃" class="btn_round" onclick="location.href='<?php echo G5_BBS_URL ?>/logout.php';">로그아웃</button>
+                            <button type="button" alt="마이페이지" class="btn_round arr_bg font-B" onclick="location.href='<?php echo G5_URL; ?>/rb/home.php?mb_id=<?php echo $member['mb_id']; ?>';">My</button>
+                            <?php } else { ?>
+                            <button type="button" alt="로그인" class="btn_round" onclick="location.href='<?php echo G5_BBS_URL ?>/login.php';">로그인</button>
+                            <button type="button" alt="회원가입" class="btn_round arr_bg font-B" onclick="location.href='<?php echo G5_BBS_URL ?>/register.php';">회원가입</button>
+                            <?php } ?>
+                        </li>
+                    </div>
+                    
+                    
+                    <ul>
+                    <?php
+                    $menu_datas = get_menu_db(0, true);
+                    $gnb_zindex = 999; // gnb_1dli z-index 값 설정용
+                    $i = 0;
+                    foreach( $menu_datas as $row ){
+                        if( empty($row) ) continue;
+                        $add_arr = (isset($row['sub']) && $row['sub']) ? 'add_arr_svg' : '';
+                        $add_arr_btn = (isset($row['sub']) && $row['sub']) ? '<button type="button" class="add_arr_btn"></button>' : '';
+                    ?>
+                    <li class="<?php echo $add_arr ?>">
+                        <a href="<?php echo $row['me_link']; ?>" target="_<?php echo $row['me_target']; ?>" class="font-B"><?php echo $row['me_name'] ?></a>
+                        <?php echo $add_arr_btn ?>
+                        <?php
+                        $k = 0;
+                        foreach( (array) $row['sub'] as $row2 ){
 
-
-<!-- 전체메뉴 { -->
-<nav id="cbp-hrmenu-btm" class="cbp-hrmenu cbp-hrmenu-btm mobile">
-
-    <div class="user_prof_bg">
-        <?php if($is_member) { ?>
-        <li class="user_prof_bg_info font-B"><?php echo $member['mb_nick'] ?></li>
-        <li class="user_prof_bg_info font-B"><span><?php echo $member['mb_level'] ?> Lv</span> <a href="<?php echo G5_BBS_URL; ?>/point.php" target="_blank" class="win_point font-B"><span><?php echo number_format($member['mb_point']); ?> P</span></a></li>
-        <?php } else { ?>
-        <li class="user_prof_bg_info font-B">Guest</li>
-        <?php } ?>
-    </div>
-    <div class="user_prof">
-        <?php if($is_member) { ?>
-        <a href="<?php echo G5_BBS_URL ?>/member_confirm.php?url=<?php echo G5_BBS_URL ?>/register_form.php" class="font-B"><?php echo get_member_profile_img($member['mb_id']); ?></a>
-        <?php } else { ?>
-        <?php echo get_member_profile_img($member['mb_id']); ?>
-        <?php } ?>
-    </div>
-    <div class="user_prof_btns">
-        <li class="">
-            <?php if($is_member) { ?>
-            <button type="button" alt="로그아웃" class="btn_round" onclick="location.href='<?php echo G5_BBS_URL ?>/logout.php';">로그아웃</button>
-            <button type="button" alt="마이페이지" class="btn_round arr_bg font-B" onclick="location.href='<?php echo G5_URL; ?>/rb/home.php?mb_id=<?php echo $member['mb_id']; ?>';">My</button>
-            <?php } else { ?>
-            <button type="button" alt="로그인" class="btn_round" onclick="location.href='<?php echo G5_BBS_URL ?>/login.php?url=<?php echo urlencode(getCurrentUrl()); ?>';">로그인</button>
-            <button type="button" alt="회원가입" class="btn_round arr_bg font-B" onclick="location.href='<?php echo G5_BBS_URL ?>/register.php';">회원가입</button>
-            <?php } ?>
-        </li>
-    </div>
-
-
-
-    <ul>
-
-
-        <?php
-                        if(IS_MOBILE()) {
-                            $menu_datas = get_menu_db(1, true);
-                        } else { 
-                            $menu_datas = get_menu_db(0, true);
-                        }
-
-                        $gnb_zindex = 999;
-                        $i = 0;
-                        foreach ($menu_datas as $row) {
-                            if (empty($row)) continue;
-
-                            // 1차 메뉴 권한 체크
-                            if (!$is_admin && isset($row['me_level']) && $row['me_level'] > 0) {
-                                if (isset($row['me_level_opt']) && $row['me_level_opt'] == 2) {
-                                    if ($row['me_level'] != $member['mb_level']) continue;
-                                } else {
-                                    if ($row['me_level'] > $member['mb_level']) continue;
-                                }
-                            }
-
-                            $add_arr = (isset($row['sub']) && $row['sub']) ? 'add_arr_svg' : '';
-                            $add_arr_btn = (isset($row['sub']) && $row['sub']) ? '<button type="button" class="add_arr_btn"></button>' : '';
+                            if( empty($row2) ) continue; 
+                            
+                            if($k == 0)
+                                echo '<div class="cbp-hrsub"><div class="cbp-hrsub-inner"><div><!--<h4 class="font-B">그룹</h4>--><ul>'.PHP_EOL;
+                            
                         ?>
-        <li class="<?php echo $add_arr ?>">
-            <a href="<?php echo $row['me_link']; ?>" target="_<?php echo $row['me_target']; ?>" class="font-B"><?php echo $row['me_name'] ?></a>
-            <?php echo $add_arr_btn ?>
-            <?php
-                                $k = 0;
-                                foreach ((array) $row['sub'] as $row2) {
-                                    if (empty($row2)) continue;
+                            <li><a href="<?php echo $row2['me_link']; ?>" target="_<?php echo $row2['me_target']; ?>"><?php echo $row2['me_name'] ?></a></li>
+                        <?php
+                        $k++;
+                        }   //end foreach $row2
 
-                                    // 2차 메뉴 권한 체크
-                                    if (!$is_admin && isset($row2['me_level']) && $row2['me_level'] > 0) {
-                                        if (isset($row2['me_level_opt']) && $row2['me_level_opt'] == 2) {
-                                            if ($row2['me_level'] != $member['mb_level']) continue;
-                                        } else {
-                                            if ($row2['me_level'] > $member['mb_level']) continue;
-                                        }
-                                    }
-
-                                    if ($k == 0)
-                                        echo '<div class="cbp-hrsub"><div class="cbp-hrsub-inner"><div><!--<h4 class="font-B">그룹</h4>--><ul>' . PHP_EOL;
-                                ?>
-        <li><a href="<?php echo $row2['me_link']; ?>" target="_<?php echo $row2['me_target']; ?>"><?php echo $row2['me_name'] ?></a></li>
-        <?php
-                                    $k++;
-                                }
-
-                                if ($k > 0)
-                                    echo '</ul></div></div></div>' . PHP_EOL;
-                                ?>
-        </li>
-        <?php
-                            $i++;
-                        }
+                        if($k > 0)
+                            echo '</ul></div></div></div>'.PHP_EOL;
                         ?>
-
-    </ul>
-
-
-</nav>
-
-
-<!-- } -->
+                    </li>
+                    <?php
+                    $i++;
+                    }   //end foreach $row
+                    ?>
+                    </ul>
+                </nav>
+                <!-- } -->
 
 
 
@@ -213,79 +158,118 @@ if(G5_COMMUNITY_USE === false) {
     })
 </script>
 
-<?php if($bo_table && $wr_id) { // 댓글 수정모드일때 높이값 갱신?>
+<link rel="stylesheet" href="<?php echo G5_THEME_URL ?>/rb.css/datepicker.css" />
+<!-- } -->
+
+<!-- rb 전용 swiper (서브페이지용) { -->
 <script>
-    (function() {
-        if (!window.comment_box || window.comment_box.__patched) return;
+        $('.rb_swiper').each(function () {
+            initializeSlider($(this));
+        });
 
-        var _orig = window.comment_box;
+        function initializeSlider($rb_slider) {
+            var realInx = 0;
+            var winWChk = '';
+            var swiper;
 
-        function kick() {
-            var ta = document.getElementById('wr_content');
-            if (!ta) return;
-            if (window.jQuery) $('#wr_content').trigger('input');
-            else {
-                ta.style.minHeight = '150px';
-                ta.style.height = 'auto';
-                ta.style.height = ta.scrollHeight + 'px';
+            $(window).on('load resize', function () {
+                var pcRows = parseInt($rb_slider.data('pc-h'), 10) || 1;
+                var moRows = parseInt($rb_slider.data('mo-h'), 10) || 1;
+                var pcCols = parseInt($rb_slider.data('pc-w'), 10) || 1;
+                var moCols = parseInt($rb_slider.data('mo-w'), 10) || 1;
+                var winW = window.innerWidth;
+                var pcGap = parseInt($rb_slider.data('pc-gap'), 10) || 0;
+                var moGap = parseInt($rb_slider.data('mo-gap'), 10) || 0;
+                var pcSwap = $rb_slider.data('pc-swap') == 1 ? 1 : 0;
+                var moSwap = $rb_slider.data('mo-swap') == 1 ? 1 : 0;
+
+                if (winW <= 1024 && winWChk != 'mo') {
+                    var view = moRows * moCols;
+                    winWChk = 'mo';
+                    setListWidth($rb_slider, moCols, moGap);
+                    reorganizeSlides($rb_slider, view, moGap, moCols);
+                    startSlider($rb_slider, view, moSwap, moGap);
+                } else if (winW > 1024 && winWChk != 'pc') {
+                    var view = pcRows * pcCols;
+                    winWChk = 'pc';
+                    setListWidth($rb_slider, pcCols, pcGap);
+                    reorganizeSlides($rb_slider, view, pcGap, pcCols);
+                    startSlider($rb_slider, view, pcSwap, pcGap);
+                }
+            });
+
+            function setListWidth($rb_slider, cols, gap) {
+                var widthPercentage = `calc(${100 / cols}% - ${(gap * (cols - 1)) / cols}px)`;
+                $rb_slider.find('.rb_swiper_list').css('width', widthPercentage);
+            }
+
+            function reorganizeSlides($rb_slider, view, gap, cols) {
+                if ($rb_slider.find('.rb_swiper_list').parent().hasClass('rb-swiper-slide')) {
+                    $rb_slider.find('.swiper-slide-duplicate').remove();
+                    $rb_slider.find('.rb_swiper_list').unwrap('.rb-swiper-slide');
+                }
+
+                var num = 0;
+                $rb_slider.find('.rb_swiper_list').each(function (i) {
+                    $(this).addClass('rb_swiper_list' + (Math.floor((i + view) / view)));
+                    num = Math.floor((i + view) / view);
+                }).promise().done(function () {
+                    for (var i = 1; i <= num; i++) {
+                        $rb_slider.find('.rb_swiper_list' + i).wrapAll('<div class="rb-swiper-slide swiper-slide"></div>');
+                        $rb_slider.find('.rb_swiper_list' + i).removeClass('rb_swiper_list' + i);
+                    }
+                });
+
+                removeRightGap($rb_slider, gap, cols); // 마지막 요소 오른쪽 간격 제거
+                setSlideGap($rb_slider, gap); // 슬라이드 간격 설정
+            }
+
+            function removeRightGap($rb_slider, gap, cols) {
+                $rb_slider.find('.rb_swiper_list').each(function (index) {
+                    if ((index + 1) % cols === 0) {
+                        $(this).css('margin-right', '0');
+                    }
+                });
+            }
+
+            function setSlideGap($rb_slider, gap) {
+                $rb_slider.find('.rb-swiper-slide').css({
+                    'gap': gap + 'px', // 동적으로 gap 적용
+                });
+            }
+
+            function startSlider($rb_slider, view, swap, gap) {
+                var autoplayEnabled = $rb_slider.data('autoplay') == 1;
+                var autoplayDelay = parseInt($rb_slider.data('autoplay-time'), 10) || 3000;
+
+                if (swiper) {
+                    swiper.destroy(true, true); // 기존 인스턴스 제거
+                }
+
+                swiper = new Swiper($rb_slider.find('.rb_swiper_inner')[0], {
+                    slidesPerView: 1,
+                    initialSlide: Math.floor(realInx / view),
+                    resistanceRatio: 0,
+                    spaceBetween: gap,
+                    touchRatio: swap,
+                    autoplay: autoplayEnabled ? {
+                        delay: autoplayDelay,
+                        disableOnInteraction: false
+                    } : false,
+                    navigation: {
+                        nextEl: $rb_slider.find('.rb-swiper-next')[0],
+                        prevEl: $rb_slider.find('.rb-swiper-prev')[0],
+                    },
+                    on: {
+                        slideChange: function () {
+                            realInx = this.realIndex * view;
+                        }
+                    },
+                });
             }
         }
 
-        window.comment_box = function() {
-            var ret = _orig.apply(this, arguments);
-            // 레이아웃 반영 후 두 번 정도 태워줌
-            requestAnimationFrame(kick);
-            setTimeout(kick, 0);
-            return ret;
-        };
-        window.comment_box.__patched = true;
-    })();
 </script>
-<script>
-(function () {
-  // 1) check_byte를 원형 보존 + 최근 target만 기록 (동작은 100% 동일)
-  if (typeof window.check_byte === 'function' && !window.check_byte.__rb_wrapped) {
-    var __orig_check_byte = window.check_byte;
-    window.__rb_last_cb_target = null;
-
-    window.check_byte = function (content, target) {
-      window.__rb_last_cb_target = target || window.__rb_last_cb_target;
-      return __orig_check_byte.apply(this, arguments);
-    };
-    window.check_byte.__rb_wrapped = true;
-    window.check_byte.__rb_orig = __orig_check_byte;
-  }
-
-  // 2) comment_box 원본 보존 후, 실행 직후 "한 번만" 재계산
-  if (typeof window.comment_box === 'function' && !window.comment_box.__rb_patched) {
-    var _orig_comment_box = window.comment_box;
-
-    window.comment_box = function () {
-      var ret = _orig_comment_box.apply(this, arguments);
-
-      setTimeout(function () {
-        // 최근에 페이지가 사용한 target을 우선 사용
-        var target = window.__rb_last_cb_target
-                  || (document.getElementById('char_count') ? 'char_count' : null)
-                  || (document.getElementById('char_cnt')   ? 'char_cnt'   : null);
-
-        if (typeof window.check_byte === 'function' && target) {
-          // 원래 출력 형식(N 글자 등)을 그대로 유지하려고 원본 check_byte를 호출
-          var fn = window.check_byte.__rb_orig || window.check_byte;
-          fn('wr_content', target);
-        }
-      }, 0);
-
-      return ret;
-    };
-    window.comment_box.__rb_patched = true;
-  }
-})();
-</script>
-
-<?php } ?>
-
-<link rel="stylesheet" href="<?php echo G5_THEME_URL ?>/rb.css/datepicker.css" />
 <!-- } -->
 
 <?php
@@ -313,13 +297,11 @@ if ($config['cf_analytics']) {
 
 <!-- } 하단 끝 -->
 
-
 <script>
-    $(function() {
-        // 폰트 리사이즈 쿠키있으면 실행
-        font_resize("container", get_cookie("ck_font_resize_rmv_class"), get_cookie("ck_font_resize_add_class"));
-    });
-
+$(function() {
+    // 폰트 리사이즈 쿠키있으면 실행
+    font_resize("container", get_cookie("ck_font_resize_rmv_class"), get_cookie("ck_font_resize_add_class"));
+});
 </script>
 
 <?php

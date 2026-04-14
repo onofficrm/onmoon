@@ -79,7 +79,7 @@ $wr_3 = isset($view["wr_3"]) ? explode("|", $view["wr_3"]) : [];
                         if ($view['wr_datetime'] >= date("Y-m-d H:i:s", G5_SERVER_TIME - ($board['bo_new'] * 3600)))
                             $view['icon_new'] = "<span class=\"lb_ico_new\">신규</span>";
                         $view['icon_hot'] = "";
-                        if ($board['bo_hot'] > 0 && $view['wr_hit'] >= $board['bo_hot'])
+                        if ($view['wr_hit'] >= $board['bo_hot'])
                             $view['icon_hot'] = "<span class=\"lb_ico_hot\">인기</span>";
 
                         echo $view['icon_new']; //뉴아이콘
@@ -126,16 +126,16 @@ $wr_3 = isset($view["wr_3"]) ? explode("|", $view["wr_3"]) : [];
                 <ul class="font-B view_info_tit"><?php echo get_text($view['wr_subject']);?></ul>
                 
                 <?php if(isset($view['wr_6']) && $view['wr_6']) { ?>
-                <ul class="view_info_sub"><?php echo isset($view['wr_6']) ? get_text($view['wr_6'], true) : ''; ?></ul>
+                <ul class="view_info_sub"><?php echo isset($view['wr_6']) ? nl2br($view['wr_6']) : ''; ?></ul>
                 <?php } ?>
                 
                 <?php if(isset($wr_1[0]) && $wr_1[0] || isset($wr_1[1]) && $wr_1[1]) { ?>
                 <ul class="font-B view_info_pri1 main_color">
                     <?php if(isset($wr_1[0]) && $wr_1[0]) { ?>
-                    <li><?php echo isset($wr_1[0]) ? get_text($wr_1[0]) : ''; ?></li>
+                    <li><?php echo isset($wr_1[0]) ? $wr_1[0] : ''; ?></li>
                     <?php } ?>
                     <?php if(isset($wr_1[0]) && $wr_1[0]) { ?>
-                    <li class="view_info_pri1 labels main_color font-B"><?php echo isset($wr_1[1]) ? get_text($wr_1[1]) : ''; ?></li>
+                    <li class="view_info_pri1 labels main_color font-B"><?php echo isset($wr_1[1]) ? $wr_1[1] : ''; ?></li>
                     <?php } ?>
                 </ul>
                 <?php } ?>
@@ -152,7 +152,7 @@ $wr_3 = isset($view["wr_3"]) ? explode("|", $view["wr_3"]) : [];
                             <svg width="18" height="18" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5722 1.54713C18.6672 2.76813 20.1412 5.24713 20.0762 8.13913C19.9952 11.7491 17.1862 14.9331 12.3972 17.7771C11.6872 18.1991 10.9392 18.7461 10.0782 18.7461C9.23319 18.7461 8.45319 18.1891 7.75819 17.7761C2.97119 14.9331 0.161193 11.7481 0.0801927 8.13913C0.0151927 5.24713 1.48919 2.76913 3.58419 1.54713C5.54419 0.406128 8.00619 0.399127 10.0782 2.08413C12.1502 0.399127 14.6122 0.405128 16.5722 1.54713ZM15.5652 3.27613C14.1712 2.46413 12.4292 2.49313 10.9212 4.01913C10.8108 4.13033 10.6794 4.21859 10.5348 4.27882C10.3901 4.33905 10.2349 4.37005 10.0782 4.37005C9.92148 4.37005 9.76631 4.33905 9.62163 4.27882C9.47695 4.21859 9.34562 4.13033 9.23519 4.01913C7.72719 2.49313 5.98519 2.46413 4.59119 3.27613C3.14719 4.11813 2.03119 5.90413 2.08019 8.09613C2.13619 10.6071 4.12019 13.2901 8.78019 16.0581C9.18819 16.3011 9.61419 16.6121 10.0782 16.7411C10.5422 16.6121 10.9682 16.3011 11.3762 16.0581C16.0362 13.2901 18.0202 10.6081 18.0762 8.09513C18.1262 5.90513 17.0092 4.11813 15.5652 3.27613Z" fill="#09244B"/>
                             </svg>
-                             <strong><?php echo number_format($view['wr_good']) ?></strong></a>
+                             <span><?php echo number_format($view['wr_good']) ?></span></a>
                             <b id="bo_v_act_good" class="font-R"></b>
                         </span>
                         <?php } ?>
@@ -169,7 +169,7 @@ $wr_3 = isset($view["wr_3"]) ? explode("|", $view["wr_3"]) : [];
                                 <svg width="18" height="18" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5722 1.54713C18.6672 2.76813 20.1412 5.24713 20.0762 8.13913C19.9952 11.7491 17.1862 14.9331 12.3972 17.7771C11.6872 18.1991 10.9392 18.7461 10.0782 18.7461C9.23319 18.7461 8.45319 18.1891 7.75819 17.7761C2.97119 14.9331 0.161193 11.7481 0.0801927 8.13913C0.0151927 5.24713 1.48919 2.76913 3.58419 1.54713C5.54419 0.406128 8.00619 0.399127 10.0782 2.08413C12.1502 0.399127 14.6122 0.405128 16.5722 1.54713ZM15.5652 3.27613C14.1712 2.46413 12.4292 2.49313 10.9212 4.01913C10.8108 4.13033 10.6794 4.21859 10.5348 4.27882C10.3901 4.33905 10.2349 4.37005 10.0782 4.37005C9.92148 4.37005 9.76631 4.33905 9.62163 4.27882C9.47695 4.21859 9.34562 4.13033 9.23519 4.01913C7.72719 2.49313 5.98519 2.46413 4.59119 3.27613C3.14719 4.11813 2.03119 5.90413 2.08019 8.09613C2.13619 10.6071 4.12019 13.2901 8.78019 16.0581C9.18819 16.3011 9.61419 16.6121 10.0782 16.7411C10.5422 16.6121 10.9682 16.3011 11.3762 16.0581C16.0362 13.2901 18.0202 10.6081 18.0762 8.09513C18.1262 5.90513 17.0092 4.11813 15.5652 3.27613Z" fill="#09244B"/>
                                 </svg>
-                                <strong><?php echo number_format($view['wr_good']) ?></strong></a>
+                                <span><?php echo number_format($view['wr_good']) ?></span></a>
                                 <b id="bo_v_act_good" class="font-R"></b>
                             </span>
                         <?php } ?>
@@ -183,10 +183,10 @@ $wr_3 = isset($view["wr_3"]) ? explode("|", $view["wr_3"]) : [];
                     <!-- }  추천 비추천 끝 -->
                     
                     <?php if(isset($wr_2[0]) && $wr_2[0]) { ?>
-                    <a href="<?php if(isset($wr_2[1]) && $wr_2[1]) { ?><?php echo isset($wr_2[1]) ? get_text($wr_2[1]) : ''; ?><?php } else { ?>javascript:void(0);<?php } ?>" class="view_info_btns_btn1 font-R" <?php if(isset($wr_2[2]) && $wr_2[2]) { ?>target="_blank"<?php } ?>>
+                    <a href="<?php if(isset($wr_2[1]) && $wr_2[1]) { ?><?php echo isset($wr_2[1]) ? $wr_2[1] : ''; ?><?php } else { ?>javascript:void(0);<?php } ?>" class="view_info_btns_btn1 font-R" <?php if(isset($wr_2[2]) && $wr_2[2]) { ?>target="_blank"<?php } ?>>
                        
                         <?php if(isset($wr_2[0]) && $wr_2[0]) { ?>
-                            <?php echo isset($wr_2[0]) ? get_text($wr_2[0]) : ''; ?>
+                            <?php echo isset($wr_2[0]) ? $wr_2[0] : ''; ?>
                         <?php } ?>
                         
                     </a>
@@ -201,31 +201,31 @@ $wr_3 = isset($view["wr_3"]) ? explode("|", $view["wr_3"]) : [];
                
                 <?php if(isset($wr_3[0]) && $wr_3[0]) { ?>
                 <ul class="opt_box_wrap">
-                    <li class="font-B"><?php echo isset($wr_3[0]) ? get_text($wr_3[0]) : ''; ?></li><li><?php echo isset($wr_3[1]) ? get_text($wr_3[1]) : ''; ?></li>
+                    <li class="font-B"><?php echo isset($wr_3[0]) ? $wr_3[0] : ''; ?></li><li><?php echo isset($wr_3[1]) ? $wr_3[1] : ''; ?></li>
                 </ul>
                 <?php } ?>
                 
                 <?php if(isset($wr_3[2]) && $wr_3[2]) { ?>
                 <ul class="opt_box_wrap">
-                    <li class="font-B"><?php echo isset($wr_3[2]) ? get_text($wr_3[2]) : ''; ?></li><li><?php echo isset($wr_3[3]) ? get_text($wr_3[3]) : ''; ?></li>
+                    <li class="font-B"><?php echo isset($wr_3[2]) ? $wr_3[2] : ''; ?></li><li><?php echo isset($wr_3[3]) ? $wr_3[3] : ''; ?></li>
                 </ul>
                 <?php } ?>
                 
                 <?php if(isset($wr_3[4]) && $wr_3[4]) { ?>
                 <ul class="opt_box_wrap">
-                    <li class="font-B"><?php echo isset($wr_3[4]) ? get_text($wr_3[4]) : ''; ?></li><li><?php echo isset($wr_3[5]) ? get_text($wr_3[5]) : ''; ?></li>
+                    <li class="font-B"><?php echo isset($wr_3[4]) ? $wr_3[4] : ''; ?></li><li><?php echo isset($wr_3[5]) ? $wr_3[5] : ''; ?></li>
                 </ul>
                 <?php } ?>
                 
                 <?php if(isset($wr_3[6]) && $wr_3[6]) { ?>
                 <ul class="opt_box_wrap">
-                    <li class="font-B"><?php echo isset($wr_3[6]) ? get_text($wr_3[6]) : ''; ?></li><li><?php echo isset($wr_3[7]) ? get_text($wr_3[7]): ''; ?></li>
+                    <li class="font-B"><?php echo isset($wr_3[6]) ? $wr_3[6] : ''; ?></li><li><?php echo isset($wr_3[7]) ? $wr_3[7] : ''; ?></li>
                 </ul>
                 <?php } ?>
                 
                 <?php if(isset($wr_3[8]) && $wr_3[8]) { ?>
                 <ul class="opt_box_wrap">
-                    <li class="font-B"><?php echo isset($wr_3[8]) ? get_text($wr_3[8]) : ''; ?></li><li><?php echo isset($wr_3[9]) ? get_text($wr_3[9]) : ''; ?></li>
+                    <li class="font-B"><?php echo isset($wr_3[8]) ? $wr_3[8] : ''; ?></li><li><?php echo isset($wr_3[9]) ? $wr_3[9] : ''; ?></li>
                 </ul>
                 <?php } ?>
                 
@@ -362,7 +362,7 @@ $wr_3 = isset($view["wr_3"]) ? explode("|", $view["wr_3"]) : [];
             
             <?php if(isset($view['wr_5']) && $view['wr_5']) { ?>
             <div class="at_cont">
-                <?php echo isset($view['wr_5']) ? get_text($view['wr_5'], true) : ''; ?>
+                <?php echo isset($view['wr_5']) ? nl2br($view['wr_5']) : ''; ?>
             </div>
             <?php } ?>
 
@@ -370,42 +370,8 @@ $wr_3 = isset($view["wr_3"]) ? explode("|", $view["wr_3"]) : [];
             <div id="bo_v_con">
             
             <h2 id="container_title" class="mo_pd_none">상세정보</h2>
-                
-                <?php if(isset($view['wr_7']) && $view['wr_7']) { ?>
-       
-                <?php
-                    $input = get_text($view['wr_7']); // 동영상 ID 자체 혹은 URL
-                    $videoId = getYouTubeVideoId($input);
-                ?>
-
-                    <div class="youtube_wrap">
-
-                        <div class="youtube">
-                            <iframe src="https://www.youtube.com/embed/<?php echo $videoId; ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-
-                        <?php if (strlen($view['wr_7']) == 11) { // 아이디만 입력했을 경우 ?>
-                            <a href="https://youtu.be/<?php echo get_text($view['wr_1']); ?>" class="urls font-B" target="_blank">https://youtu.be/<span class="main_color"><?php echo get_text($view['wr_1']); ?></span></a>
-                        <?php } else { ?>
-                            <a href="<?php echo get_text($view['wr_7']); ?>" class="urls font-B" target="_blank"><?php echo get_text($view['wr_7']); ?></a>
-                        <?php } ?>
-
-                    </div>
-                    <?php } ?>
-               
-               
-                <?//php $original_content = isset($view['content']) ? $view['content'] : ''; ?>
-                <?//php echo get_view_thumbnail($view['content']); ?>
-                <?php
-                  $original_content = isset($view['content']) ? $view['content'] : '';
-
-                  if (stripos($view['wr_content'], '<style') !== false) {
-                      echo $view['content'];
-                  } else {
-                      echo get_view_thumbnail($view['content']);
-                  }
-              ?>
-          </div>
+                <?php echo get_view_thumbnail($view['content']); ?>
+            </div>
             
             
             <div>

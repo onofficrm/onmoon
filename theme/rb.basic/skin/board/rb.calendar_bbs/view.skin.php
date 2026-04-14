@@ -75,7 +75,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             if ($view['wr_datetime'] >= date("Y-m-d H:i:s", G5_SERVER_TIME - ($board['bo_new'] * 3600)))
                 $view['icon_new'] = "<span class=\"lb_ico_new\">새글</span>";
             $view['icon_hot'] = "";
-            if ($board['bo_hot'] > 0 && $view['wr_hit'] >= $board['bo_hot'])
+            if ($view['wr_hit'] >= $board['bo_hot'])
                 $view['icon_hot'] = "<span class=\"lb_ico_hot\">인기</span>";
 
             echo $view['icon_new']; //뉴아이콘
@@ -166,7 +166,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     
     <?php if(isset($view['wr_1']) && $view['wr_1']) { ?>
     <div class="date_words font-B">
-        <span><?php echo get_text($view['wr_1']); ?><?php if(isset($view['wr_2']) && $view['wr_2']) { ?> ~ <?php echo get_text($view['wr_2']); ?><?php } ?></span>
+        <span><?php echo $view['wr_1']; ?><?php if(isset($view['wr_2']) && $view['wr_2']) { ?> ~ <?php echo $view['wr_2']; ?><?php } ?></span>
     </div>
     <?php } ?>
 
@@ -191,7 +191,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             }
 
         ?>
-        <?php $original_content = isset($view['content']) ? $view['content'] : ''; ?>
+
         <?php echo get_view_thumbnail($view['content']); ?>
     </div>
     
@@ -237,13 +237,13 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     <div id="bo_v_act">
         <?php if ($good_href) { ?>
         <span class="bo_v_act_gng">
-            <a href="<?php if(!$is_member) { ?>javascript:alert('로그인 후 이용하실 수 있습니다.');<?php } else { ?><?php echo $good_href.'&amp;'.$qstr ?><?php } ?>" id="good_button" class="bo_v_good">추천해요 <strong><?php echo number_format($view['wr_good']) ?></strong></a>
+            <a href="<?php if(!$is_member) { ?>javascript:alert('로그인 후 이용하실 수 있습니다.');<?php } else { ?><?php echo $good_href.'&amp;'.$qstr ?><?php } ?>" id="good_button" class="bo_v_good">추천해요 <?php echo number_format($view['wr_good']) ?></a>
             <b id="bo_v_act_good" class="font-R"></b>
         </span>
         <?php } ?>
         <?php if ($nogood_href) { ?>
         <span class="bo_v_act_gng">
-            <a href="<?php if(!$is_member) { ?>javascript:alert('로그인 후 이용하실 수 있습니다.');<?php } else { ?><?php echo $nogood_href.'&amp;'.$qstr ?><?php } ?>" id="nogood_button" class="bo_v_nogood">별로에요 <strong><?php echo number_format($view['wr_nogood']) ?></strong></a>
+            <a href="<?php if(!$is_member) { ?>javascript:alert('로그인 후 이용하실 수 있습니다.');<?php } else { ?><?php echo $nogood_href.'&amp;'.$qstr ?><?php } ?>" id="nogood_button" class="bo_v_nogood">별로에요 <?php echo number_format($view['wr_nogood']) ?></a>
             <b id="bo_v_act_nogood" class="font-R"></b>
         </span>
         <?php } ?>
@@ -255,13 +255,13 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
         <?php if($board['bo_use_good']) { ?>
             <span class="bo_v_act_gng">
                 
-                <a href="<?php if(!$is_member) { ?>javascript:alert('로그인 후 이용하실 수 있습니다.');<?php } else { ?>javascript:void(0);<?php } ?>" class="bo_v_good">추천해요 <strong><?php echo number_format($view['wr_good']) ?></strong></a>
+                <a href="<?php if(!$is_member) { ?>javascript:alert('로그인 후 이용하실 수 있습니다.');<?php } else { ?>javascript:void(0);<?php } ?>" class="bo_v_good">추천해요 <?php echo number_format($view['wr_good']) ?></a>
                 <b id="bo_v_act_good" class="font-R"></b>
             </span>
         <?php } ?>
         <?php if($board['bo_use_nogood']) { ?>
             <span class="bo_v_act_gng">
-                <a href="<?php if(!$is_member) { ?>javascript:alert('로그인 후 이용하실 수 있습니다.');<?php } else { ?>javascript:void(0);<?php } ?>" class="bo_v_nogood">별로에요 <strong><?php echo number_format($view['wr_nogood']) ?></strong></a>
+                <a href="<?php if(!$is_member) { ?>javascript:alert('로그인 후 이용하실 수 있습니다.');<?php } else { ?>javascript:void(0);<?php } ?>" class="bo_v_nogood">별로에요 <?php echo number_format($view['wr_nogood']) ?></a>
                 <b id="bo_v_act_nogood" class="font-R"></b>
             </span>
         <?php } ?>

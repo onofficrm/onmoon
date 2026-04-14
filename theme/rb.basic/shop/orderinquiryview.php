@@ -24,19 +24,11 @@ if($od['od_pg'] == 'lg') {
         $st_count1 = $st_count2 = 0;
         $custom_cancel = false;
 
-        if(isset($pa['pa_is']) && $pa['pa_is'] == 1) {
-        $sql = " select it_id, it_name, ct_send_cost, it_sc_type, ct_partner
-                    from {$g5['g5_shop_cart_table']}
-                    where od_id = '$od_id'
-                    group by it_id
-                    order by ct_id ";
-        } else {
         $sql = " select it_id, it_name, ct_send_cost, it_sc_type
                     from {$g5['g5_shop_cart_table']}
                     where od_id = '$od_id'
                     group by it_id
                     order by ct_id ";
-        }
         $result = sql_query($sql);
         ?>
         
@@ -107,15 +99,6 @@ if($od['od_pg'] == 'lg') {
 	                    if($sendcost == 0)
 	                        $ct_send_cost = '무료';
 	                }
-
-                    if(isset($pa['pa_is']) && $pa['pa_is'] == 1) {
-                        if(isset($row['ct_partner']) && $row['ct_partner']) {
-                            $pm = get_member($row['ct_partner']);
-                            $partnmer_nick = $pm['mb_nick'];
-                        } else {
-                            $partnmer_nick = "-";
-                        }
-                    }
 	
 	                for($k=0; $opt=sql_fetch_array($res); $k++) {
 	                    if($opt['io_type'])
@@ -125,7 +108,13 @@ if($od['od_pg'] == 'lg') {
 	
 	                    $sell_price = $opt_price * $opt['ct_qty'];
 	                    $point = $opt['ct_point'] * $opt['ct_qty'];
-
+                        
+                        if(isset($pa['pa_is']) && $pa['pa_is'] == 1) {
+                            if(isset($opt['ct_partner']) && $opt['ct_partner']) {
+                                $pm = get_member($opt['ct_partner']);
+                            }
+                        }
+	
 	                    if($k == 0) {
 	            ?>
 	            <?php } ?>
@@ -144,7 +133,7 @@ if($od['od_pg'] == 'lg') {
 	                <td headers="th_itsum" class="td_numbig text_right"><?php echo number_format($sell_price); ?></td>
 	                <td headers="th_itst" class="td_mngsmall"><?php echo $opt['ct_status']; ?></td>
 	                <?php if(isset($pa['pa_is']) && $pa['pa_is'] == 1) { ?>
-	                <td headers="th_partner" class="td_mngsmall"><?php echo $partnmer_nick; ?></td>
+	                <td headers="th_partner" class="td_mngsmall"><?php echo isset($pm['mb_nick']) ? $pm['mb_nick'] : '-'; ?></td>
 	                <?php } ?>
 	            </tr>
 	            <?php
@@ -552,8 +541,6 @@ if($od['od_pg'] == 'lg') {
 	                            $LGD_HASHDATA = md5($LGD_MID.$LGD_TID.$LGD_MERTKEY);
 	
 	                            $hp_receipt_script = 'showReceiptByTID(\''.$LGD_MID.'\', \''.$LGD_TID.'\', \''.$LGD_HASHDATA.'\');';
-                            } else if($od['od_pg'] == 'toss') {
-	                            $hp_receipt_script = 'window.open(\'https://dashboard.tosspayments.com/receipt/phone?transactionId='.$od['od_tno'].'&ref=PX\',\'receipt\',\'width=430,height=700\');';
 	                        } else if($od['od_pg'] == 'inicis') {
 	                            $hp_receipt_script = 'window.open(\'https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid='.$od['od_tno'].'&noMethod=1\',\'receipt\',\'width=430,height=700\');';
 	                        } else if($od['od_pg'] == 'nicepay') {
@@ -575,8 +562,6 @@ if($od['od_pg'] == 'lg') {
 	                            $LGD_HASHDATA = md5($LGD_MID.$LGD_TID.$LGD_MERTKEY);
 	
 	                            $card_receipt_script = 'showReceiptByTID(\''.$LGD_MID.'\', \''.$LGD_TID.'\', \''.$LGD_HASHDATA.'\');';
-                            } else if($od['od_pg'] == 'toss') {
-	                            $card_receipt_script = 'window.open(\'https://dashboard.tosspayments.com/receipt/redirection?transactionId='.$od['od_tno'].'&ref=PX\',\'receipt\',\'width=430,height=700\');';
 	                        } else if($od['od_pg'] == 'inicis') {
 	                            $card_receipt_script = 'window.open(\'https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/mCmReceipt_head.jsp?noTid='.$od['od_tno'].'&noMethod=1\',\'receipt\',\'width=430,height=700\');';
 	                        } else if($od['od_pg'] == 'nicepay') {
@@ -650,8 +635,6 @@ if($od['od_pg'] == 'lg') {
 	                                break;
 	                        }
 	                        $cash_receipt_script = 'javascript:showCashReceipts(\''.$LGD_MID.'\',\''.$od['od_id'].'\',\''.$od['od_casseqno'].'\',\''.$trade_type.'\',\''.$CST_PLATFORM.'\');';
-                        } else if($od['od_pg'] == 'toss') {
-                            $cash_receipt_script = 'window.open(\'https://dashboard.tosspayments.com/receipt/mids/si_'.$config['cf_lg_mid'].'/orders/'.$od['od_id'].'/cash-receipt?ref=dashboard\',\'receipt\',\'width=430,height=700\');';
 	                    } else if($od['od_pg'] == 'inicis') {
 	                        $cash = unserialize($od['od_cash_info']);
 	                        $cash_receipt_script = 'window.open(\'https://iniweb.inicis.com/DefaultWebApp/mall/cr/cm/Cash_mCmReceipt.jsp?noTid='.$cash['TID'].'&clpaymethod=22\',\'showreceipt\',\'width=380,height=540,scrollbars=no,resizable=no\');';

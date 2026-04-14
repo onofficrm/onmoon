@@ -1,10 +1,3 @@
-<!-- Tailwind CSS (리빌더 테마에 이미 있다면 생략 가능) -->
-<script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
-<!-- Alpine.js (React의 상태 관리를 대체합니다) -->
-<script defer src="[https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js](https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js)"></script>
-<!-- Lucide Icons -->
-<script src="[https://unpkg.com/lucide@latest](https://unpkg.com/lucide@latest)"></script>
-
 <?php
 // 이 파일은 새로운 파일 생성시 반드시 포함되어야 함
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
@@ -91,7 +84,7 @@ header("Pragma: no-cache"); // HTTP/1.0
     ?>
     <meta property="og:title" content="<?php echo $views['wr_subject'] ?>"/>
     <meta property="og:description" content="<?php echo $meta_description; ?>" />
-    <meta property="og:image" content="<?php echo $meta_img ?>?ver=<?php echo G5_SERVER_TIME ?>"/>
+    <meta property="og:image" content="<?php echo $meta_img ?>?ver=<?php echo G5_TIME_YMDHIS ?>"/>
     
 <?php } else { ?>
    
@@ -106,7 +99,7 @@ header("Pragma: no-cache"); // HTTP/1.0
         <?php } ?>
     <?php } ?>
     <?php if(isset($seo['se_og_image']) && $seo['se_og_image']) { ?>
-        <meta property="og:image" content="<?php echo G5_URL ?>/data/seo/og_image?ver=<?php echo G5_SERVER_TIME ?>" />
+        <meta property="og:image" content="<?php echo G5_URL ?>/data/seo/og_image?ver=<?php echo G5_TIME_YMDHIS ?>" />
     <?php } ?>
 
 <?php } ?>
@@ -114,8 +107,8 @@ header("Pragma: no-cache"); // HTTP/1.0
 
 <!-- ICO { -->
 <?php if(isset($seo['se_favicon']) && $seo['se_favicon']) { ?>
-<link rel="shortcut icon" href="<?php echo G5_URL ?>/data/seo/favicon?ver=<?php echo G5_SERVER_TIME ?>" type="image/x-icon">
-<link rel="icon" href="<?php echo G5_URL ?>/data/seo/favicon?ver=<?php echo G5_SERVER_TIME ?>" type="image/x-icon">
+<link rel="shortcut icon" href="<?php echo G5_URL ?>/data/seo/favicon?ver=<?php echo G5_TIME_YMDHIS ?>" type="image/x-icon">
+<link rel="icon" href="<?php echo G5_URL ?>/data/seo/favicon?ver=<?php echo G5_TIME_YMDHIS ?>" type="image/x-icon">
 <?php } ?>
 <!-- } -->
 
@@ -165,17 +158,13 @@ const g5_shop_url = "<?php echo G5_SHOP_URL; ?>";
 <?php if(defined('G5_IS_ADMIN')) { ?>
 const g5_admin_url = "<?php echo G5_ADMIN_URL; ?>";
 <?php } ?>
-    
-// 레이아웃 ajax 에 전달되는 인덱스 플래그
-const is_index = <?php echo defined('_INDEX_') ? 'true' : 'false'; ?>;
-const is_shop = <?php echo defined('_SHOP_') ? 'true' : 'false'; ?>;
 </script>
 
 <?php
 if (isset($rb_core) && isset($rb_core['font'])) {
     $font = $rb_core['font'];
 } else {
-    $font = 'Pretendard';
+    $font = '';
 }
     
 add_javascript('<script src="'.G5_JS_URL.'/jquery-1.12.4.min.js"></script>', 0);
@@ -183,11 +172,11 @@ add_javascript('<script src="'.G5_JS_URL.'/jquery-migrate-1.4.1.min.js"></script
     
 if(defined('_SHOP_')) {
     if (isset($rb_core['layout_shop'])) {
-        add_javascript('<script src="' . G5_THEME_URL . '/rb.js/rb.layout.shop.js?v=2.2.3"></script>', 0);
+        add_javascript('<script src="' . G5_THEME_URL . '/rb.js/rb.layout.shop.js?ver=216"></script>', 0);
     }
 } else { 
     if (isset($rb_core['layout'])) {
-        add_javascript('<script src="' . G5_THEME_URL . '/rb.js/rb.layout.js?v=2.2.3"></script>', 0);
+        add_javascript('<script src="' . G5_THEME_URL . '/rb.js/rb.layout.js?ver=216"></script>', 0);
     }
 }
 
@@ -219,6 +208,7 @@ $rb_css_files = [
     'form.css',
     'swiper.css',
     'custom.css',
+    'brand-system.css',
 ];
 
 foreach ($rb_css_files as $rb_css_file) {
@@ -232,7 +222,7 @@ add_javascript('<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12
 add_javascript('<script src="'.G5_THEME_URL.'/rb.js/swiper.js"></script>', 0);
 add_stylesheet('<link rel="stylesheet" href="'.G5_THEME_URL.'/rb.fonts/'.$font.'/'.$font.'.css?ver='.filemtime(G5_THEME_PATH.'/rb.fonts/'.$font.'/'.$font.'.css').'" />', 0);  
 add_stylesheet('<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" />', 0);
-add_javascript('<script src="'.G5_THEME_URL.'/rb.js/rb.common.js"></script>', 0);
+
 
 if(!defined('G5_IS_ADMIN'))
     echo $config['cf_add_script'];
@@ -253,46 +243,24 @@ if ($is_member) { // 회원이라면 로그인 중이라는 메세지를 출력�
 
 ?>
 
-<main class="<?php echo isset($rb_core['color']) ? $rb_core['color'] : ''; ?> <?php echo isset($rb_core['header']) ? $rb_core['header'] : ''; ?> gap_pc_<?php echo isset($rb_core['gap_pc']) ? $rb_core['gap_pc'] : ''; ?>" id="main">
+<main class="<?php echo $rb_core['color'] ?> <?php echo $rb_core['header'] ?>" id="main">
 
 
 <?php if (!empty($rb_builder['bu_load'])) { ?>
-    
-    <?php if(isset($rb_builder['bu_load']) && $rb_builder['bu_load'] == 2) { ?>
 
-    <?php if (defined("_INDEX_")) { ?>
-        <!-- 로더 시작 { -->
-        <div id="loadings">
-            <div id="loadings_spin"></div>
-        </div>
+    <!-- 로더 시작 { -->
+    <div id="loadings">
+        <div id="loadings_spin"></div>
+    </div>
 
-        <script>
+    <script>
 
-            // DOM을 포함한 페이지가 준비가 되면 사라집니다.
-            $(window).on("load", function() {
-                $('#loadings').delay(500).fadeOut(500);
-            });
+        // DOM을 포함한 페이지가 준비가 되면 사라집니다.
+        $(window).on("load", function() {
+            $('#loadings').fadeOut(500);
+        });
 
-        </script>
-        <!-- } -->
-    <?php } ?>
-    
-    <?php } else { ?>
-        <!-- 로더 시작 { -->
-        <div id="loadings">
-            <div id="loadings_spin"></div>
-        </div>
-
-        <script>
-
-            // DOM을 포함한 페이지가 준비가 되면 사라집니다.
-            $(window).on("load", function() {
-                $('#loadings').delay(500).fadeOut(500);
-            });
-
-        </script>
-        <!-- } -->
-    <?php } ?>
-
+    </script>
+    <!-- } -->
 
 <?php } ?>

@@ -6,68 +6,7 @@ include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css?ver='.G5_TIME_YMDHIS.'">', 0);
 
 $loca = isset($_GET['loca']) ? $_GET['loca'] : '';
-$write_table = $g5['write_prefix'] . $bo_table;
 $status = isset($_GET['status']) ? $_GET['status'] : '';
-
-if(isset($config['cf_kakao_js_apikey']) && $config['cf_kakao_js_apikey']) { 
-    
-                    if($loca == "서울") {
-                        $lat = 37.4929603863248;
-                        $lng = 126.989487610175;
-                    } else if($loca == "인천") {
-                        $lat = 37.4562562632513;
-                        $lng = 126.704702815512;
-                    } else if($loca == "세종특별자치시") {
-                        $lat = 36.4800579897497;
-                        $lng = 127.289039408864;
-                    } else if($loca == "대전") {
-                        $lat = 36.3503849976553;
-                        $lng = 127.384633005948;
-                    } else if($loca == "광주") {
-                        $lat = 35.1595454;
-                        $lng = 126.8526012;
-                    } else if($loca == "대구") {
-                        $lat = 35.8920272135627;
-                        $lng = 128.598409309488;
-                    } else if($loca == "울산") {
-                        $lat = 35.5379472830778;
-                        $lng = 129.311256608093;
-                    } else if($loca == "부산") {
-                        $lat = 35.17992598569;
-                        $lng = 129.07509523457;
-                    } else if($loca == "제주특별자치도") {
-                        $lat = 33.2555817572486;
-                        $lng = 126.510527414272;
-                    } else if($loca == "경기") {
-                        $lat = 37.2746661643172;
-                        $lng = 127.009619860326;
-                    } else if($loca == "강원특별자치도") {
-                        $lat = 37.8800729197963;
-                        $lng = 127.727907820318;
-                    } else if($loca == "충북") {
-                        $lat = 36.6353867908159;
-                        $lng = 127.491428436987;
-                    } else if($loca == "충남") {
-                        $lat = 36.6589926132573;
-                        $lng = 126.672803575984;
-                    } else if($loca == "전북특별자치도") {
-                        $lat = 35.8194473147472;
-                        $lng = 127.106373795093;
-                    } else if($loca == "전남") {
-                        $lat = 34.8174988528003;
-                        $lng = 126.465423854957;
-                    } else if($loca == "경북") {
-                        $lat = 36.5761205474728;
-                        $lng = 128.505722686385;
-                    } else if($loca == "경남") {
-                        $lat = 35.2378032514675;
-                        $lng = 128.691940442146;
-                    } else { 
-                        $lat = 37.4929603863248;
-                        $lng = 126.989487610175;
-                    }
-
-}
 
 //검색 재설정
 function get_board_sfl_select_options2($sfl){
@@ -111,139 +50,6 @@ if ($board['bo_use_category']) {
 
 
 <link rel="stylesheet" href="<?php echo $board_skin_url ?>/style.php?columns=<?php echo $board['bo_gallery_cols']; ?>">
-
-<?php if(isset($config['cf_kakao_js_apikey']) && $config['cf_kakao_js_apikey']) {  ?>
-
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<?php echo $config['cf_kakao_js_apikey'] ?>&libraries=services"></script>
-    <div id="map" class="v_maps" style="width: 100%; height: 30vh; margin:0px; margin-bottom:30px; border-radius:6px;"></div>
-
-    <script>
-        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-            mapOption = {
-                center: new kakao.maps.LatLng('<?php echo isset($lat) ? $lat : 0; ?>', '<?php echo isset($lng) ? $lng : 0; ?>'), // 지도의 중심좌표
-                level: 12 // 지도 초기 확대레벨
-            };
-
-        var map = new kakao.maps.Map(mapContainer, mapOption);
-
-        // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-        var mapTypeControl = new daum.maps.MapTypeControl();
-
-        // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-        // daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-        map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
-
-        // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성합니다
-        var zoomControl = new daum.maps.ZoomControl();
-        map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
-
-        <?php 
-
-        $ca = str_replace("/", "", isset($_GET['sca']) ? $_GET['sca'] : ''); 
-                                                                                 
-
-        if(isset($ca) && $ca) { 
-            $sql = " SELECT * FROM {$write_table} WHERE ca_name = '{$ca}' AND (wr_8 = '판매중' OR wr_8 = '') ORDER BY wr_id ASC ";
-        } else if(isset($loca) && $loca) { 
-            $sql = " SELECT * FROM {$write_table} WHERE wr_9 = '{$loca}' AND (wr_8 = '판매중' OR wr_8 = '') ORDER BY wr_id ASC ";
-        } else { 
-            $sql = "SELECT * FROM {$write_table} WHERE (wr_8 = '판매중' OR wr_8 = '') ORDER BY wr_id ASC ";
-        }
-
-        $result = sql_query($sql);
-        $cnt = 0;
-        while ($row = sql_fetch_array($result)) { 
-
-            //필드분할
-            $wr_1 = isset($row["wr_1"]) ? explode("|", $row["wr_1"]) : [];
-            $wr_2 = isset($row["wr_2"]) ? explode("|", $row["wr_2"]) : [];
-            $wr_3 = isset($row["wr_3"]) ? explode("|", $row["wr_3"]) : [];
-            $wr_4 = isset($row["wr_4"]) ? explode("|", $row["wr_4"]) : [];
-            $wr_5 = isset($row["wr_5"]) ? explode("|", $row["wr_5"]) : [];
-
-            if(isset($wr_3[4]) && isset($wr_3[5])) {
-                $thumb = get_list_thumbnail($board['bo_table'], $row['wr_id'], 100, 100, false, true);
-                if(isset($thumb['src'])) {
-                    $img_content = $thumb['src'];
-                } else { 
-                    $img_content = '';
-                }
-        ?>
-
-
-        var imageSrc = '<?php echo $board_skin_url ?>/img/pin.svg',
-
-
-        imageSize = new kakao.maps.Size(24, 35), // 마커이미지의 크기입니다
-        imageOption = {
-            offset: new kakao.maps.Point(12, 35)
-        }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
-        // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-            markerPosition = new kakao.maps.LatLng('<?php echo $wr_3[4] ?>', '<?php echo $wr_3[5] ?>'); // 마커가 표시될 위치입니다
-
-        // 마커를 생성합니다
-        var marker = new kakao.maps.Marker({
-            position: markerPosition,
-            image: markerImage
-        });
-
-        // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
-
-        var wr_subject = '<?php echo str_replace("'", "\\'", get_text($row['wr_subject'], 1)); ?>';
-        
-        <?php if(isset($row['wr_9'])) { ?>
-            var wr_9 = '<?php echo isset($row['wr_9']) ? str_replace("'", "\\'", get_text($row['wr_9'], 1)) : ''; ?>';
-            var wr_10 = '<?php echo isset($row['wr_10']) ? str_replace("'", "\\'", get_text($row['wr_10'], 1)) : ''; ?>';
-        <?php } ?>
-        
-        // 커스텀 오버레이에 표시할 컨텐츠 입니다
-        var content = '<div class="wrap">' +
-            '    <div class="info">' +
-            '        <div class="body">' +
-            '            <div class="desc">' +
-            '                <img src="<?php echo $board_skin_url ?>/img/close_black_24dp.svg" class="close" onclick="closeOverlay_<?php echo $row['wr_id'] ?>()" title="닫기">' +
-            '                <div class="titles"><a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?php echo $bo_table ?>&wr_id=<?php echo $row['wr_id']; ?>" class="cut80">' + wr_subject + '</a></div>' +
-            '                <div class="sub3 cut80"><?php if(isset($row['ca_name']) && $row['ca_name']) { ?><?php echo $row['ca_name']; ?>　<?php } ?>' + wr_9 + ' ' + wr_10 + '</div>' +
-            '            </div>' +
-            '        </div>' +
-            '    </div>' +
-            '</div>';
-
-        // 마커 위에 커스텀오버레이를 표시합니다
-        var position = new kakao.maps.LatLng('<?php echo $wr_3[4] ?>', '<?php echo $wr_3[5] ?>');
-
-        // 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정
-        var overlay_<?php echo $row['wr_id'] ?> = new kakao.maps.CustomOverlay({
-            content: content,
-            map: map,
-            position: position,
-            yAnchor: 1
-        });
-
-        // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-        kakao.maps.event.addListener(marker, 'click', function() {
-            overlay_<?php echo $row['wr_id'] ?>.setMap(map);
-        });
-
-        // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-        function closeOverlay_<?php echo $row['wr_id'] ?>() {
-            overlay_<?php echo $row['wr_id'] ?>.setMap(null);
-        }
-
-        overlay_<?php echo $row['wr_id'] ?>.setMap(null);
-
-        <?php
-            $cnt++;
-        }
-    }
-    ?>
-    </script>
-
-
-<?php } ?>
 
 
 <div class="rb_bbs_wrap" id="scroll_container" style="width:<?php echo $width; ?>">
@@ -341,7 +147,7 @@ if ($board['bo_use_category']) {
         
 
         <!-- 갯수, 전체선택 { -->
-        <ul class="rb_bbs_top" <?php if(isset($config['cf_kakao_js_apikey']) && $config['cf_kakao_js_apikey']) {  ?>style="top:0px;"<?php } ?>>
+        <ul class="rb_bbs_top">
             
             
 
@@ -431,26 +237,17 @@ if ($board['bo_use_category']) {
         <script>
             $(document).ready(function() {
                 $("#bo_cate_ul li").addClass("swiper-slide swiper-slide-category");
+            });
 
-                var activeElement = document.querySelector('#bo_cate_on'); // ID로 바로 찾기
-                var initialSlideIndex = 0;
+            var swiper = new Swiper('.swiper-container-category', {
+                slidesPerView: 'auto', //가로갯수
+                spaceBetween: 0, // 간격
+                //slidesOffsetBefore: 40, //좌측여백
+                //slidesOffsetAfter: 40, // 우측여백
+                observer: true, //리셋
+                observeParents: true, //리셋
+                touchRatio: 1, // 드래그 가능여부
 
-                if (activeElement) {
-                    var parentLi = activeElement.closest('li.swiper-slide-category');
-                    var allSlides = document.querySelectorAll('li.swiper-slide-category');
-                    initialSlideIndex = Array.prototype.indexOf.call(allSlides, parentLi);
-                }
-
-                //console.log('초기 인덱스:', initialSlideIndex);
-
-                var swiper = new Swiper('.swiper-container-category', {
-                    slidesPerView: 'auto',
-                    spaceBetween: 0,
-                    observer: true,
-                    observeParents: true,
-                    touchRatio: 1,
-                    initialSlide: initialSlideIndex
-                });
             });
         </script>
         <?php } ?>
@@ -532,7 +329,7 @@ if ($board['bo_use_category']) {
                        
 
                         <li class="bbs_prd_list_con_li2 cut"><a href="<?php echo $wr_href ?>" class="font-B"><?php echo $list[$i]['subject'] ?></a></li>
-                        <li class="bbs_prd_list_con_li3"><?php echo passing_time3($list[$i]['wr_datetime']) ?>　<?php echo get_text($list[$i]['wr_name']); ?></li>
+                        <li class="bbs_prd_list_con_li3"><?php echo passing_time3($list[$i]['wr_datetime']) ?>　<?php echo ($list[$i]['wr_name']) ?></li>
 
                         <?php if($list[$i]['wr_4']) { ?>
                         <div class="bbs_prd_list_con_li4 mt-10">
@@ -563,7 +360,7 @@ if ($board['bo_use_category']) {
                             <dd><img src="<?php echo $board_skin_url ?>/img/ico_pin.svg"></dd>
                         </li>
                         <li class="font-B color-999">
-                            <dd><?php echo get_text($list[$i]['wr_9']); ?> <?php echo get_text($list[$i]['wr_10']); ?></dd>
+                            <dd><?php echo $list[$i]['wr_9'] ?> <?php echo $list[$i]['wr_10'] ?></dd>
                         </li>
                     </div>
 
@@ -580,9 +377,9 @@ if ($board['bo_use_category']) {
                 
                 <?php if($list[$i]['icon_new'] || $list[$i]['icon_hot'] || $list[$i]['is_notice']) { ?>
                 <li class="gallery-item-ico lists_rc_p2">
-                    <?php if ($list[$i]['is_notice']) echo "<span class=\"bbs_list_label label5\">프리미엄</span>"; ?>
+                    <?php if ($list[$i]['is_notice']) echo "<span class=\"bbs_list_label label1\">프리미엄</span>"; ?>
                     <?php if ($list[$i]['icon_new']) echo "<span class=\"bbs_list_label label3\">신규</span>"; ?>
-                    <?php if ($list[$i]['icon_hot']) echo "<span class=\"bbs_list_label label1\">인기</span>"; ?>
+                    <?php if ($list[$i]['icon_hot']) echo "<span class=\"bbs_list_label label\">인기</span>"; ?>
                 </li>
                 <?php } ?>
 

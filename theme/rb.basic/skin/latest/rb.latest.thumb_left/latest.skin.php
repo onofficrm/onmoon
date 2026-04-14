@@ -58,14 +58,14 @@ $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
 <div class="bbs_main">
     
     <!-- { -->
-    <ul class="bbs_main_wrap_tit" style="display:<?php echo (isset($rb_skin['md_title_hide']) && $rb_skin['md_title_hide'] == '1') ? 'none' : 'block'; ?>">
+    <ul class="bbs_main_wrap_tit">
 
         <li class="bbs_main_wrap_tit_l">
-                        <!-- 타이틀 { -->
-                        <a href="<?php echo $links_url; ?>">
-                            <h2 class="<?php echo isset($rb_skin['md_title_font']) ? $rb_skin['md_title_font'] : 'font-B'; ?>" style="color:<?php echo isset($rb_skin['md_title_color']) ? $rb_skin['md_title_color'] : '#25282b'; ?>; font-size:<?php echo isset($rb_skin['md_title_size']) ? $rb_skin['md_title_size'] : '20'; ?>px; "><?php echo $bo_subject ?></h2>
-                        </a>
-                        <!-- } -->
+            <!-- 타이틀 { -->
+            <a href="<?php echo $links_url ?>">
+                <h2 class="font-B"><?php echo $bo_subject ?></h2>
+            </a>
+            <!-- } -->
         </li>
 
 
@@ -126,7 +126,10 @@ $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
                                     
                                 
                                 //본문출력 (class="cut" : 한줄자르기 / class="cut2" : 두줄자르기)
-                                $wr_content = trim(strip_tags((string)($list[$i]['wr_content'] ?? '')));
+                                //$wr_content = preg_replace("/<(.*?)\>/","",$list[$i]['wr_content']);
+                                //$wr_content = preg_replace("/&nbsp;/","",$wr_content);
+                                //$wr_content = preg_replace("/&gt;/","",$wr_content);
+                                $wr_content = strip_tags($list[$i]['wr_content']);
                               
                             ?>
                             
@@ -142,28 +145,8 @@ $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
                                     
                                     <ul class="bbs_main_wrap_con_ul2" style="<?php if($rb_skin['md_thumb_is'] == 1) { ?><?php } else { ?>padding-left:0px !important; min-height:auto;<?php } ?>">
                                        
-                                        <?php if($rb_skin['md_subject_is'] == 1 || $rb_skin['md_icon_is'] == 1 || $rb_skin['md_comment_is'] == 1) { ?>
-                                        <li class="bbs_main_wrap_con_subj">
-                                            <?php if($rb_skin['md_subject_is'] == 1) { //모듈설정:제목 출력여부(1,0) ?>
-                                            <a href="<?php echo $wr_href ?>" class="font-B cut_subj"><?php echo $list[$i]['subject'] ?></a>
-                                            <?php } ?>
-                                            
-                                            <?php if($rb_skin['md_comment_is'] == 1) { //모듈설정:댓글 출력여부(1,0 || 댓글이 0개 이상인 경우)?>
-                                                <?php if($list[$i]['comment_cnt']) { ?>
-                                                <span class="comments_span font-B main_color">+<?php echo number_format($list[$i]['wr_comment']); ?></span>
-                                                <?php } ?>
-                                            <?php } ?>
-                                            
-                                            <?php if($rb_skin['md_icon_is'] == 1) { //모듈설정:아이콘 출력여부(1,0)?>
-
-                                                <?php if ($list[$i]['icon_new']) echo "<span class=\"bbs_list_label bbs_list_label_inline label3\">N</span>"; ?>
-                                                <?php if ($list[$i]['icon_hot']) echo "<span class=\"bbs_list_label bbs_list_label_inline label1\">H</span>"; ?>
-
-                                            <?php } ?>
-                                            
-                                            <div class="cb"></div>
-                                            
-                                        </li>
+                                        <?php if($rb_skin['md_subject_is'] == 1) { //모듈설정:제목 출력여부(1,0) ?>
+                                        <li class="bbs_main_wrap_con_subj cut"><a href="<?php echo $wr_href ?>" class="font-B"><?php echo $list[$i]['subject'] ?></a></li>
                                         <?php } ?>
                                         
                                         <?php if($rb_skin['md_content_is'] == 1) { //모듈설정:본문 출력여부(1,0)?>
@@ -178,25 +161,42 @@ $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
                                             <?php } ?>
                                         <?php } ?>
                                         
-                                        <?php if($rb_skin['md_date_is'] == 1 || $rb_skin['md_ca_is'] == 1) { //모듈설정:작성일 출력여부(1,0) || 모듈설정:카테고리명 출력여부(1,0)?>
+                                        <?php if($rb_skin['md_date_is'] == 1 || $rb_skin['md_ca_is'] == 1 || $rb_skin['md_comment_is'] == 1) { //모듈설정:작성일 출력여부(1,0) || 모듈설정:카테고리명 출력여부(1,0)?>
                                             <li class="bbs_main_wrap_con_info">
                                                
                                                 <?php if($rb_skin['md_nick_is'] == 1) { //모듈설정:작성자 출력여부(1,0)?>
                                                 <span class="prof_tiny_name font-B"><?php echo $list[$i]['wr_name'] ?></span>
                                                 <?php } ?>
                                                
+                                                <?php if($rb_skin['md_date_is'] == 1) { //모듈설정:작성일 출력여부(1,0)?>
+                                                <?php echo passing_time($list[$i]['wr_datetime']) ?>　
+                                                <?php } ?>
+
                                                 <?php if($rb_skin['md_ca_is'] == 1 && $list[$i]['ca_name']) { //모듈설정:카테고리 출력여부(1,0) || 카테고리 있을때만?>
                                                 <?php echo $list[$i]['ca_name'] ?>　
                                                 <?php } ?>
                                                 
-                                                <?php if($rb_skin['md_date_is'] == 1) { //모듈설정:작성일 출력여부(1,0)?>
-                                                <?php echo passing_time($list[$i]['wr_datetime']) ?>　
-                                                조회 <?php echo number_format($list[$i]['wr_hit']); ?>　
+                                                <?php if($rb_skin['md_comment_is'] == 1) { //모듈설정:댓글 출력여부(1,0 || 댓글이 0개 이상인 경우)?>
+                                                    <?php if($list[$i]['comment_cnt']) { ?>
+                                                        댓글 <?php echo number_format($list[$i]['wr_comment']); ?>　
+                                                    <?php } ?>
+                                                    조회 <?php echo number_format($list[$i]['wr_hit']); ?>　
                                                 <?php } ?>
+                                                
+                                                
                                             </li>
                                         <?php } ?>
                                         
-                                        
+                                        <?php if($rb_skin['md_icon_is'] == 1) { //모듈설정:작성자 출력여부(1,0) || 모듈설정:아이콘 출력여부(1,0)?>
+                                        <li class="bbs_main_wrap_con_writer">
+                                            <?php if($rb_skin['md_icon_is'] == 1) { //모듈설정:아이콘 출력여부(1,0)?>
+                                            
+                                                <?php if ($list[$i]['icon_new']) echo "<span class=\"bbs_list_label label3\">새글</span>"; ?>
+                                                <?php if ($list[$i]['icon_hot']) echo "<span class=\"bbs_list_label label1\">인기</span>"; ?>
+
+                                            <?php } ?>
+                                        </li>
+                                        <?php } ?>
                                     </ul>
                                     <div class="cb"></div>
                                 </div>
@@ -214,7 +214,7 @@ $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
             </div>
 
             <?php if($rb_skin['md_swiper_is'] == 1) { //모듈설정:스와이프 사용여부(1,0)?>
-            <div class="rb_swiper_paging_btn" style="display:<?php echo (isset($rb_skin['md_title_hide']) && $rb_skin['md_title_hide'] == '1') ? 'none' : 'block'; ?>">
+            <div class="rb_swiper_paging_btn">
                 <!-- 좌우 페이징 { -->
                 <button type="button" class="swiper-button-prev rb-swiper-prev">
                     <img src="<?php echo G5_THEME_URL ?>/rb.img/icon/arr_prev.svg">

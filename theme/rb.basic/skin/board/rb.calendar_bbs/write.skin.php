@@ -34,33 +34,12 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     <!-- } -->
 
     <!-- 제목 { -->
-        <div class="rb_inp_wrap">
-            <div id="autosave_wrapper" class="write_div">
-                <ul class="autosave_wrapper_ul1" <?php if (!$is_member) { ?>style="padding-right:0px;"<?php } ?>>
-                <input type="text" name="wr_subject" value="<?php echo $subject ?>" id="wr_subject" required class="input required full_input" maxlength="255" placeholder="제목을 입력하세요.">
-                </ul>
-                <?php if ($is_member) { // 임시 저장된 글 기능 ?>
-                <ul class="autosave_wrapper_ul2">
-                    <script src="<?php echo G5_JS_URL; ?>/autosave.js"></script>
-                    <?php if($editor_content_js) echo $editor_content_js; ?>
-                    <button type="button" id="btn_autosave" class="btn_frmline">임시저장 <span id="autosave_count" class="font-B"><?php echo $autosave_count; ?></span></button>
-                    <div id="autosave_pop">
-                        <strong>임시 저장된 글 목록</strong>
-                        <?php if($autosave_count > 0) { ?>
-                            <ul></ul>
-                        <?php } else { ?>
-                            <div class="autosave_guide">저장된 데이터가 없습니다.</div>
-                        <?php } ?>
-                        <div class="autosave_btn_wrap">
-                        <button type="button" class="autosave_close autosave_save font-B" onclick="autosave()">저장</button>
-                        <button type="button" class="autosave_close font-B">닫기</button>
-                        </div>
-                    </div>
-                </ul>
-                <?php } ?>
-            </div>
-        </div>
-        <!-- } -->
+    <div class="rb_inp_wrap">
+        <ul>
+            <input type="text" name="wr_subject" value="<?php echo $subject ?>" id="wr_subject" required class="input required full_input" maxlength="255" placeholder="제목을 입력하세요.">
+        </ul>
+    </div>
+    <!-- } -->
     
     <!-- wr_1 : 시작일 / wr_2 : 종료일 { -->
     <div class="rb_inp_wrap new_bbs_border_wrap">
@@ -75,35 +54,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             
             <h6 class="bbs_sub_titles font-B">날짜(기간) 등록</h6>
             <label class="helps">기간을 설정하시는 경우 해당 기간동안 라벨이 이어집니다. 시작일만 설정하시는 경우 해당 일자에만 라벨이 표기 됩니다.<br>컬러 팔레트를 통해 백그라운드 및 폰트의 컬러를 설정하실 수 있습니다.</label>
-            <input type="text" name="wr_1" class="datepicker_start datepicker_inp datepicker" value="<?php echo isset($write['wr_1']) ? $write['wr_1'] : ''; ?>" id="wr_1" class="input" placeholder="시작일" required>
-            <input type="text" name="wr_2" class="datepicker_end datepicker_inp datepicker" value="<?php echo isset($write['wr_2']) ? $write['wr_2'] : ''; ?>" id="wr_2" class="input" placeholder="종료일">　
+            <input type="text" name="wr_1" class="datepicker_inp datepicker" value="<?php echo isset($write['wr_1']) ? $write['wr_1'] : ''; ?>" id="wr_1" class="input" placeholder="시작일" required>
+            <input type="text" name="wr_2" class="datepicker_inp datepicker" value="<?php echo isset($write['wr_2']) ? $write['wr_2'] : ''; ?>" id="wr_2" class="input" placeholder="종료일">　
             <input type="color" class="color_inps" name="wr_3" id="wr_3" value="<?php echo isset($write['wr_3']) ? $write['wr_3'] : '' ?>" title="배경컬러">
             <input type="color" class="color_inps" name="wr_4" id="wr_4" value="<?php echo $font_colors; ?>" title="폰트컬러">
-            
-            <script>
-                $(function() {
-                    $('.datepicker_start').datepicker({
-                        minDate: 0
-                    });
-                    $('.datepicker_end').datepicker({
-                        minDate: 0,
-                        beforeShow: function(input, inst) {
-                            var startDate = $('.datepicker_start').datepicker('getDate');
-                            if (startDate) {
-                                $(this).datepicker('option', 'minDate', startDate);
-                            }
-                        }
-                    });
-
-                    // 시작일이 변경되면 종료일의 최소 날짜를 업데이트
-                    $('.datepicker_start').on('change', function() {
-                        var startDate = $(this).datepicker('getDate');
-                        if (startDate) {
-                            $('.datepicker_end').datepicker('option', 'minDate', startDate);
-                        }
-                    });
-                });
-            </script>
             
         </ul>
     </div>
@@ -224,7 +178,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     <!-- } -->
     <?php } ?>
 
-    <?php if(isset($is_link) && $is_link) { ?>
     <!-- 링크 { -->
     <div class="rb_inp_wrap rb_inp_wrap_gap">
         <label class="help_text">링크 주소를 입력할 수 있어요.</label>
@@ -238,15 +191,8 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
         </ul>
     </div>
     <!-- } -->
-    <?php } ?>
     
                     <?php if(isset($board['bo_upload_count']) && $board['bo_upload_count'] > 0) { ?>
-                    <?php
-                        $wr_file = isset($wr_file) ? $wr_file : [];
-                        $wf_cnt = count((array)$wr_file) + 1;
-                        ?>
-                        <?php if (isset($is_file) && $is_file && $wf_cnt > 0): ?>
-                        
                     <!-- 파일 { -->
                     <div class="rb_inp_wrap rb_inp_wrap_gap">
                         <label class="help_text">
@@ -255,7 +201,11 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                         
                         <div class="">
 
-                        
+                        <?php
+                        $wr_file = isset($wr_file) ? $wr_file : [];
+                        $wf_cnt = count((array)$wr_file) + 1;
+                        ?>
+                        <?php if (isset($is_file) && $is_file && $wf_cnt > 0): ?>
                           <?php
                           $new_files = [];
                           if (isset($w) && $w == 'u') {
@@ -274,7 +224,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                           }
                           ?>
                           <input type="file" name="bf_file[]" style="display:none;" />
-                        
+                        <?php endif; ?>
                         
                         <div class="divmb-10">
                             <input type="hidden" id="ajax_files" name="ajax_files" value="" />
@@ -438,7 +388,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                         </div>
                     </div>
                 <!-- } -->
-                <?php endif; ?>
                 <?php } ?>
                 
     <?php if ($is_use_captcha) { //자동등록방지  ?>

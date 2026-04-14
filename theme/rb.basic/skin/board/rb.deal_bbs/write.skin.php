@@ -20,7 +20,7 @@ $wr_3 = isset($write["wr_3"]) ? explode("|", $write["wr_3"]) : [];
     <input type="hidden" name="sst" value="<?php echo $sst ?>">
     <input type="hidden" name="sod" value="<?php echo $sod ?>">
     <input type="hidden" name="page" value="<?php echo $page ?>">
-    <input type="hidden" name="wr_8" value="<?php echo isset($write['wr_8']) ? $write['wr_8'] : ''; ?>">
+    
 
 <div class="rb_bbs_wrap rb_bbs_write_wrap">
 
@@ -29,12 +29,6 @@ $wr_3 = isset($write["wr_3"]) ? explode("|", $write["wr_3"]) : [];
         
         
                     <?php if(isset($board['bo_upload_count']) && $board['bo_upload_count'] > 0) { ?>
-                    <?php
-                        $wr_file = isset($wr_file) ? $wr_file : [];
-                        $wf_cnt = count((array)$wr_file) + 1;
-                    ?>
-                    <?php if (isset($is_file) && $is_file && $wf_cnt > 0): ?>
-                        
                     <!-- 파일 { -->
                     <div class="rb_inp_wrap">
                         <label class="help_text">
@@ -43,7 +37,11 @@ $wr_3 = isset($write["wr_3"]) ? explode("|", $write["wr_3"]) : [];
                         
                         <div class="">
 
-                        
+                        <?php
+                        $wr_file = isset($wr_file) ? $wr_file : [];
+                        $wf_cnt = count((array)$wr_file) + 1;
+                        ?>
+                        <?php if (isset($is_file) && $is_file && $wf_cnt > 0): ?>
                           <?php
                           $new_files = [];
                           if (isset($w) && $w == 'u') {
@@ -62,7 +60,7 @@ $wr_3 = isset($write["wr_3"]) ? explode("|", $write["wr_3"]) : [];
                           }
                           ?>
                           <input type="file" name="bf_file[]" style="display:none;" />
-                        
+                        <?php endif; ?>
                         
                         <div class="divmb-10">
                             <input type="hidden" id="ajax_files" name="ajax_files" value="" />
@@ -226,7 +224,6 @@ $wr_3 = isset($write["wr_3"]) ? explode("|", $write["wr_3"]) : [];
                         </div>
                     </div>
                 <!-- } -->
-                <?php endif; ?>
                 <?php } ?>
                 
                 
@@ -246,30 +243,9 @@ $wr_3 = isset($write["wr_3"]) ? explode("|", $write["wr_3"]) : [];
 
         <!-- 제목 { -->
         <div class="rb_inp_wrap">
-            <div id="autosave_wrapper" class="write_div">
-                <ul class="autosave_wrapper_ul1" <?php if (!$is_member) { ?>style="padding-right:0px;"<?php } ?>>
-                <input type="text" name="wr_subject" value="<?php echo $subject ?>" id="wr_subject" required class="input required full_input" maxlength="255" placeholder="제목을 입력하세요.">
-                </ul>
-                <?php if ($is_member) { // 임시 저장된 글 기능 ?>
-                <ul class="autosave_wrapper_ul2">
-                    <script src="<?php echo G5_JS_URL; ?>/autosave.js"></script>
-                    <?php if($editor_content_js) echo $editor_content_js; ?>
-                    <button type="button" id="btn_autosave" class="btn_frmline">임시저장 <span id="autosave_count" class="font-B"><?php echo $autosave_count; ?></span></button>
-                    <div id="autosave_pop">
-                        <strong>임시 저장된 글 목록</strong>
-                        <?php if($autosave_count > 0) { ?>
-                            <ul></ul>
-                        <?php } else { ?>
-                            <div class="autosave_guide">저장된 데이터가 없습니다.</div>
-                        <?php } ?>
-                        <div class="autosave_btn_wrap">
-                        <button type="button" class="autosave_close autosave_save font-B" onclick="autosave()">저장</button>
-                        <button type="button" class="autosave_close font-B">닫기</button>
-                        </div>
-                    </div>
-                </ul>
-                <?php } ?>
-            </div>
+            <ul>
+                <input type="text" name="wr_subject" value="<?php echo $subject ?>" id="wr_subject" required class="input required full_input" maxlength="255" placeholder="상품명을 입력하세요.">
+            </ul>
         </div>
         <!-- } -->
         
@@ -345,7 +321,7 @@ $wr_3 = isset($write["wr_3"]) ? explode("|", $write["wr_3"]) : [];
                     <script>
                     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                         mapOption = {
-                            center: new daum.maps.LatLng('<?php echo $wr_3[4] ?>', '<?php echo $wr_3[5] ?>'), // 지도의 중심좌표
+                            center: new daum.maps.LatLng(<?php echo $wr_3[4] ?>, <?php echo $wr_3[5] ?>), // 지도의 중심좌표
                             level: 3 // 지도의 확대 레벨
                         };
 
@@ -623,7 +599,6 @@ $wr_3 = isset($write["wr_3"]) ? explode("|", $write["wr_3"]) : [];
     <!-- } -->
     <?php } ?>
 
-    <?php if(isset($is_link) && $is_link) { ?>
     <!-- 링크 {
     <div class="rb_inp_wrap rb_inp_wrap_gap">
         <label class="help_text">링크 주소를 입력할 수 있어요.</label>
@@ -637,7 +612,6 @@ $wr_3 = isset($write["wr_3"]) ? explode("|", $write["wr_3"]) : [];
         </ul>
     </div>
     } -->
-    <?php } ?>
     
                     
                 

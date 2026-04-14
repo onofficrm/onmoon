@@ -38,6 +38,8 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
             <li>
                 <button type="submit" class="btn_submit font-B">로그인</button>
             </li>
+            </form>
+            
             <li>
                 <div id="login_info">
                     <div class="login_if_auto">
@@ -49,17 +51,19 @@ add_stylesheet('<link rel="stylesheet" href="'.$member_skin_url.'/style.css">', 
                     </div>
                 </div>
             </li>
-            </form>
+            
             
             <?php if($config['cf_social_login_use'] == 1) { ?>
+            
             <li>
                 <span class="sns_titles">SNS로 간편하게 시작하기</span>
             <?php @include_once(get_social_skin_path().'/social_login.skin.php'); // 소셜로그인 사용시 소셜로그인 버튼 ?>
             </li>
+            
             <?php } ?>
             
             <li class="join_links">
-                아직 회원이 아니신가요?　<a href="<?php echo G5_BBS_URL ?>/register.php" class="font-B">회원가입</a>
+                아직 <?php echo $config['cf_title'] ?> 회원이 아니신가요?　<a href="<?php echo G5_BBS_URL ?>/register.php" class="font-B">회원가입</a>
             </li>
             
             

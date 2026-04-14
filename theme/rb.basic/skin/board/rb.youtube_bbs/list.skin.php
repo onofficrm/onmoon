@@ -3,13 +3,14 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
-add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css?ver='.G5_SERVER_TIME.'">', 0);
+add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
 
 $bo_page_rows = isset($board['bo_page_rows']) ? $board['bo_page_rows'] : '';
 $bo_mobile_page_rows = isset($board['bo_mobile_page_rows']) ? $board['bo_mobile_page_rows'] : '';
 $bo_gallery_cols = isset($board['bo_gallery_cols']) ? $board['bo_gallery_cols'] : '';
 $bo_gallery_height = isset($board['bo_gallery_height']) ? $board['bo_gallery_height'] : '';
 $bo_mobile_gallery_height = isset($board['bo_mobile_gallery_height'])  ? $board['bo_mobile_gallery_height'] : '';
+
 ?>
 
 <!--
@@ -160,29 +161,21 @@ $bo_mobile_gallery_height = isset($board['bo_mobile_gallery_height'])  ? $board[
         </ul>
     </nav>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function(){
             $("#bo_cate_ul li").addClass("swiper-slide swiper-slide-category");
-
-            var activeElement = document.querySelector('#bo_cate_on'); // ID로 바로 찾기
-            var initialSlideIndex = 0;
-
-            if (activeElement) {
-                var parentLi = activeElement.closest('li.swiper-slide-category');
-                var allSlides = document.querySelectorAll('li.swiper-slide-category');
-                initialSlideIndex = Array.prototype.indexOf.call(allSlides, parentLi);
-            }
-
-            //console.log('초기 인덱스:', initialSlideIndex);
-
-            var swiper = new Swiper('.swiper-container-category', {
-                slidesPerView: 'auto',
-                spaceBetween: 0,
-                observer: true,
-                observeParents: true,
-                touchRatio: 1,
-                initialSlide: initialSlideIndex
-            });
         });
+        
+        var swiper = new Swiper('.swiper-container-category', {
+            slidesPerView: 'auto', //가로갯수
+            spaceBetween: 0, // 간격
+            //slidesOffsetBefore: 40, //좌측여백
+            //slidesOffsetAfter: 40, // 우측여백
+            observer: true, //리셋
+            observeParents: true, //리셋
+            touchRatio: 1, // 드래그 가능여부
+
+        });
+
     </script>
     <?php } ?>
     <!-- } -->
@@ -194,16 +187,9 @@ $bo_mobile_gallery_height = isset($board['bo_mobile_gallery_height'])  ? $board[
         for ($i=0; $i<count($list); $i++) { 
             
             $thumb = get_list_thumbnail($board['bo_table'], $list[$i]['wr_id'], $board['bo_gallery_width'], $board['bo_gallery_height'], false, true);
-
             
             if (isset($list[$i]['wr_1']) && $list[$i]['wr_1']) {
-                
-                $input = $list[$i]['wr_1']; // 동영상 ID 자체 혹은 URL
-                $videoId = getYouTubeVideoId($input);
-                $isShort = isYouTubeShorts($input);
-                
-                $img_content = '<img src="https://i.ytimg.com/vi/'.$videoId.'/hqdefault.jpg" alt="'.$thumb['alt'].'" >';
-                
+                $img_content = '<img src="https://i.ytimg.com/vi/'.$list[$i]['wr_1'].'/hqdefault.jpg" alt="'.$thumb['alt'].'" >';
             } else if($thumb['src']) {
                 if (strstr($list[$i]['wr_option'], 'secret')) {
                     $img_content = '<img src="'.G5_THEME_URL.'/rb.img/sec_image.png" alt="'.$thumb['alt'].'" >';
@@ -222,7 +208,7 @@ $bo_mobile_gallery_height = isset($board['bo_mobile_gallery_height'])  ? $board[
             $wr_content = preg_replace("/<(.*?)\>/","",$list[$i]['wr_content']);
             $wr_content = preg_replace("/&nbsp;/","",$wr_content);
             $wr_content = get_text($wr_content);
-
+            
             
         ?>
         
@@ -240,9 +226,7 @@ $bo_mobile_gallery_height = isset($board['bo_mobile_gallery_height'])  ? $board[
                 </div>
                 <?php } ?>
                 
-                <?php if (isset($list[$i]['wr_1']) && $list[$i]['wr_1']) { ?>
-                <img src="<?php echo $board_skin_url ?>/img/<?php echo $isShort ? 'yt2ico' : 'ytico'; ?>.png" class="yt_ico">
-                <?php } ?>
+                <?php if (isset($list[$i]['wr_1']) && $list[$i]['wr_1']) echo "<img src=\"".$board_skin_url."/img/ytico.png\" class=\"yt_ico\">"; ?>
                 
             </ul>
             

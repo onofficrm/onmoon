@@ -87,12 +87,3 @@ function sb_send($board, $wr_id, $w, $qstr, $redirect_url) {
     }
 
 }
-
-// @미니님a 님 제안코드
-add_event('member_leave', 'sb_member_leave', G5_HOOK_DEFAULT_PRIORITY, 1);
-
-function sb_member_leave($member) {
-    global $g5;
-    $sql = "DELETE FROM rb_subscribe WHERE sb_mb_id = '{$member['mb_id']}'";
-    sql_query($sql);
-}

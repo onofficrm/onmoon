@@ -5,8 +5,7 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
     $wr_3_ex = isset($_POST['wr_3_ex']) ? $_POST['wr_3_ex'] : array();
     $wr_3 = [];
     for ($i = 0; $i < 6; $i++) {
-        $val = isset($wr_3_ex[$i]) ? $wr_3_ex[$i] : '';
-        $wr_3[] = sql_escape_string($val);
+        $wr_3[] = isset($wr_3_ex[$i]) ? $wr_3_ex[$i] : '';
     }
     $wr_3_str = implode("|", $wr_3);
 

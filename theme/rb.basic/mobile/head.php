@@ -51,7 +51,7 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
                     foreach( (array) $row['sub'] as $row2 ){
 						if( empty($row2) ) continue;
                         if($k == 0)
-                            echo '<button type="button" class="btn_gnb_op"><span class="sound_only">하위분류</span></button><ul class="gnb_2dul">'.PHP_EOL;
+                            echo '<button type="button" class="btn_gnb_op btn_gnb_cl"><span class="sound_only">하위분류</span></button><ul class="gnb_2dul">'.PHP_EOL;
                     ?>
                         <li class="gnb_2dli"><a href="<?php echo $row2['me_link']; ?>" target="_<?php echo $row2['me_target']; ?>" class="gnb_2da"><span></span><?php echo $row2['me_name'] ?></a></li>
                     <?php

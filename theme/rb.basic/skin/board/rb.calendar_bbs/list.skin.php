@@ -181,29 +181,21 @@ $is_target = ' target="_blank"';
         </ul>
     </nav>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function(){
             $("#bo_cate_ul li").addClass("swiper-slide swiper-slide-category");
-
-            var activeElement = document.querySelector('#bo_cate_on'); // ID로 바로 찾기
-            var initialSlideIndex = 0;
-
-            if (activeElement) {
-                var parentLi = activeElement.closest('li.swiper-slide-category');
-                var allSlides = document.querySelectorAll('li.swiper-slide-category');
-                initialSlideIndex = Array.prototype.indexOf.call(allSlides, parentLi);
-            }
-
-            //console.log('초기 인덱스:', initialSlideIndex);
-
-            var swiper = new Swiper('.swiper-container-category', {
-                slidesPerView: 'auto',
-                spaceBetween: 0,
-                observer: true,
-                observeParents: true,
-                touchRatio: 1,
-                initialSlide: initialSlideIndex
-            });
         });
+        
+        var swiper = new Swiper('.swiper-container-category', {
+            slidesPerView: 'auto', //가로갯수
+            spaceBetween: 0, // 간격
+            //slidesOffsetBefore: 40, //좌측여백
+            //slidesOffsetAfter: 40, // 우측여백
+            observer: true, //리셋
+            observeParents: true, //리셋
+            touchRatio: 1, // 드래그 가능여부
+
+        });
+
     </script>
     <?php } ?>
     <!-- } -->
@@ -234,13 +226,9 @@ $is_target = ' target="_blank"';
                     var calendarEl = $("#calendar").get(0);
                     var calendar = new FullCalendar.Calendar(calendarEl, {
                         plugins: [ 'dayGrid', 'interaction', 'bootstrap' ],
-                        <?php if($is_member) { ?>
-                        editable: <?php echo ($is_admin || $member['mb_id'] == $row['mb_id']) ? 'true' : 'false' ?>,
-                        droppable: <?php echo ($is_admin || $member['mb_id'] == $row['mb_id']) ? 'true' : 'false' ?>,
-                        <?php } else { ?>
-                         editable: false,
-                        droppable: false,
-                        <?php } ?>
+                        //contentHeight: 900,
+                        editable: true,
+                        droppable: true,
                         defaultDate: '<?php echo G5_TIME_YMD?>',
                         locale: 'ko',
                         height: 'auto',
@@ -253,11 +241,7 @@ $is_target = ' target="_blank"';
                             right: 'dayGridMonth,dayGridWeek,dayGridDay'
                         },
                         events: '<?php echo $board_skin_url; ?>/list.json.php?bo_table=<?php echo $bo_table; ?>&sca=<?php echo $sca; ?>',
-                        eventDidMount: function(info) {
-                            if (info.event.extendedProps.opacity) {
-                                $(info.el).css('opacity', info.event.extendedProps.opacity);
-                            }
-                        },
+
                         eventDrop: function(info) {
                             var start = formatDateToLocal(info.event.start);
                             var end = info.event.end ? formatDateToLocal(adjustEndDate(new Date(info.event.end))) : start;
@@ -272,10 +256,13 @@ $is_target = ' target="_blank"';
                                     bo_table: '<?php echo $bo_table; ?>'
                                 },
                                 success: function(response) {
-                                    // 성공적으로 업데이트된 경우 처리
+                                    //alert(info.event.title + " was dropped on " + start);
+                                    //console.log(response);
                                 },
                                 error: function(xhr, status, error) {
-                                    info.revert(); // 권한이 없거나 오류 발생 시 이벤트 되돌리기
+                                    //alert("There was an error while updating the event: " + xhr.responseText);
+                                    //console.log("Error: " + error);
+                                    //info.revert();
                                 }
                             });
                         },
@@ -294,10 +281,13 @@ $is_target = ' target="_blank"';
                                     bo_table: '<?php echo $bo_table; ?>'
                                 },
                                 success: function(response) {
-                                    // 성공적으로 업데이트된 경우 처리
+                                    //alert(info.event.title + " end is now " + end);
+                                    //console.log(response);
                                 },
                                 error: function(xhr, status, error) {
-                                    info.revert(); // 권한이 없거나 오류 발생 시 이벤트 되돌리기
+                                    //alert("There was an error while updating the event: " + xhr.responseText);
+                                    //console.log("Error: " + error);
+                                    //info.revert();
                                 }
                             });
                         }
@@ -305,7 +295,7 @@ $is_target = ' target="_blank"';
 
                     calendar.render();
                 });
-            </script>
+                </script>
                
                
                

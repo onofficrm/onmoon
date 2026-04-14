@@ -8,8 +8,8 @@
 }
 
 @media all and (max-width:1024px) {
-    html, body {overflow-x: hidden; height:auto !important;}
-    main {}
+    html, body {overflow-x: hidden; background-color: #fff !important;}
+    main {background-color: #fff !important;}
     .mobile {display: block}
     .pc {display: none;}
     
@@ -21,9 +21,8 @@
     .gnb_wrap .logo_wrap {margin-right: 20px;}
     
     .gnb_wrap nav {position: fixed; top:0px; left: 0px; width: 250px; background-color: #fff; z-index: 98; height:100%;}
-    .rb_layout_box {width: 100% !important; border-top: 0px solid #eee; padding-top: 0px; padding-bottom: 0px;}
+    .content_box {width: 100% !important; border-top: 0px solid #eee; padding-top: 0px; padding-bottom: 0px;}
     .content_box .swiper-container {padding-left: 20px; padding-right: 20px !important;}
-    .flex_box_inner {margin-bottom: 0px !important;}
     .bbs_main_wrap_tit {padding-left: 20px; padding-right: 20px;}
     .more_btn {margin-left: 15px;}
     .arr_next_btn {right:70px !important;}
@@ -82,13 +81,15 @@
     header {transition: all 600ms cubic-bezier(0.86, 0, 0.07, 1); left: 0px;}
     header.moves {position: fixed; left: 100% !important; top:0px; width: 100%;}
     
+    html::-webkit-scrollbar {display: none;}
+    html {-ms-overflow-style: none;scrollbar-width: none;}
     .cbp-hrmenu-btm::-webkit-scrollbar {display: none;}
     .cbp-hrmenu-btm {-ms-overflow-style: none;scrollbar-width: none;}
 
     .ovlay_wrap {padding-left: 20px; padding-right: 20px;}
     .ovlay.active {border-radius: 0px;}
     
-    .q_btns {padding:20px; padding-bottom: 0px;}
+    .q_btns {padding:20px;}
     .q_btns button {margin-top: 5px; height:55px;}
     .bbs_main {padding-top: 20px; padding-bottom: 20px; border-top:1px solid #eee;}
     

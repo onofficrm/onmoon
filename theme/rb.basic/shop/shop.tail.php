@@ -9,39 +9,6 @@ if (G5_IS_MOBILE) {
 $admin = get_admin("super");
 
 ?>
-       
-       <?php if (!defined("_INDEX_")) { ?>
-            <?php if(isset($bo_table) && $bo_table) { ?>
-                <div class="rb_bo_btm flex_box rb_sub_module" data-layout="rb_bo_btm_shop_<?php echo $bo_table ?>"></div>
-            <?php } ?>
-            <?php if(isset($co_id) && $co_id) { ?>
-                <div class="rb_co_btm flex_box rb_sub_module" data-layout="rb_co_btm_shop_<?php echo $co_id ?>"></div>
-            <?php } ?>
-            <?php if(isset($_GET['ca_id']) && $_GET['ca_id']) { ?>
-                <div class="rb_ca_btm flex_box rb_sub_module" data-layout="rb_ca_btm_shop_<?php echo $_GET['ca_id'] ?>"></div>
-            <?php } ?>
-            <?php if(isset($_GET['ev_id']) && $_GET['ev_id']) { ?>
-                <div class="rb_ev_btm flex_box rb_sub_module" data-layout="rb_ev_btm_shop_<?php echo $_GET['ev_id'] ?>"></div>
-            <?php } ?>
-            <?php if(isset($it_id) && $it_id) { ?>
-                <div class="rb_it_btm flex_box rb_sub_module" data-layout="rb_it_btm_shop_<?php echo $it_id ?>"></div>
-            <?php } ?>
-            <?php if(isset($fr_id) && $fr_id) { ?>
-                <div class="rb_fr_btm flex_box rb_sub_module" data-layout="rb_fr_btm_shop_<?php echo $fr_id ?>"></div>
-            <?php } ?>
-        <?php } ?>
-        
-        <?php if (!defined('_INDEX_') && !$sidebar_hidden) { ?>
-            <?php if (!empty($side_float_shop)) { ?>
-            </div>
-            <?php } ?>
-            
-            <?php if (isset($rb_core['sidemenu_shop']) && $rb_core['sidemenu_shop'] == "left" || isset($rb_core['sidemenu_shop']) && $rb_core['sidemenu_shop'] == "right") { ?>
-            <div id="rb_sidemenu_shop" class="rb_sidemenu_shop rb_sidemenu_shop_<?php echo isset($rb_core['sidemenu_shop']) ? $rb_core['sidemenu_shop'] : ''; ?> <?php if (isset($rb_core['sidemenu_hide_shop']) && $rb_core['sidemenu_hide_shop'] == "1") { ?>pc<?php } ?>" style="width:<?php echo isset($rb_core['sidemenu_width_shop']) ? $rb_core['sidemenu_width_shop'] : '200'; ?>px; <?php if (isset($rb_core['sidemenu_shop']) && $rb_core['sidemenu_shop'] == "left") { ?>padding-right:<?php echo isset($rb_core['sidemenu_padding_shop']) ? $rb_core['sidemenu_padding_shop'] : '0'; ?>px;<?php } else if (isset($rb_core['sidemenu_shop']) && $rb_core['sidemenu_shop'] == "right") { ?>padding-left:<?php echo isset($rb_core['sidemenu_padding_shop']) ? $rb_core['sidemenu_padding_shop'] : '0'; ?>px;<?php } ?>"><div class="flex_box" data-layout="rb_sidemenu_shop"></div></div>
-            <?php } ?>
-
-            <div class="cb"></div>
-        <?php } ?>
         
        </section>
     </div>
@@ -95,112 +62,41 @@ $admin = get_admin("super");
                     
                     
                     <ul>
-                    
-                    
-                    <?php if (isset($rb_core['menu_shop']) && $rb_core['menu_shop'] == 1 || isset($rb_core['menu_shop']) && $rb_core['menu_shop'] == 2) { ?>
-                        
-                            <?php
-                            $mshop_ca_res1 = sql_query(get_mshop_category('', 2));
-                            for($y=0; $mshop_ca_row1=sql_fetch_array($mshop_ca_res1); $y++) {
-                                
-                                // 2차 카테고리 유무 확인
-                                $has_sub = false;
-                                $tmp_res = sql_query(get_mshop_category($mshop_ca_row1['ca_id'], 4));
-                                if (sql_num_rows($tmp_res) > 0) $has_sub = true;
-                                sql_free_result($tmp_res);
-
-                                $add_arr = $has_sub ? 'add_arr_svg' : '';
-                                $add_arr_btn = $has_sub ? '<button type="button" class="add_arr_btn"></button>' : '';
-                                
-                            ?>
-                                <li class="<?php echo $add_arr ?>">
-                                    <a href="<?php echo shop_category_url($mshop_ca_row1['ca_id']); ?>" class="font-B"><?php echo get_text($mshop_ca_row1['ca_name']); ?></a>
-                                    <?php echo $add_arr_btn ?>
-                                    <?php
-                                    $mshop_ca_res2 = sql_query(get_mshop_category($mshop_ca_row1['ca_id'], 4));
-
-                                    for($u=0; $mshop_ca_row2=sql_fetch_array($mshop_ca_res2); $u++) {
-                                        if($u == 0)
-                                            echo '<div class="cbp-hrsub"><div class="cbp-hrsub-inner"><div><!--<h4 class="font-B">그룹</h4>--><ul>'.PHP_EOL;
-                                    ?>
-                                        <li><a href="<?php echo shop_category_url($mshop_ca_row2['ca_id']); ?>"><?php echo get_text($mshop_ca_row2['ca_name']); ?></a></li>
-                                    <?php
-                                    }
-
-                                    if($u > 0)
-                                        echo '</div></div></div>'.PHP_EOL;
-                                    ?>
-                                </li>
-                                
-                            <?php } ?>
-
-                        
-                    <?php } ?>
-                    
-
-                    
-                    <?php if (isset($rb_core['menu_shop']) && $rb_core['menu_shop'] == 2 || isset($rb_core['menu_shop']) && $rb_core['menu_shop'] == 0 || isset($rb_core['menu_shop']) && $rb_core['menu_shop'] == "") { ?>
-                    
-
+                    <?php
+                    $menu_datas = get_menu_db(0, true);
+                    $gnb_zindex = 999; // gnb_1dli z-index 값 설정용
+                    $i = 0;
+                    foreach( $menu_datas as $row ){
+                        if( empty($row) ) continue;
+                        $add_arr = (isset($row['sub']) && $row['sub']) ? 'add_arr_svg' : '';
+                        $add_arr_btn = (isset($row['sub']) && $row['sub']) ? '<button type="button" class="add_arr_btn"></button>' : '';
+                    ?>
+                    <li class="<?php echo $add_arr ?>">
+                        <a href="<?php echo $row['me_link']; ?>" target="_<?php echo $row['me_target']; ?>" class="font-B"><?php echo $row['me_name'] ?></a>
+                        <?php echo $add_arr_btn ?>
                         <?php
-                        if(IS_MOBILE()) {
-                            $menu_datas = get_menu_db(1, true);
-                        } else { 
-                            $menu_datas = get_menu_db(0, true);
-                        }
+                        $k = 0;
+                        foreach( (array) $row['sub'] as $row2 ){
 
-                        $gnb_zindex = 999;
-                        $i = 0;
-                        foreach ($menu_datas as $row) {
-                            if (empty($row)) continue;
-
-                            // 1차 메뉴 권한 체크
-                            if (!$is_admin && isset($row['me_level']) && $row['me_level'] > 0) {
-                                if (isset($row['me_level_opt']) && $row['me_level_opt'] == 2) {
-                                    if ($row['me_level'] != $member['mb_level']) continue;
-                                } else {
-                                    if ($row['me_level'] > $member['mb_level']) continue;
-                                }
-                            }
-
-                            $add_arr = (isset($row['sub']) && $row['sub']) ? 'add_arr_svg' : '';
-                            $add_arr_btn = (isset($row['sub']) && $row['sub']) ? '<button type="button" class="add_arr_btn"></button>' : '';
+                            if( empty($row2) ) continue; 
+                            
+                            if($k == 0)
+                                echo '<div class="cbp-hrsub"><div class="cbp-hrsub-inner"><div><!--<h4 class="font-B">그룹</h4>--><ul>'.PHP_EOL;
+                            
                         ?>
-                            <li class="<?php echo $add_arr ?>">
-                                <a href="<?php echo $row['me_link']; ?>" target="_<?php echo $row['me_target']; ?>" class="font-B"><?php echo $row['me_name'] ?></a>
-                                <?php echo $add_arr_btn ?>
-                                <?php
-                                $k = 0;
-                                foreach ((array) $row['sub'] as $row2) {
-                                    if (empty($row2)) continue;
-
-                                    // 2차 메뉴 권한 체크
-                                    if (!$is_admin && isset($row2['me_level']) && $row2['me_level'] > 0) {
-                                        if (isset($row2['me_level_opt']) && $row2['me_level_opt'] == 2) {
-                                            if ($row2['me_level'] != $member['mb_level']) continue;
-                                        } else {
-                                            if ($row2['me_level'] > $member['mb_level']) continue;
-                                        }
-                                    }
-
-                                    if ($k == 0)
-                                        echo '<div class="cbp-hrsub"><div class="cbp-hrsub-inner"><div><!--<h4 class="font-B">그룹</h4>--><ul>' . PHP_EOL;
-                                ?>
-                                    <li><a href="<?php echo $row2['me_link']; ?>" target="_<?php echo $row2['me_target']; ?>"><?php echo $row2['me_name'] ?></a></li>
-                                <?php
-                                    $k++;
-                                }
-
-                                if ($k > 0)
-                                    echo '</ul></div></div></div>' . PHP_EOL;
-                                ?>
-                            </li>
+                            <li><a href="<?php echo $row2['me_link']; ?>" target="_<?php echo $row2['me_target']; ?>"><?php echo $row2['me_name'] ?></a></li>
                         <?php
-                            $i++;
-                        }
+                        $k++;
+                        }   //end foreach $row2
+
+                        if($k > 0)
+                            echo '</ul></div></div></div>'.PHP_EOL;
                         ?>
-                        
-                    <?php } ?>
+                    </li>
+                    <?php
+                    $i++;
+                    }   //end foreach $row
+                    ?>
                     
 
                     <?php /* 쇼핑몰 분류 사용시
@@ -317,7 +213,6 @@ $admin = get_admin("super");
 <link rel="stylesheet" href="<?php echo G5_THEME_URL ?>/rb.css/datepicker.css" />
 <!-- } -->
 
-
 <?php
     //리빌드세팅
     if($is_admin) {
@@ -341,12 +236,6 @@ if ($config['cf_analytics']) {
 
 <script src="<?php echo G5_JS_URL; ?>/sns.js"></script>
 <!-- } 하단 끝 -->
-
-<style>
-    @media all and (max-width:1024px) {
-        .chat_open_btn {bottom:90px !important;}
-    }
-</style>
 
 <?php
 include_once(G5_THEME_PATH.'/tail.sub.php');

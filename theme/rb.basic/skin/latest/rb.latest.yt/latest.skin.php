@@ -49,6 +49,7 @@ $rb_skin['md_comment_is'] 댓글수 출력여부(1,0)
 $rb_skin['md_swiper_is'] 스와이프 여부(1,0)
 $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
 */
+
 ?>
 
 <link rel="stylesheet" href="<?php echo $latest_skin_url ?>/style.css">
@@ -58,43 +59,44 @@ $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
             <div class="bbs_main">
                
                 <!-- { -->
-                <ul class="bbs_main_wrap_tit" style="display:<?php echo (isset($rb_skin['md_title_hide']) && $rb_skin['md_title_hide'] == '1') ? 'none' : 'block'; ?>">
+                <ul class="bbs_main_wrap_tit">
 
                     <li class="bbs_main_wrap_tit_l">
                         <!-- 타이틀 { -->
-                        <a href="<?php echo $links_url; ?>">
-                            <h2 class="<?php echo isset($rb_skin['md_title_font']) ? $rb_skin['md_title_font'] : 'font-B'; ?>" style="color:<?php echo isset($rb_skin['md_title_color']) ? $rb_skin['md_title_color'] : '#25282b'; ?>; font-size:<?php echo isset($rb_skin['md_title_size']) ? $rb_skin['md_title_size'] : '20'; ?>px; "><?php echo $bo_subject ?></h2>
-                        </a>
+                        <a href="<?php echo $links_url; ?>"><h2 class="font-B"><?php echo $bo_subject ?></h2></a>
                         <!-- } -->
                     </li>
-
-
+                    
+                    
                     <li class="bbs_main_wrap_tit_r">
+                       
+                        <?php if($rb_skin['md_swiper_is'] == 1) { //모듈설정:스와이프 사용여부(1,0)?>
+                        <!-- 좌우 페이징 { -->
+                        <button type="button" class="arr_prev_btn arr_sw_prev1 swiper-button-prev arr_sw_prev_<?php echo $rb_skin['md_id'] ?>">
+                            <img src="<?php echo G5_THEME_URL ?>/rb.img/icon/arr_prev.svg">
+                        </button>
+                        <button type="button" class="arr_next_btn arr_sw_next1 swiper-button-next arr_sw_next_<?php echo $rb_skin['md_id'] ?>">
+                            <img src="<?php echo G5_THEME_URL ?>/rb.img/icon/arr_next.svg">
+                        </button>
+                        <!-- } -->
+                        <?php } ?>
+                        
                         <button type="button" class="more_btn" onclick="location.href='<?php echo $links_url; ?>';">더보기</button>
+                        
                     </li>
-
+                    
                     <div class="cb"></div>
                 </ul>
                 <!-- } -->
                 
                 <!-- { -->
                 <ul class="bbs_main_wrap_yt">
-                  
-                   <div class="rb_swiper" 
-                       id="rb_swiper_<?php echo $rb_skin['md_id'] ?>" 
-                       data-pc-w="<?php echo $rb_skin['md_col'] ?>" 
-                       data-pc-h="<?php echo $rb_skin['md_row'] ?>" 
-                       data-mo-w="<?php echo $rb_skin['md_col_mo'] ?>" 
-                       data-mo-h="<?php echo $rb_skin['md_row_mo'] ?>" 
-                       data-pc-gap="<?php echo $rb_skin['md_gap'] ?>" 
-                       data-mo-gap="<?php echo $rb_skin['md_gap_mo'] ?>" 
-                       data-autoplay="<?php echo $rb_skin['md_auto_is'] ?>" 
-                       data-autoplay-time="<?php echo $rb_skin['md_auto_time'] ?>" 
-                       data-pc-swap="<?php echo $rb_skin['md_swiper_is'] ?>" 
-                       data-mo-swap="<?php echo $rb_skin['md_swiper_is'] ?>"
-                    >
-                        <div class="rb_swiper_inner">
-                            <div class="rb-swiper-wrapper swiper-wrapper">
+                   
+                    <!-- swiper-container-모듈아이디 -->
+                    <div class="swiper-container swiper-container-<?php echo $rb_skin['md_id'] ?>">
+                       
+                        <!-- swiper-wrapper-모듈아이디 -->
+                        <ul class="swiper-wrapper swiper-wrapper-<?php echo $rb_skin['md_id'] ?>">
                             
                             <?php
                                 for ($i=0; $i<$list_count; $i++) {
@@ -104,12 +106,7 @@ $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
                                     
                                     
                                 if (isset($list[$i]['wr_1']) && $list[$i]['wr_1']) {
-                                    
-                                    $input = get_text($list[$i]['wr_1']); // 동영상 ID 자체 혹은 URL
-                                    $videoId = getYouTubeVideoId($input);
-                                    $isShort = isYouTubeShorts($input);
-                                    
-                                    $img = "https://i.ytimg.com/vi/".$videoId."/hqdefault.jpg";
+                                    $img = "https://i.ytimg.com/vi/".$list[$i]['wr_1']."/hqdefault.jpg";
                                 } else if($thumb['src']) {
                                     if (strstr($list[$i]['wr_option'], 'secret')) {
                                         $img = G5_THEME_URL.'/rb.img/sec_image.png';
@@ -140,7 +137,7 @@ $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
 
                             <!-- for { -->
                             <!-- swiper-slide-모듈아이디 -->
-                            <div class="rb_swiper_list">
+                            <dd class="swiper-slide swiper-slide-<?php echo $rb_skin['md_id'] ?>">
                                 
                                 <div>
                                     
@@ -155,9 +152,7 @@ $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
                                             </div>
                                         <?php } ?>
                                         
-                                        <?php if (isset($list[$i]['wr_1']) && $list[$i]['wr_1']) { ?>
-                                        <img src="<?php echo $latest_skin_url ?>/image/<?php echo $isShort ? 'yt2ico' : 'ytico'; ?>.png" class="yt_ico">
-                                        <?php } ?>
+                                        <?php if (isset($list[$i]['wr_1']) && $list[$i]['wr_1']) echo "<img src=\"".$latest_skin_url."/image/ytico.png\" class=\"yt_ico\">"; ?>
                                         
                                     </ul>
                                     <?php } ?>
@@ -219,34 +214,81 @@ $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
 
                                     <div class="cb"></div>
                                 </div>
-                            </div>
+                            </dd>
                             <!-- } -->
                             
                             <?php }  ?>
                             <?php if ($list_count == 0) { //게시물이 없을 때  ?>
-                            <div class="no_data" style="width:100% !important;">데이터가 없습니다.</div>
+                            <dd class="no_data" style="width:100% !important;">데이터가 없습니다.</dd>
                             <?php }  ?>
-                    
-                    
-                    
-                </div>
-            </div>
+                            
 
-            <?php if($rb_skin['md_swiper_is'] == 1) { //모듈설정:스와이프 사용여부(1,0)?>
-            <div class="rb_swiper_paging_btn">
-                <!-- 좌우 페이징 { -->
-                <button type="button" class="swiper-button-prev rb-swiper-prev">
-                    <img src="<?php echo G5_THEME_URL ?>/rb.img/icon/arr_prev.svg">
-                </button>
-                <button type="button" class="swiper-button-next rb-swiper-next">
-                    <img src="<?php echo G5_THEME_URL ?>/rb.img/icon/arr_next.svg">
-                </button>
+                            
+                        </ul>
+                    </div>
+                    
+                    <!-- 모듈세팅 { -->
+                    <script>
+                                                
+                        var swiper = new Swiper('.swiper-container-<?php echo $rb_skin['md_id'] ?>', {
+                            slidesPerColumnFill: 'row', //세로형
+                            slidesPerView: <?php echo $rb_skin['md_col'] ?>, //가로갯수
+                            slidesPerColumn: <?php echo $rb_skin['md_row'] ?>, // 세로갯수
+                            spaceBetween: <?php echo $rb_skin['md_gap'] ?>, // 간격
+                            observer: true, //리셋
+                            observeParents: true, //리셋
+                            touchRatio: <?php echo $rb_skin['md_swiper_is'] ?>, // 드래그 가능여부
+                            slidesPerGroup:<?php echo $rb_skin['md_col'] ?>,
+                            //loop: true, //반복
+                            
+                            <?php if($rb_skin['md_auto_is'] == 1) { //모듈설정:자동롤링여부(1,0)?>
+                            
+                            autoplay: { //오토플레이
+                                delay: <?php echo $rb_skin['md_auto_time'] //모듈설정:자동롤링시간?>, //시간
+                                disableOnInteraction: false,
+                            },
+                            
+                            <?php } ?>
+                            
+                            /*
+                            pagination: {
+                                el: '.swiper-pagination',
+                                dynamicBullets: true,
+                                clickable: true,
+                            },
+                            */
+
+                            <?php if($rb_skin['md_swiper_is'] == 1) { //모듈설정:스와이프 사용여부(1,0)?>
+                            //arr_sw_next_모듈아이디 / arr_sw_prev_모듈아이디
+                            navigation: {
+                                nextEl: '.arr_sw_next_<?php echo $rb_skin['md_id'] ?>',
+                                prevEl: '.arr_sw_prev_<?php echo $rb_skin['md_id'] ?>',
+                            },
+                            <?php } ?>
+
+                            breakpoints: { //반응형세팅
+                                1024: {
+                                    slidesPerView: <?php echo $rb_skin['md_col'] ?>, //가로갯수
+                                    slidesPerColumn: <?php echo $rb_skin['md_row'] ?>, //세로갯수
+                                    spaceBetween: <?php echo $rb_skin['md_gap'] ?>, //간격
+                                    slidesPerGroup:<?php echo $rb_skin['md_col'] ?>,
+                                },
+                                10: {
+                                    slidesPerView: <?php echo $rb_skin['md_col_mo'] ?>, //모바일 가로갯수
+                                    slidesPerColumn: <?php echo $rb_skin['md_row_mo'] ?>, //모바일 세로갯수
+                                    spaceBetween: <?php echo $rb_skin['md_gap_mo'] ?>, //모바일 간격
+                                    slidesPerGroup:<?php echo $rb_skin['md_col_mo'] ?>,
+                                }
+                            }
+
+                        });
+                        
+
+                    </script>
+                    <!-- } -->
+                    
+                </ul>
                 <!-- } -->
+                
             </div>
-            <?php } ?>
             
-        </div>
-    </ul>
-
-
-</div>

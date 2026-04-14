@@ -39,17 +39,13 @@ $rb_skin['md_gap_mo']; // 모바일 여백
 
 <div class="rb_shop_list4 shop_main_list_rb">
     <!-- { -->
-    <ul class="bbs_main_wrap_tit" style="display:<?php echo (isset($rb_skin['md_title_hide']) && $rb_skin['md_title_hide'] == '1') ? 'none' : 'block'; ?>">
+    <ul class="bbs_main_wrap_tit">
 
         <li class="bbs_main_wrap_tit_l">
             <!-- 타이틀 { -->
-            <?php if($rb_skin['md_sca'] || $rb_skin['md_module']) { ?>
-            <a href="<?php echo $links_url; ?>">
-            <?php } ?>
-                <h2 class="<?php echo isset($rb_skin['md_title_font']) ? $rb_skin['md_title_font'] : 'font-B'; ?>" style="color:<?php echo isset($rb_skin['md_title_color']) ? $rb_skin['md_title_color'] : '#25282b'; ?>; font-size:<?php echo isset($rb_skin['md_title_size']) ? $rb_skin['md_title_size'] : '20'; ?>px; "><?php echo $item_subject ?></h2>
-            <?php if($rb_skin['md_sca'] || $rb_skin['md_module']) { ?>
+            <a href="<?php echo $links_url ?>">
+                <h2 class="font-B"><?php echo $item_subject ?></h2>
             </a>
-            <?php } ?></a>
             <!-- } -->
         </li>
 
@@ -127,13 +123,11 @@ foreach((array) $list as $row){
 ?>
 
 
-     <ul class="rb_swiper_list" onclick="location.href='<?php echo $item_link_href ?>';">
+     <ul class="rb_swiper_list sct" onclick="location.href='<?php echo $item_link_href ?>';">
      
         <li class="rb_shop_list_item sct_li">
-           
-            <?php if (isset($rb_skin['md_thumb_is']) && $rb_skin['md_thumb_is']) { ?>
             <div class="v_ch_list">
-                
+                <?php if (isset($rb_skin['md_thumb_is']) && $rb_skin['md_thumb_is']) { ?>
                 <div class="rb_shop_list_item_img">
                     <a href="<?php echo $item_link_href ?>">
                     <?php echo rb_it_image($row['it_id'], $this->img_width, $this->img_height, '', '', stripslashes($row['it_name'])); ?>
@@ -162,11 +156,10 @@ foreach((array) $list as $row){
                     <?php } ?>
 
                 </div>
-                
+                <?php } ?>
             </div>
-            <?php } ?>
             
-            <div class="v_ch_list_r" <?php if (isset($rb_skin['md_thumb_is']) && $rb_skin['md_thumb_is']) { ?><?php } else { ?>style="float:none; width:100%;"<?php } ?>>
+            <div class="v_ch_list_r">
                 
                 <?php if (isset($rb_skin['md_ca_is']) && $rb_skin['md_ca_is']) { ?>
                 <div class="rb_shop_list_item_ca"><?php echo $ca['ca_name'];?></div>
@@ -225,7 +218,7 @@ foreach((array) $list as $row){
     </div>
     
             <?php if($rb_skin['md_swiper_is'] == 1) { //모듈설정:스와이프 사용여부(1,0)?>
-            <div class="rb_swiper_paging_btn" style="display:<?php echo (isset($rb_skin['md_title_hide']) && $rb_skin['md_title_hide'] == '1') ? 'none' : 'block'; ?>">
+            <div class="rb_swiper_paging_btn">
                 <!-- 좌우 페이징 { -->
                 <button type="button" class="swiper-button-prev rb-swiper-prev">
                     <img src="<?php echo G5_THEME_URL ?>/rb.img/icon/arr_prev.svg">

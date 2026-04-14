@@ -49,10 +49,8 @@ if(defined('_INDEX_')) { // index에서만 실행
         function adjustContentPadding() {
             // header의 높이 구하기
             var height_header = $('#header').outerHeight();
-            var sticky_header = $('#header').outerHeight() + 30;
             // contents_wrap 에 구해진 높이값 적용
             $('#contents_wrap').css('padding-top', height_header + 'px');
-            $('#rb_sidemenu_shop').css('top', sticky_header + 'px');
         }
 
         $(document).ready(function() {
@@ -67,59 +65,9 @@ if(defined('_INDEX_')) { // index에서만 실행
     </script>
     
     <div class="contents_wrap" id="contents_wrap">
-      
-        <?php if (!defined("_INDEX_")) { ?>
-            <?php include_once(G5_PATH.'/rb/rb.config/topvisual.shop.php'); ?>
-        <?php } ?>
        
-        <section class="<?php if (defined("_INDEX_")) { ?>index co_gap_pc_<?php echo $rb_core['gap_pc'] ?><?php } else { ?>sub co_gap_pc_<?php echo $rb_core['gap_pc'] ?><?php } ?>">
-        
-        <?php
-            $safe = sql_escape_string($rb_page_urls);
-            $row = sql_fetch("SELECT 1 AS ok FROM rb_sidebar_hide WHERE s_code='{$safe}' LIMIT 1");
-            $sidebar_hidden = (bool)$row;
-        ?>
-        
-        <?php if (!defined('_INDEX_') && !$sidebar_hidden) { ?>
-
-            <?php
-                $side_float_shop = "";
-                if (isset($rb_core['sidemenu_shop']) && $rb_core['sidemenu_shop'] == "left" && !$sidebar_hidden) {
-                    $side_float_shop = "float:right; width: calc(100% - ".$rb_core['sidemenu_width_shop']."px);";
-                } else if (isset($rb_core['sidemenu_shop']) && $rb_core['sidemenu_shop'] == "right" && !$sidebar_hidden) {
-                    $side_float_shop = "float:left; width: calc(100% - ".$rb_core['sidemenu_width_shop']."px);";
-                }
-            ?>
-            <?php if (!empty($side_float_shop)) { ?>
-            <div id="rb_sidemenu_float_shop" style="<?php echo $side_float_shop ?>">
-            <?php } ?>
-            
-        <?php } ?>
-        
-        
-        <?php if (!defined("_INDEX_")) { ?>
-            <?php if(isset($bo_table) && $bo_table) { ?>
-                <div class="rb_bo_top flex_box rb_sub_module" data-layout="rb_bo_top_shop_<?php echo $bo_table ?>"></div>
-            <?php } ?>
-            <?php if(isset($co_id) && $co_id) { ?>
-                <div class="rb_co_top flex_box rb_sub_module" data-layout="rb_co_top_shop_<?php echo $co_id ?>"></div>
-            <?php } ?>
-            <?php if(isset($_GET['ca_id']) && $_GET['ca_id']) { ?>
-                <div class="rb_ca_top flex_box rb_sub_module" data-layout="rb_ca_top_shop_<?php echo $_GET['ca_id'] ?>"></div>
-            <?php } ?>
-            <?php if(isset($_GET['ev_id']) && $_GET['ev_id']) { ?>
-                <div class="rb_ev_top flex_box rb_sub_module" data-layout="rb_ev_top_shop_<?php echo $_GET['ev_id'] ?>"></div>
-            <?php } ?>
-            <?php if(isset($it_id) && $it_id) { ?>
-                <div class="rb_it_top flex_box rb_sub_module" data-layout="rb_it_top_shop_<?php echo $it_id ?>"></div>
-            <?php } ?>
-            <?php if(isset($fr_id) && $fr_id) { ?>
-                <div class="rb_fr_top flex_box rb_sub_module" data-layout="rb_fr_top_shop_<?php echo $fr_id ?>"></div>
-            <?php } ?>
-            
-            
-            
-        <?php } ?>
+        <!-- $rb_core['sub_width'] 는 반드시 포함해주세요 (환경설정 > 서브가로폭) -->
+        <section class="<?php if (defined("_INDEX_")) { ?>index co_inner_padding_pc_<?php echo $rb_core['inner_padding_pc'] ?> co_gap_pc_<?php echo $rb_core['gap_pc'] ?><?php } else { ?>sub<?php } ?>" <?php if (!defined("_INDEX_")) { ?>style="width:<?php echo $rb_core['sub_width'] ?>px;"<?php } else { ?>style="width:<?php echo $rb_core['main_width'] ?>px;"<?php } ?>>
         
         <?php if (isset($rb_core['padding_top_shop']) && $rb_core['padding_top_shop'] == 1) { ?>
         <?php if (defined("_INDEX_")) { ?><span style="margin-top:-70px;" class="pc"></span><?php } ?>

@@ -3,7 +3,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
-add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css?ver='.G5_SERVER_TIME.'">', 0);
+add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
 ?>
 <style>
 #scroll_container {margin-top: 20px;}
@@ -74,7 +74,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css?ver='
             if ($view['wr_datetime'] >= date("Y-m-d H:i:s", G5_SERVER_TIME - ($board['bo_new'] * 3600)))
                 $view['icon_new'] = "<span class=\"lb_ico_new\">새글</span>";
             $view['icon_hot'] = "";
-            if ($board['bo_hot'] > 0 && $view['wr_hit'] >= $board['bo_hot'])
+            if ($view['wr_hit'] >= $board['bo_hot'])
                 $view['icon_hot'] = "<span class=\"lb_ico_hot\">인기</span>";
 
             echo $view['icon_new']; //뉴아이콘
@@ -169,30 +169,12 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css?ver='
     <div id="bo_v_con">
     
        <?php if(isset($view['wr_1']) && $view['wr_1']) { ?>
-        <?php
-            $input   = get_text($view['wr_1']);
-            $videoId = getYouTubeVideoId($input);
-            $isShort = isYouTubeShorts($input);
-
-            // 못 뽑아오면 렌더 스킵
-            if ($videoId):
-        ?>
-
         <div class="youtube_wrap">
-            <div class="youtube-player <?php echo $isShort ? 'portrait' : 'landscape'; ?>">
-                <iframe src="https://www.youtube.com/embed/<?php echo $videoId; ?>?playsinline=1&rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div class="youtube">
+                <iframe src="https://www.youtube.com/embed/<?php echo $view['wr_1']; ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-
-            <?php if (strlen($view['wr_1']) == 11) { ?>
-            <a href="https://youtu.be/<?php echo get_text($view['wr_1']); ?>" class="urls font-B cut" target="_blank">
-                https://youtu.be/<span class="main_color"><?php echo get_text($view['wr_1']); ?></span>
-            </a>
-            <?php } else { ?>
-            <a href="<?php echo get_text($view['wr_1']); ?>" class="urls font-B cut" target="_blank"><?php echo get_text($view['wr_1']); ?></a>
-            <?php } ?>
+            <a href="https://www.youtube.com/watch?v=<?php echo $view['wr_1']; ?>" class="urls font-B" target="_blank">https://www.youtube.com/watch?v=<span class="main_color"><?php echo $view['wr_1']; ?></span></a>
         </div>
-
-        <?php endif; ?>
         <?php } ?>
     
     
@@ -212,7 +194,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css?ver='
             }
 
         ?>
-        <?php $original_content = isset($view['content']) ? $view['content'] : ''; ?>
+
         <?php echo get_view_thumbnail($view['content']); ?>
     </div>
     
@@ -257,13 +239,13 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css?ver='
     <div id="bo_v_act">
         <?php if ($good_href) { ?>
         <span class="bo_v_act_gng">
-            <a href="<?php if(!$is_member) { ?>javascript:alert('로그인 후 이용하실 수 있습니다.');<?php } else { ?><?php echo $good_href.'&amp;'.$qstr ?><?php } ?>" id="good_button" class="bo_v_good">추천해요 <strong><?php echo number_format($view['wr_good']) ?></strong></a>
+            <a href="<?php if(!$is_member) { ?>javascript:alert('로그인 후 이용하실 수 있습니다.');<?php } else { ?><?php echo $good_href.'&amp;'.$qstr ?><?php } ?>" id="good_button" class="bo_v_good">추천해요 <?php echo number_format($view['wr_good']) ?></a>
             <b id="bo_v_act_good" class="font-R"></b>
         </span>
         <?php } ?>
         <?php if ($nogood_href) { ?>
         <span class="bo_v_act_gng">
-            <a href="<?php if(!$is_member) { ?>javascript:alert('로그인 후 이용하실 수 있습니다.');<?php } else { ?><?php echo $nogood_href.'&amp;'.$qstr ?><?php } ?>" id="nogood_button" class="bo_v_nogood">별로에요 <strong><?php echo number_format($view['wr_nogood']) ?></strong></a>
+            <a href="<?php if(!$is_member) { ?>javascript:alert('로그인 후 이용하실 수 있습니다.');<?php } else { ?><?php echo $nogood_href.'&amp;'.$qstr ?><?php } ?>" id="nogood_button" class="bo_v_nogood">별로에요 <?php echo number_format($view['wr_nogood']) ?></a>
             <b id="bo_v_act_nogood" class="font-R"></b>
         </span>
         <?php } ?>
@@ -275,13 +257,13 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css?ver='
         <?php if($board['bo_use_good']) { ?>
             <span class="bo_v_act_gng">
                 
-                <a href="<?php if(!$is_member) { ?>javascript:alert('로그인 후 이용하실 수 있습니다.');<?php } else { ?>javascript:void(0);<?php } ?>" class="bo_v_good">추천해요 <strong><?php echo number_format($view['wr_good']) ?></strong></a>
+                <a href="<?php if(!$is_member) { ?>javascript:alert('로그인 후 이용하실 수 있습니다.');<?php } else { ?>javascript:void(0);<?php } ?>" class="bo_v_good">추천해요 <?php echo number_format($view['wr_good']) ?></a>
                 <b id="bo_v_act_good" class="font-R"></b>
             </span>
         <?php } ?>
         <?php if($board['bo_use_nogood']) { ?>
             <span class="bo_v_act_gng">
-                <a href="<?php if(!$is_member) { ?>javascript:alert('로그인 후 이용하실 수 있습니다.');<?php } else { ?>javascript:void(0);<?php } ?>" class="bo_v_nogood">별로에요 <strong><?php echo number_format($view['wr_nogood']) ?></strong></a>
+                <a href="<?php if(!$is_member) { ?>javascript:alert('로그인 후 이용하실 수 있습니다.');<?php } else { ?>javascript:void(0);<?php } ?>" class="bo_v_nogood">별로에요 <?php echo number_format($view['wr_nogood']) ?></a>
                 <b id="bo_v_act_nogood" class="font-R"></b>
             </span>
         <?php } ?>

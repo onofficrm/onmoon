@@ -60,13 +60,11 @@ $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
             <div class="bbs_main">
                
                 <!-- { -->
-                <ul class="bbs_main_wrap_tit" style="display:<?php echo (isset($rb_skin['md_title_hide']) && $rb_skin['md_title_hide'] == '1') ? 'none' : 'block'; ?>">
+                <ul class="bbs_main_wrap_tit">
 
                     <li class="bbs_main_wrap_tit_l">
                         <!-- 타이틀 { -->
-                        <a href="<?php echo $links_url; ?>">
-                            <h2 class="<?php echo isset($rb_skin['md_title_font']) ? $rb_skin['md_title_font'] : 'font-B'; ?>" style="color:<?php echo isset($rb_skin['md_title_color']) ? $rb_skin['md_title_color'] : '#25282b'; ?>; font-size:<?php echo isset($rb_skin['md_title_size']) ? $rb_skin['md_title_size'] : '20'; ?>px; "><?php echo $bo_subject ?></h2>
-                        </a>
+                        <a href="<?php echo $links_url; ?>"><h2 class="font-B"><?php echo $bo_subject ?></h2></a>
                         <!-- } -->
                     </li>
                     
@@ -126,7 +124,10 @@ $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
                                 $sec_txt = '<span style="opacity:0.6">작성자 및 관리자 외 열람할 수 없습니다.<br>비밀글 기능으로 보호된 글입니다.</span>';
                                 
                                 //본문출력 (class="cut" : 한줄자르기 / class="cut2" : 두줄자르기)
-                                $wr_content = trim(strip_tags((string)($list[$i]['wr_content'] ?? '')));
+                                //$wr_content = preg_replace("/<(.*?)\>/","",$list[$i]['wr_content']);
+                                //$wr_content = preg_replace("/&nbsp;/","",$wr_content);
+                                //$wr_content = preg_replace("/&gt;/","",$wr_content);
+                                $wr_content = strip_tags($list[$i]['wr_content']);
                             ?>
                             
                             <div class="rb_swiper_list">
@@ -141,8 +142,8 @@ $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
                                         
                                         <?php if($rb_skin['md_icon_is'] == 1) { //모듈설정:아이콘 출력여부(1,0)?>
                                             <div class="icon_abs">
-                                            <?php if ($list[$i]['icon_new']) echo "<span class=\"bbs_list_label label3\">N</span>"; ?>
-                                            <?php if ($list[$i]['icon_hot']) echo "<span class=\"bbs_list_label label1\">H</span>"; ?>
+                                            <?php if ($list[$i]['icon_new']) echo "<span class=\"bbs_list_label label3\">새글</span>"; ?>
+                                            <?php if ($list[$i]['icon_hot']) echo "<span class=\"bbs_list_label label1\">인기</span>"; ?>
                                             </div>
                                         <?php } ?>
                                     </ul>
@@ -174,6 +175,10 @@ $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
                                                 <?php if($rb_skin['md_nick_is'] == 1) { //모듈설정:작성자 출력여부(1,0)?>
                                                 <span class="font-B"><?php echo $list[$i]['wr_name'] ?></span>　
                                                 <?php } ?>
+                                               
+                                                <?php if($rb_skin['md_date_is'] == 1) { //모듈설정:작성일 출력여부(1,0)?>
+                                                <?php echo passing_time($list[$i]['wr_datetime']) ?>　
+                                                <?php } ?>
 
                                                 <?php if($rb_skin['md_ca_is'] == 1 && $list[$i]['ca_name']) { //모듈설정:카테고리 출력여부(1,0) || 카테고리 있을때만?>
                                                 <?php echo $list[$i]['ca_name'] ?>　
@@ -183,11 +188,7 @@ $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
                                                     <?php if($list[$i]['comment_cnt']) { ?>
                                                         댓글 <?php echo number_format($list[$i]['wr_comment']); ?>　
                                                     <?php } ?>
-                                                <?php } ?>
-                                                
-                                                <?php if($rb_skin['md_date_is'] == 1) { //모듈설정:작성일 출력여부(1,0)?>
-                                                <?php echo passing_time($list[$i]['wr_datetime']) ?>　
-                                                조회 <?php echo number_format($list[$i]['wr_hit']); ?>　
+                                                    조회 <?php echo number_format($list[$i]['wr_hit']); ?>　
                                                 <?php } ?>
 
                                             </li>
@@ -209,7 +210,7 @@ $rb_skin['md_auto_is'] 자동롤링 여부(1,0)
                         </div>
                            
                         <?php if($rb_skin['md_swiper_is'] == 1) { //모듈설정:스와이프 사용여부(1,0)?>
-                        <div class="rb_swiper_paging_btn" style="display:<?php echo (isset($rb_skin['md_title_hide']) && $rb_skin['md_title_hide'] == '1') ? 'none' : 'block'; ?>">
+                        <div class="rb_swiper_paging_btn">
                             <!-- 좌우 페이징 { -->
                             <button type="button" class="swiper-button-prev rb-swiper-prev">
                                 <img src="<?php echo G5_THEME_URL ?>/rb.img/icon/arr_prev.svg">

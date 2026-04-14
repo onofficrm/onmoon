@@ -78,7 +78,7 @@ $mb = get_member($view['mb_id']);
                         if ($view['wr_datetime'] >= date("Y-m-d H:i:s", G5_SERVER_TIME - ($board['bo_new'] * 3600)))
                             $view['icon_new'] = "<span class=\"lb_ico_new\">신규</span>";
                         $view['icon_hot'] = "";
-                        if ($board['bo_hot'] > 0 && $view['wr_hit'] >= $board['bo_hot'])
+                        if ($view['wr_hit'] >= $board['bo_hot'])
                             $view['icon_hot'] = "<span class=\"lb_ico_hot\">인기</span>";
 
                         echo $view['icon_new']; //뉴아이콘
@@ -155,7 +155,7 @@ $mb = get_member($view['mb_id']);
                             <svg width="18" height="18" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5722 1.54713C18.6672 2.76813 20.1412 5.24713 20.0762 8.13913C19.9952 11.7491 17.1862 14.9331 12.3972 17.7771C11.6872 18.1991 10.9392 18.7461 10.0782 18.7461C9.23319 18.7461 8.45319 18.1891 7.75819 17.7761C2.97119 14.9331 0.161193 11.7481 0.0801927 8.13913C0.0151927 5.24713 1.48919 2.76913 3.58419 1.54713C5.54419 0.406128 8.00619 0.399127 10.0782 2.08413C12.1502 0.399127 14.6122 0.405128 16.5722 1.54713ZM15.5652 3.27613C14.1712 2.46413 12.4292 2.49313 10.9212 4.01913C10.8108 4.13033 10.6794 4.21859 10.5348 4.27882C10.3901 4.33905 10.2349 4.37005 10.0782 4.37005C9.92148 4.37005 9.76631 4.33905 9.62163 4.27882C9.47695 4.21859 9.34562 4.13033 9.23519 4.01913C7.72719 2.49313 5.98519 2.46413 4.59119 3.27613C3.14719 4.11813 2.03119 5.90413 2.08019 8.09613C2.13619 10.6071 4.12019 13.2901 8.78019 16.0581C9.18819 16.3011 9.61419 16.6121 10.0782 16.7411C10.5422 16.6121 10.9682 16.3011 11.3762 16.0581C16.0362 13.2901 18.0202 10.6081 18.0762 8.09513C18.1262 5.90513 17.0092 4.11813 15.5652 3.27613Z" fill="#09244B"/>
                             </svg>
-                             <span><strong><?php echo number_format($view['wr_good']) ?></strong></span></a>
+                             <span><?php echo number_format($view['wr_good']) ?></span></a>
                             <b id="bo_v_act_good" class="font-R"></b>
                         </span>
                         <?php } ?>
@@ -172,7 +172,7 @@ $mb = get_member($view['mb_id']);
                                 <svg width="18" height="18" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M16.5722 1.54713C18.6672 2.76813 20.1412 5.24713 20.0762 8.13913C19.9952 11.7491 17.1862 14.9331 12.3972 17.7771C11.6872 18.1991 10.9392 18.7461 10.0782 18.7461C9.23319 18.7461 8.45319 18.1891 7.75819 17.7761C2.97119 14.9331 0.161193 11.7481 0.0801927 8.13913C0.0151927 5.24713 1.48919 2.76913 3.58419 1.54713C5.54419 0.406128 8.00619 0.399127 10.0782 2.08413C12.1502 0.399127 14.6122 0.405128 16.5722 1.54713ZM15.5652 3.27613C14.1712 2.46413 12.4292 2.49313 10.9212 4.01913C10.8108 4.13033 10.6794 4.21859 10.5348 4.27882C10.3901 4.33905 10.2349 4.37005 10.0782 4.37005C9.92148 4.37005 9.76631 4.33905 9.62163 4.27882C9.47695 4.21859 9.34562 4.13033 9.23519 4.01913C7.72719 2.49313 5.98519 2.46413 4.59119 3.27613C3.14719 4.11813 2.03119 5.90413 2.08019 8.09613C2.13619 10.6071 4.12019 13.2901 8.78019 16.0581C9.18819 16.3011 9.61419 16.6121 10.0782 16.7411C10.5422 16.6121 10.9682 16.3011 11.3762 16.0581C16.0362 13.2901 18.0202 10.6081 18.0762 8.09513C18.1262 5.90513 17.0092 4.11813 15.5652 3.27613Z" fill="#09244B"/>
                                 </svg>
-                                <span><strong><?php echo number_format($view['wr_good']) ?></strong></span></a>
+                                <span><?php echo number_format($view['wr_good']) ?></span></a>
                                 <b id="bo_v_act_good" class="font-R"></b>
                             </span>
                         <?php } ?>
@@ -223,7 +223,7 @@ $mb = get_member($view['mb_id']);
                         var bo_table = "<?php echo isset($bo_table) ? $bo_table : ''; ?>";
                         var wr_id = "<?php echo isset($wr_id) ? $wr_id : ''; ?>";
                         var wr_status = $('select[name="wr_status"]').val();
-                        var old_status = "<?php echo isset($view['wr_8']) ? get_text($view['wr_8']) : ''; ?>";
+                        var old_status = "<?php echo isset($view['wr_8']) ? $view['wr_8'] : ''; ?>";
                         
                         if(wr_status) {
                             
@@ -290,17 +290,17 @@ $mb = get_member($view['mb_id']);
                 
                 <ul class="opt_box_wrap">
                     <li class="font-B">판매상태</li>
-                    <li class="font-B"><?php echo !empty($view['wr_8']) ? get_text($view['wr_8']) : '판매중'; ?></li>
+                    <li class="font-B"><?php echo !empty($view['wr_8']) ? $view['wr_8'] : '판매중'; ?></li>
                 </ul>
 
                 <ul class="opt_box_wrap">
                     <li class="font-B">거래옵션</li>
-                    <li><?php echo !empty($view['wr_1']) ? get_text($view['wr_1']) : '배송불가'; ?> <?php echo !empty($view['wr_2']) ? '('.get_text($view['wr_2']).')' : '(직거래 불가)'; ?></li>
+                    <li><?php echo !empty($view['wr_1']) ? $view['wr_1'] : '배송불가'; ?> <?php echo !empty($view['wr_2']) ? '('.$view['wr_2'].')' : '(직거래 불가)'; ?></li>
                 </ul>
                 
                 <ul class="opt_box_wrap">
                     <li class="font-B">상품상태</li>
-                    <li><?php echo !empty($view['wr_4']) ? get_text($view['wr_4']) : '정보없음'; ?></li>
+                    <li><?php echo !empty($view['wr_4']) ? $view['wr_4'] : '정보없음'; ?></li>
                 </ul>
                 
                 
@@ -360,20 +360,15 @@ $mb = get_member($view['mb_id']);
                                 
                                 <div>
                                     
-                                    
+                                    <?php if($thumbs['src']) { ?>
                                     <ul class="bbs_main_wrap_con_ul1">
-                                        <?php if($thumbs['src']) { ?>
                                         <a href="<?php echo $hrefs ?>"><?php echo run_replace('thumb_image_tag', $img_contents, $thumbs); ?></a>
-                                        <?php } else { ?>
-                                        <a href="<?php echo $hrefs ?>"><img src="<?php echo G5_THEME_URL ?>/rb.img/no_image.png" class="skin_list_image" title=""></a>
-                                        <?php } ?>
                                     </ul>
-                                    
-                                    
+                                    <?php } ?>
 
                                     
                                     <ul class="bbs_main_wrap_con_ul2" <?php if(!$thumbs['src']) { ?>style="padding-right:0px;"<?php } ?>>
-                                        <li class="bbs_main_wrap_con_subj cut"><a href="<?php echo $hrefs ?>" class="font-B"><?php echo get_text($rows['wr_subject']); ?></a></li>
+                                        <li class="bbs_main_wrap_con_subj cut"><a href="<?php echo $hrefs ?>" class="font-B"><?php echo $rows['wr_subject'] ?></a></li>
                                         
 
 
@@ -566,17 +561,7 @@ $mb = get_member($view['mb_id']);
             <!-- 본문 내용 시작 { -->
             <div id="bo_v_con">
                 <h2 id="container_title" class="mo_pd_none">상세정보</h2>
-                <?//php $original_content = isset($view['content']) ? $view['content'] : ''; ?>
-                <?//php echo get_view_thumbnail($view['content']); ?>
-                <?php
-                  $original_content = isset($view['content']) ? $view['content'] : '';
-
-                  if (stripos($view['wr_content'], '<style') !== false) {
-                      echo $view['content'];
-                  } else {
-                      echo get_view_thumbnail($view['content']);
-                  }
-                ?>
+                <?php echo get_view_thumbnail($view['content']); ?>
             </div>
             
             
@@ -603,7 +588,7 @@ $mb = get_member($view['mb_id']);
                             <script>
                             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                                 mapOption = {
-                                    center: new daum.maps.LatLng('<?php echo $wr_3[4] ?>', '<?php echo $wr_3[5] ?>'), // 지도의 중심좌표
+                                    center: new daum.maps.LatLng(<?php echo $wr_3[4] ?>, <?php echo $wr_3[5] ?>), // 지도의 중심좌표
                                     level: 3 // 지도의 확대 레벨
                                 };
 
@@ -650,8 +635,8 @@ $mb = get_member($view['mb_id']);
 
                             </script>
                             <div class="flex_gbtns">
-                            <span class="rc_sub_title2 font-R"><?php echo isset($wr_3[0]) ? get_text($wr_3[0]) : ''; ?> <?php echo isset($wr_3[1]) ? get_text($wr_3[1]) : ''; ?></span>
-                            <a href="https://map.kakao.com/?q=<?php echo isset($wr_3[4]) ? get_text($wr_3[4]) : ''; ?> <?php echo isset($wr_3[5]) ? get_text($wr_3[5]) : ''; ?>" target="_blank">길찾기</a>
+                            <span class="rc_sub_title2 font-R"><?php echo isset($wr_3[0]) ? $wr_3[0] : ''; ?> <?php echo isset($wr_3[1]) ? $wr_3[1] : ''; ?></span>
+                            <a href="https://map.kakao.com/?q=<?php echo isset($wr_3[4]) ? $wr_3[4] : ''; ?> <?php echo isset($wr_3[5]) ? $wr_3[5] : ''; ?>" target="_blank">길찾기</a>
                             </div>
                 </div>
                 <?php } ?>

@@ -25,8 +25,8 @@ if(defined('_INDEX_')) { // index에서만 실행
 
 include_once(G5_PATH.'/rb/rb.mod/alarm/alarm.php'); // 실시간 알림
 ?>
-   
-   
+
+
     <?php 
 
     if (isset($rb_core['layout_hd']) && $rb_core['layout_hd'] == "") {
@@ -42,32 +42,16 @@ include_once(G5_PATH.'/rb/rb.mod/alarm/alarm.php'); // 실시간 알림
 
     
     <script>
-        function adjustContentPadding() {
+        $(document).ready(function() {
             // header의 높이 구하기
             var height_header = $('#header').outerHeight();
-            var sticky_header = $('#header').outerHeight() + 30;
             // contents_wrap 에 구해진 높이값 적용
             $('#contents_wrap').css('padding-top', height_header + 'px');
-            $('#rb_sidemenu').css('top', sticky_header + 'px');
-        }
-
-        $(document).ready(function() {
-            // 처음 페이지 로드 시 호출
-            adjustContentPadding();
-
-            // 브라우저 리사이즈 시 호출
-            $(window).resize(function() {
-                adjustContentPadding();
-            });
         });
     </script>
     
     <div class="contents_wrap" id="contents_wrap">
        
-        <?php if (!defined("_INDEX_")) { ?>
-            <?php include_once(G5_PATH.'/rb/rb.config/topvisual.php'); ?>
-        <?php } ?>
-        
         <!-- 
         $rb_core['sub_width'] 는 반드시 포함해주세요 (환경설정 > 서브가로폭) 
         모듈박스 스타일 설정
@@ -76,42 +60,10 @@ include_once(G5_PATH.'/rb/rb.mod/alarm/alarm.php'); // 실시간 알림
         co_inner_padding_ : (0~30)
         co_gap_ : (0~30)
         -->
+        <section class="<?php if (defined("_INDEX_")) { ?>index co_gap_pc_<?php echo $rb_core['gap_pc'] ?><?php } else { ?>sub<?php } ?>" <?php if (!defined("_INDEX_")) { ?>style="width:<?php echo $rb_core['sub_width'] ?>px;"<?php } else { ?>style="width:<?php echo $rb_core['main_width'] ?>px;"<?php } ?>>
         
-        <section class="<?php if (defined("_INDEX_")) { ?>index co_gap_pc_<?php echo $rb_core['gap_pc'] ?><?php } else { ?>sub co_gap_pc_<?php echo $rb_core['gap_pc'] ?><?php } ?>">
-        
-        <?php
-            $safe = sql_escape_string($rb_page_urls);
-            $row = sql_fetch("SELECT 1 AS ok FROM rb_sidebar_hide WHERE s_code='{$safe}' LIMIT 1");
-            $sidebar_hidden = (bool)$row;
-        ?>
-        
-        <?php if (!defined('_INDEX_') && !$sidebar_hidden) { ?>
-
-            <?php
-                $side_float = "";
-                if (isset($rb_core['sidemenu']) && $rb_core['sidemenu'] == "left" && !$sidebar_hidden) {
-                    $side_float = "float:right; width: calc(100% - ".$rb_core['sidemenu_width']."px);";
-                } else if (isset($rb_core['sidemenu']) && $rb_core['sidemenu'] == "right" && !$sidebar_hidden) {
-                    $side_float = "float:left; width: calc(100% - ".$rb_core['sidemenu_width']."px);";
-                }
-            ?>
-            <?php if (!empty($side_float)) { ?>
-            <div id="rb_sidemenu_float" style="<?php echo $side_float ?>">
-            <?php } ?>
-            
-        <?php } ?>
-        
-        
-        <?php if (!defined("_INDEX_")) { ?>
-            <?php if(isset($bo_table) && $bo_table) { ?>
-                <div class="rb_bo_top flex_box rb_sub_module" data-layout="rb_bo_top_<?php echo $bo_table ?>"></div>
-            <?php } ?>
-            <?php if(isset($co_id) && $co_id) { ?>
-                <div class="rb_co_top flex_box rb_sub_module" data-layout="rb_co_top_<?php echo $co_id ?>"></div>
-            <?php } ?>
-            <?php if(isset($fr_id) && $fr_id) { ?>
-                <div class="rb_fr_top flex_box rb_sub_module" data-layout="rb_fr_top_<?php echo $fr_id ?>"></div>
-            <?php } ?>
+        <?php if (isset($rb_core['padding_top']) && $rb_core['padding_top'] == 1) { ?>
+        <?php if (defined("_INDEX_")) { ?><span style="margin-top:-70px;" class="pc"></span><?php } ?>
         <?php } ?>
         
         <?php if (!defined("_INDEX_")) { ?><h2 id="container_title"><?php echo get_head_title($g5['title']); ?></h2><?php } ?>

@@ -1,0 +1,873 @@
+@charset "utf-8";
+/* 한필 정보 랜딩(비자·세무 등) — Remix 시안 (deep-blue #003366, 카카오 #FEE500) */
+
+/* information_bbs/style.css 다크 패널(2026 board refresh) 무력화 — 라이트 랜딩 전용 */
+.contents_wrap .rb_bbs_wrap.hp-info-landing #bo_v_con.hp-visa-prose,
+.rb_bbs_wrap.hp-info-landing #bo_v_con.hp-visa-prose,
+#bo_v.hp-info-landing #bo_v_con.hp-visa-prose {
+    background: #fff !important;
+    background-image: none !important;
+    color: #334155 !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06) !important;
+}
+.contents_wrap .rb_bbs_wrap.hp-info-landing #bo_v_con.hp-visa-prose a,
+.rb_bbs_wrap.hp-info-landing #bo_v_con.hp-visa-prose a,
+#bo_v.hp-info-landing #bo_v_con.hp-visa-prose a {
+    color: #003366 !important;
+}
+.contents_wrap .rb_bbs_wrap.hp-info-landing .rb_bbs_file,
+.rb_bbs_wrap.hp-info-landing .rb_bbs_file {
+    background: transparent !important;
+    background-image: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding-left: 0;
+    padding-right: 0;
+}
+.contents_wrap .rb_bbs_wrap.hp-info-landing .rb_bbs_file_for,
+.rb_bbs_wrap.hp-info-landing .rb_bbs_file_for {
+    background: #f8fafc !important;
+    background-image: none !important;
+    color: #475569 !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
+}
+.contents_wrap .rb_bbs_wrap.hp-info-landing .rb_bbs_file_for a,
+.rb_bbs_wrap.hp-info-landing .rb_bbs_file_for a {
+    color: #003366 !important;
+}
+
+.hp-info-landing {
+    --hp-db: #003366;
+    --hp-navy: #002d5b;
+    --hp-kakao: #fee500;
+    --hp-kakao-h: #fdd835;
+    --hp-slate-50: #f8fafc;
+    --hp-slate-600: #475569;
+    --hp-slate-900: #0f172a;
+    max-width: none;
+    padding-bottom: 0;
+    position: relative;
+}
+
+.hp-info-landing .hp-visa-toolbar {
+    position: absolute;
+    top: 12px;
+    right: 0;
+    left: 0;
+    z-index: 20;
+    pointer-events: none;
+}
+.hp-info-landing .hp-visa-toolbar .sub {
+    margin-left: auto;
+    margin-right: max(16px, calc((100vw - 1280px) / 2 + 16px));
+    pointer-events: auto;
+}
+.hp-info-landing .hp-visa-toolbar .fl_btns {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(0, 51, 102, 0.12);
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+}
+
+.hp-visa-hero {
+    position: relative;
+    padding: 48px 24px 40px;
+    margin: 0 calc(50% - 50vw) 0;
+    width: 100vw;
+    max-width: 100vw;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: var(--hp-slate-50);
+}
+.hp-visa-hero__bg {
+    position: absolute;
+    inset: 0;
+    background:
+        url("https://images.unsplash.com/photo-1506012733851-00f447074800?auto=format&fit=crop&q=80&w=1920") center/cover no-repeat;
+    opacity: 0.06;
+    pointer-events: none;
+}
+.hp-visa-hero__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 120%, rgba(0, 51, 102, 0.1), transparent 55%);
+}
+.hp-visa-hero__grid {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+}
+.hp-visa-hero__copy {
+    min-width: 0;
+}
+.hp-visa-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: var(--hp-db);
+    background: rgba(0, 51, 102, 0.06);
+    border: 1px solid rgba(0, 51, 102, 0.12);
+    margin: 0 0 24px;
+}
+.hp-visa-badge__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--hp-db);
+    opacity: 0.85;
+}
+.hp-visa-hero__title {
+    margin: 0 0 20px;
+    font-size: clamp(1.85rem, 3.2vw, 3rem);
+    font-weight: 800;
+    line-height: 1.12;
+    color: var(--hp-slate-900);
+    letter-spacing: -0.03em;
+}
+.hp-visa-hero__title strong,
+.hp-visa-hero__subtitle strong {
+    color: var(--hp-db);
+    font-weight: 800;
+}
+.hp-visa-hero__subtitle {
+    margin: 0 0 12px;
+    font-size: 1.2rem;
+    line-height: 1.55;
+    color: var(--hp-slate-600);
+    font-weight: 500;
+}
+.hp-visa-hero__desc {
+    margin: 0 0 28px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #64748b;
+    max-width: 32em;
+}
+.hp-visa-hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+.hp-visa-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 28px;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.hp-visa-btn--kakao {
+    background: var(--hp-kakao);
+    color: #111;
+    box-shadow: 0 12px 32px rgba(234, 179, 8, 0.22);
+}
+.hp-visa-btn--kakao:hover {
+    background: var(--hp-kakao-h);
+    color: #111;
+}
+.hp-visa-btn--outline {
+    background: #fff;
+    color: var(--hp-slate-900);
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+.hp-visa-btn--outline:hover {
+    background: #f8fafc;
+    color: var(--hp-slate-900);
+}
+.hp-visa-btn--ghost {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+}
+.hp-visa-btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+.hp-visa-btn--primary {
+    background: var(--hp-db);
+    color: #fff;
+    box-shadow: 0 12px 28px rgba(0, 51, 102, 0.2);
+}
+.hp-visa-btn--primary:hover {
+    background: var(--hp-navy);
+    color: #fff;
+}
+.hp-visa-hero__trust {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    font-weight: 600;
+}
+.hp-visa-hero__trust-n {
+    color: var(--hp-slate-900);
+    font-weight: 800;
+}
+.hp-visa-hero__visual {
+    position: relative;
+}
+.hp-visa-hero__frame {
+    border-radius: 2.5rem;
+    overflow: hidden;
+    border: 8px solid #fff;
+    box-shadow: 0 25px 60px rgba(15, 23, 42, 0.15);
+}
+.hp-visa-hero__photo {
+    aspect-ratio: 4/3;
+    background:
+        linear-gradient(to top, rgba(0, 51, 102, 0.45), transparent 55%),
+        url("https://images.unsplash.com/photo-1544016768-982d1554f0b9?auto=format&fit=crop&q=80&w=1200") center/cover no-repeat;
+}
+.hp-visa-hero__float {
+    position: absolute;
+    bottom: -20px;
+    left: -16px;
+    background: #fff;
+    padding: 18px 22px;
+    border-radius: 16px;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+    border: 1px solid #f1f5f9;
+    max-width: 240px;
+}
+.hp-visa-hero__float-t {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--hp-slate-900);
+    margin-bottom: 4px;
+}
+.hp-visa-hero__float-s {
+    font-size: 0.72rem;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+.hp-visa-cate {
+    max-width: 900px;
+    margin: -20px auto 12px;
+    padding: 0 24px;
+    position: relative;
+    z-index: 2;
+}
+.hp-visa-files,
+.hp-visa-links {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 24px;
+}
+.hp-visa-prose {
+    max-width: 900px;
+    margin: 20px auto 32px;
+    padding: 28px 24px 36px;
+    background: #fff;
+    border-radius: 24px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.04);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #334155;
+}
+.hp-visa-prose h2,
+.hp-visa-prose h3 {
+    color: var(--hp-slate-900);
+    margin-top: 1.6em;
+}
+.hp-visa-prose a {
+    color: var(--hp-db);
+}
+
+/* #bo_v_con 단독 규칙(style.css)보다 우선해 랜딩 본문 박스 여백 통일 */
+.rb_bbs_wrap.hp-info-landing #bo_v_con.hp-visa-prose {
+    margin: 20px auto 32px;
+    padding: 28px 24px 36px;
+}
+#bo_v.hp-info-landing #bo_v_con.hp-visa-prose {
+    margin: 20px auto 28px;
+    padding: 28px 24px 36px;
+}
+
+/* 프로세스 */
+.hp-visa-process {
+    margin: 0 calc(50% - 50vw);
+    width: 100vw;
+    max-width: 100vw;
+    padding: 44px 24px 52px;
+    box-sizing: border-box;
+    background: var(--hp-slate-900);
+    color: #fff;
+}
+.hp-visa-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.hp-visa-inner--narrow {
+    max-width: 720px;
+}
+.hp-visa-h2 {
+    margin: 0 0 12px;
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+.hp-visa-h2--dark {
+    color: var(--hp-slate-900);
+}
+.hp-visa-lead {
+    margin: 0;
+    font-size: 1.05rem;
+    color: #64748b;
+}
+.hp-visa-lead--on-dark {
+    color: rgba(255, 255, 255, 0.55);
+}
+.hp-visa-process__head {
+    text-align: center;
+    margin-bottom: 32px;
+}
+.hp-visa-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+.hp-visa-step {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 28px 22px;
+    transition: background 0.2s;
+}
+.hp-visa-step:hover {
+    background: rgba(255, 255, 255, 0.09);
+}
+.hp-visa-step__n {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: rgba(96, 165, 250, 0.35);
+    line-height: 1;
+    margin-bottom: 16px;
+}
+.hp-visa-step__t {
+    margin: 0 0 10px;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+.hp-visa-step__d {
+    margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* FAQ */
+.hp-visa-faq {
+    padding: 44px 24px 52px;
+    background: #fff;
+}
+.hp-visa-faq__head {
+    text-align: center;
+    margin-bottom: 28px;
+}
+.hp-visa-faq__head .hp-visa-h2--dark {
+    color: #0f172a !important;
+}
+.hp-visa-faq__head .hp-visa-lead {
+    color: #475569 !important;
+    font-size: 1.08rem;
+    max-width: 28em;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.55;
+}
+.hp-visa-faq__item {
+    border: 1px solid #f1f5f9;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.04);
+}
+.hp-visa-faq__q {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 20px 22px;
+    border: 0;
+    background: #f8fafc;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    transition: background 0.2s;
+}
+.hp-visa-faq__q:hover {
+    background: #f1f5f9;
+}
+.hp-visa-faq__q-mark {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--hp-db);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+}
+.hp-visa-faq__q-text {
+    flex: 1;
+    font-weight: 700;
+    color: var(--hp-slate-900);
+    line-height: 1.45;
+}
+.hp-visa-faq__icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    position: relative;
+    margin-top: 4px;
+    opacity: 0.45;
+}
+.hp-visa-faq__icon::before,
+.hp-visa-faq__icon::after {
+    content: "";
+    position: absolute;
+    background: currentColor;
+    transition: transform 0.25s;
+}
+.hp-visa-faq__icon::before {
+    left: 4px;
+    right: 4px;
+    top: 10px;
+    height: 2px;
+}
+.hp-visa-faq__icon::after {
+    top: 4px;
+    bottom: 4px;
+    left: 10px;
+    width: 2px;
+}
+.hp-visa-faq__item.is-open .hp-visa-faq__icon::after {
+    transform: scaleY(0);
+}
+.hp-visa-faq__a {
+    display: flex;
+    gap: 14px;
+    padding: 20px 22px;
+    background: #fff;
+    border-top: 1px solid #f8fafc;
+}
+.hp-visa-faq__a[hidden] {
+    display: none !important;
+}
+.hp-visa-faq__a-mark {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+}
+.hp-visa-faq__a p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #475569;
+}
+
+/* 하단 CTA */
+.hp-visa-cta {
+    position: relative;
+    margin: 0 calc(50% - 50vw);
+    width: 100vw;
+    max-width: 100vw;
+    padding: 52px 24px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.hp-visa-cta__bg {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, var(--hp-db) 0%, rgba(0, 51, 102, 0.88) 45%, rgba(0, 51, 102, 0.75) 100%),
+        url("https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&q=80&w=1920") center/cover no-repeat;
+}
+.hp-visa-cta__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+}
+.hp-visa-cta__title {
+    margin: 0 0 20px;
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+}
+.hp-visa-cta__lead {
+    margin: 0 0 32px;
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.72);
+}
+.hp-visa-cta__btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* 본문 생략 시 히어로→프로세스 간격 */
+.hp-info--no-editor .hp-visa-hero {
+    padding-bottom: 36px;
+}
+.hp-info--no-editor .hp-visa-process {
+    margin-top: 0;
+}
+
+.hp-visa-faq .hp-visa-h2 {
+    color: #0f172a !important;
+}
+.hp-visa-faq .hp-visa-lead {
+    color: #475569 !important;
+}
+
+/* 하단 관리자 바 — 보드 기본 버튼과 분리 */
+.rb_bbs_wrap.hp-info-landing .btm_btns.hp-visa-adminbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin: 20px auto 32px;
+    padding: 20px 24px;
+    max-width: 900px;
+    list-style: none;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    background: #f8fafc;
+    box-shadow: none;
+}
+.rb_bbs_wrap.hp-info-landing .btm_btns.hp-visa-adminbar .btm_btns_right {
+    float: none;
+    margin: 0;
+    order: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.rb_bbs_wrap.hp-info-landing .btm_btns.hp-visa-adminbar #bo_v_btns {
+    float: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+    align-items: center;
+    order: 0;
+    width: auto;
+    flex: 1 1 auto;
+}
+.rb_bbs_wrap.hp-info-landing .btm_btns.hp-visa-adminbar #bo_v_btns .fl_btns,
+.rb_bbs_wrap.hp-info-landing .btm_btns.hp-visa-adminbar .btm_btns_right .fl_btns {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 10px !important;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid #cbd5e1 !important;
+    background: #fff !important;
+    color: #334155 !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05) !important;
+    text-decoration: none;
+}
+.rb_bbs_wrap.hp-info-landing .btm_btns.hp-visa-adminbar #bo_v_btns .fl_btns:hover,
+.rb_bbs_wrap.hp-info-landing .btm_btns.hp-visa-adminbar .btm_btns_right .fl_btns:hover {
+    border-color: #94a3b8 !important;
+    background: #fff !important;
+    color: #0f172a !important;
+}
+.rb_bbs_wrap.hp-info-landing .btm_btns.hp-visa-adminbar .btm_btns_right .fl_btns.main_color_bg {
+    border-color: #003366 !important;
+    background: #003366 !important;
+    color: #fff !important;
+}
+.rb_bbs_wrap.hp-info-landing .btm_btns.hp-visa-adminbar .btm_btns_right .fl_btns.main_color_bg:hover {
+    filter: brightness(1.08);
+    color: #fff !important;
+}
+.rb_bbs_wrap.hp-info-landing .btm_btns.hp-visa-adminbar .fl_btns img {
+    opacity: 0.9;
+}
+
+/* 모바일 스킨: article#bo_v */
+#bo_v.hp-info-landing {
+    width: 100% !important;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+.hp-visa-hero--mo {
+    padding-top: 52px;
+    padding-bottom: 28px;
+}
+.hp-visa-hero--mo .hp-visa-hero__title {
+    font-size: 1.65rem;
+}
+.hp-visa-mo-toolbar.btn_bo_user {
+    position: relative;
+    z-index: 30;
+    padding-right: 8px;
+}
+#bo_v.hp-info-landing .hp-visa-prose-wrap {
+    padding-left: 0;
+    padding-right: 0;
+}
+#bo_v.hp-info-landing #bo_v_file.hp-visa-mo-file,
+#bo_v.hp-info-landing #bo_v_link.hp-visa-mo-link {
+    margin-left: 12px;
+    margin-right: 12px;
+    border-radius: 14px;
+    border-color: #e2e8f0;
+}
+
+@media (max-width: 1024px) {
+    .hp-visa-hero__grid {
+        grid-template-columns: 1fr;
+    }
+    .hp-visa-hero__visual {
+        display: none;
+    }
+    .hp-visa-steps {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 640px) {
+    .hp-info-landing .hp-visa-toolbar .sub {
+        margin-right: 12px;
+    }
+    .hp-visa-hero {
+        padding-top: 52px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .hp-visa-steps {
+        grid-template-columns: 1fr;
+    }
+    .hp-visa-prose {
+        margin-left: 12px;
+        margin-right: 12px;
+        padding: 28px 18px 36px;
+        border-radius: 18px;
+    }
+    #bo_v.hp-info-landing #bo_v_con.hp-visa-prose {
+        margin: 16px 12px 24px;
+        padding: 24px 18px 30px;
+    }
+    .hp-visa-cate,
+    .hp-visa-files,
+    .hp-visa-links {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+/* 세무정보 랜딩: 히어로 우측 이미지(회계·세무) */
+.hp-info-landing--tax .hp-visa-hero__photo {
+    background:
+        linear-gradient(to top, rgba(0, 51, 102, 0.45), transparent 55%),
+        url("https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=1200") center/cover no-repeat;
+}
+
+/* 사업관련정보·법인설립 랜딩: 히어로 우측 이미지 */
+.hp-info-landing--biz .hp-visa-hero__photo {
+    background:
+        linear-gradient(to top, rgba(0, 51, 102, 0.45), transparent 55%),
+        url("https://images.unsplash.com/photo-1544016768-982d1554f0b9?auto=format&fit=crop&q=80&w=1200") center/cover no-repeat;
+}
+
+/* 비즈니스 서비스 그리드 (Remix 시안) */
+.hp-biz-services {
+    padding: 44px 24px 52px;
+    background: #fff;
+}
+.hp-biz-services__head {
+    text-align: center;
+    margin: 0 auto 40px;
+    max-width: 40rem;
+}
+.hp-biz-service {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-bottom: 56px;
+}
+.hp-biz-service:last-of-type {
+    margin-bottom: 0;
+}
+.hp-biz-service--rev .hp-biz-service__media {
+    order: 2;
+}
+.hp-biz-service--rev .hp-biz-service__body {
+    order: 1;
+}
+.hp-biz-service__frame {
+    position: relative;
+    border-radius: 2rem;
+    overflow: hidden;
+    border: 8px solid #fff;
+    box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.22);
+    aspect-ratio: 4 / 3;
+    background: #e2e8f0;
+}
+.hp-biz-service__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.hp-biz-service__cap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 22px 24px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 58%);
+    color: #fff;
+    pointer-events: none;
+}
+.hp-biz-service__cap-sub {
+    margin: 0 0 6px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    opacity: 0.88;
+}
+.hp-biz-service__cap-title {
+    margin: 0;
+    font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+.hp-biz-service__title {
+    margin: 0 0 16px;
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+    font-weight: 800;
+    color: var(--hp-slate-900);
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+}
+.hp-biz-service__desc {
+    margin: 0 0 22px;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--hp-slate-600);
+}
+.hp-biz-pricing {
+    margin: 0 0 24px;
+    padding: 20px 20px 20px 24px;
+    background: rgba(0, 51, 102, 0.06);
+    border-radius: 16px;
+    border-left: 8px solid var(--hp-db);
+}
+.hp-biz-pricing__label {
+    margin: 0 0 8px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--hp-db);
+}
+.hp-biz-pricing__val {
+    margin: 0;
+    font-size: 1.12rem;
+    font-weight: 800;
+    color: var(--hp-slate-900);
+    line-height: 1.45;
+}
+.hp-biz-pricing__note {
+    margin: 10px 0 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #64748b;
+}
+.hp-biz-detail-list {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+}
+.hp-biz-detail-list__i {
+    position: relative;
+    padding-left: 34px;
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #334155;
+    line-height: 1.55;
+}
+.hp-biz-detail-list__i:last-child {
+    margin-bottom: 0;
+}
+.hp-biz-detail-list__i::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #d1fae5;
+    color: #059669;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 22px;
+    text-align: center;
+}
+.hp-biz-service__cta {
+    align-self: flex-start;
+}
+@media (max-width: 900px) {
+    .hp-biz-service {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        margin-bottom: 48px;
+    }
+    .hp-biz-service--rev .hp-biz-service__media,
+    .hp-biz-service--rev .hp-biz-service__body {
+        order: unset;
+    }
+}

@@ -149,9 +149,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$new_skin_url.'/style.css?ver='.G
                             <li class="new_li_right">
 
                                 <?php if($thumb['src']) { ?>
-                                    <?php if (!strstr($list[$i]['wr_option'], 'secret')) { ?>
-                                    <a href="<?php echo $list[$i]['href']; ?>"><?php echo $img; ?></a>
-                                    <?php } ?>
+                                <a href="<?php echo $list[$i]['href']; ?>"><?php echo $img; ?></a>
                                 <?php } ?>
                                 <?php if ($is_admin) { ?>
                                     <input type="checkbox" name="chk_bn_id[]" value="<?php echo $i; ?>" id="chk_bn_id_<?php echo $i; ?>">

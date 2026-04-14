@@ -29,10 +29,6 @@ for ($i=0; $i<$ext_cnt; $i++) {
 }
 //==========================================================================================================================
 
-// Cloudflare 사용시 REMOTE_ADDR 에 사용자 IP 적용과 https 사용 여부
-if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
-    include_once('cloudflare.check.php');    // cloudflare 의 ip 대역인지 체크
-}
 
 function g5_path()
 {
@@ -64,6 +60,16 @@ unset($g5_path);
 // IIS 에서 SERVER_ADDR 서버변수가 없다면
 if (!isset($_SERVER['SERVER_ADDR'])) {
     $_SERVER['SERVER_ADDR'] = isset($_SERVER['LOCAL_ADDR']) ? $_SERVER['LOCAL_ADDR'] : '';
+}
+
+// Cloudflare 환경을 고려한 https 사용여부
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === "https") {
+    $_SERVER['HTTPS'] = 'on';
+}
+
+// Cloudflare 사용시 REMOTE_ADDR 에 사용자 IP 적용
+if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
+    $_SERVER['REMOTE_ADDR'] = preg_replace('/[^0-9.]/', '', $_SERVER['HTTP_CF_CONNECTING_IP']);
 }
 
 // multi-dimensional array에 사용자지정 함수적용
@@ -525,6 +531,7 @@ if (isset($_REQUEST['gr_id'])) {
 }
 //===================================
 
+
 // 자동로그인 부분에서 첫로그인에 포인트 부여하던것을 로그인중일때로 변경하면서 코드도 대폭 수정하였습니다.
 if (isset($_SESSION['ss_mb_id']) && $_SESSION['ss_mb_id']) { // 로그인중이라면
     $member = get_member($_SESSION['ss_mb_id']);
@@ -584,45 +591,6 @@ if (isset($_SESSION['ss_mb_id']) && $_SESSION['ss_mb_id']) { // 로그인중이�
     // 자동로그인 end ---------------------------------------
 }
 
-// 최고관리자가 아니면 IP를 체크한다.
-if (!(isset($member['mb_id']) && $config['cf_admin'] === $member['mb_id'])) {
-    // 접근가능 IP
-    $cf_possible_ip = trim($config['cf_possible_ip']);
-    if ($cf_possible_ip) {
-        $is_possible_ip = false;
-        $pattern = explode("\n", $cf_possible_ip);
-        for ($i=0; $i<count($pattern); $i++) {
-            $pattern[$i] = trim($pattern[$i]);
-            if (empty($pattern[$i]))
-                continue;
-
-            $pattern[$i] = str_replace(".", "\.", $pattern[$i]);
-            $pattern[$i] = str_replace("+", "[0-9\.]+", $pattern[$i]);
-            $pat = "/^{$pattern[$i]}$/";
-            $is_possible_ip = preg_match($pat, $_SERVER['REMOTE_ADDR']);
-            if ($is_possible_ip)
-                break;
-        }
-        if (!$is_possible_ip)
-            die ("<meta charset=utf-8>접근이 가능하지 않습니다.");
-    }
-
-    // 접근차단 IP
-    $is_intercept_ip = false;
-    $pattern = explode("\n", trim($config['cf_intercept_ip']));
-    for ($i=0; $i<count($pattern); $i++) {
-        $pattern[$i] = trim($pattern[$i]);
-        if (empty($pattern[$i]))
-            continue;
-
-        $pattern[$i] = str_replace(".", "\.", $pattern[$i]);
-        $pattern[$i] = str_replace("+", "[0-9\.]+", $pattern[$i]);
-        $pat = "/^{$pattern[$i]}$/";
-        $is_intercept_ip = preg_match($pat, $_SERVER['REMOTE_ADDR']);
-        if ($is_intercept_ip)
-            die ("<meta charset=utf-8>접근 불가합니다.");
-    }
-}
 
 /** @var array $write 글 데이터 */
 $write = array();
@@ -674,6 +642,47 @@ if (isset($member['mb_id']) && $member['mb_id']) {
     $member['mb_id'] = '';
     $member['mb_level'] = 1; // 비회원의 경우 회원레벨을 가장 낮게 설정
 }
+
+
+if ($is_admin != 'super') {
+    // 접근가능 IP
+    $cf_possible_ip = trim($config['cf_possible_ip']);
+    if ($cf_possible_ip) {
+        $is_possible_ip = false;
+        $pattern = explode("\n", $cf_possible_ip);
+        for ($i=0; $i<count($pattern); $i++) {
+            $pattern[$i] = trim($pattern[$i]);
+            if (empty($pattern[$i]))
+                continue;
+
+            $pattern[$i] = str_replace(".", "\.", $pattern[$i]);
+            $pattern[$i] = str_replace("+", "[0-9\.]+", $pattern[$i]);
+            $pat = "/^{$pattern[$i]}$/";
+            $is_possible_ip = preg_match($pat, $_SERVER['REMOTE_ADDR']);
+            if ($is_possible_ip)
+                break;
+        }
+        if (!$is_possible_ip)
+            die ("<meta charset=utf-8>접근이 가능하지 않습니다.");
+    }
+
+    // 접근차단 IP
+    $is_intercept_ip = false;
+    $pattern = explode("\n", trim($config['cf_intercept_ip']));
+    for ($i=0; $i<count($pattern); $i++) {
+        $pattern[$i] = trim($pattern[$i]);
+        if (empty($pattern[$i]))
+            continue;
+
+        $pattern[$i] = str_replace(".", "\.", $pattern[$i]);
+        $pattern[$i] = str_replace("+", "[0-9\.]+", $pattern[$i]);
+        $pat = "/^{$pattern[$i]}$/";
+        $is_intercept_ip = preg_match($pat, $_SERVER['REMOTE_ADDR']);
+        if ($is_intercept_ip)
+            die ("<meta charset=utf-8>접근 불가합니다.");
+    }
+}
+
 
 // 테마경로
 if(defined('_THEME_PREVIEW_') && _THEME_PREVIEW_ === true)
@@ -817,9 +826,10 @@ include_once(G5_BBS_PATH.'/db_table.optimize.php');
 $extend_file = array();
 $tmp = dir(G5_EXTEND_PATH);
 while ($entry = $tmp->read()) {
-    // php 파일만 include 함
-    if (preg_match("/(\.php)$/i", $entry))
+    // php 파일만 include 함 (Mac ._*.php 메타데이터 파일 제외 — 출력 시 headers already sent 유발)
+    if (preg_match("/(\.php)$/i", $entry) && strpos($entry, '._') !== 0) {
         $extend_file[] = $entry;
+    }
 }
 
 if(!empty($extend_file) && is_array($extend_file)) {
