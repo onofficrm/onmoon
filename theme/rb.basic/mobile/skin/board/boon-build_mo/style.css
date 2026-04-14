@@ -545,3 +545,51 @@
 .btn_top.top.btn_bo_user {
     display: none !important;
 }
+
+body:has(#bo_v.bb-view-clean-mo) #container_title {
+    display: none !important;
+}
+
+.bb-mo-view-adminbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 16px;
+    margin: 0;
+    border-top: 1px solid #e5e7eb;
+    background: #f9fafb;
+    border-radius: 0 0 12px 12px;
+}
+
+.bb-mo-view-adminbar__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151 !important;
+    text-decoration: none !important;
+    background: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.bb-mo-view-adminbar__btn--primary {
+    background: #111827 !important;
+    color: #fff !important;
+    border-color: #111827 !important;
+}
+
+.bb-mo-view-adminbar__sns {
+    width: 100%;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px dashed #e5e7eb;
+}
+
+.bb-mo-view-adminbar__sns #bo_v_sns {
+    justify-content: flex-start;
+}

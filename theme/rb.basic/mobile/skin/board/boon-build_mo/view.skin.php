@@ -6,69 +6,13 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
 $bb_mc_board = isset($bo_table) && in_array($bo_table, array('massage', 'massage2', 'massage3', 'massage4'), true);
 $bb_mc_can_edit = !$bb_mc_board || ($is_admin === 'super');
+$bb_super = ($is_admin === 'super');
 ?>
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
 
-<div class="bb-mo-view-toolbar">
-    <?php if ($list_href) { ?>
-    <a href="<?php echo $list_href ?>" class="bb-mo-view-toolbar__btn">목록</a>
-    <?php } ?>
-    <span class="bb-mo-view-toolbar__sp"></span>
-    <?php if ($board['bo_use_sns'] || $scrap_href) { ?>
-    <div class="bb-mo-share">
-        <button type="button" class="bb-mo-view-toolbar__btn bb-mo-view-toolbar__btn--icon btn_share_opt is_view_btn" title="공유">공유</button>
-        <div id="bo_v_share" class="is_view_btn bb-mo-share__panel">
-            <?php if ($scrap_href) { ?>
-            <a href="<?php echo $scrap_href; ?>" target="_blank" class="btn_scrap" onclick="win_scrap(this.href); return false;">스크랩</a>
-            <?php } ?>
-            <?php include_once G5_SNS_PATH.'/view.sns.skin.php'; ?>
-        </div>
-    </div>
-    <?php } ?>
-    <?php if ($write_href && $bb_mc_can_edit) { ?>
-    <a href="<?php echo $write_href ?>" class="bb-mo-view-toolbar__btn">글쓰기</a>
-    <?php } ?>
-    <div class="bb-mo-more">
-        <button type="button" class="bb-mo-view-toolbar__btn bb-mo-view-toolbar__btn--icon btn_more_opt is_view_btn" title="더보기">···</button>
-        <?php ob_start(); ?>
-        <ul class="more_opt is_view_btn bb-mo-more__list">
-            <?php if ($reply_href && $bb_mc_can_edit) { ?><li><a href="<?php echo $reply_href ?>">답변</a></li><?php } ?>
-            <?php if ($update_href && $bb_mc_can_edit) { ?><li><a href="<?php echo $update_href ?>">수정</a></li><?php } ?>
-            <?php if ($delete_href && $bb_mc_can_edit) { ?><li><a href="<?php echo $delete_href ?>" onclick="del(this.href); return false;">삭제</a></li><?php } ?>
-            <?php if ($copy_href && $bb_mc_can_edit) { ?><li><a href="<?php echo $copy_href ?>" onclick="board_move(this.href); return false;">복사</a></li><?php } ?>
-            <?php if ($move_href && $bb_mc_can_edit) { ?><li><a href="<?php echo $move_href ?>" onclick="board_move(this.href); return false;">이동</a></li><?php } ?>
-            <?php if ($search_href) { ?><li><a href="<?php echo $search_href ?>">검색</a></li><?php } ?>
-            <?php if ($list_href) { ?><li><a href="<?php echo $list_href ?>">목록</a></li><?php } ?>
-        </ul>
-        <?php $link_buttons = ob_get_contents();
-        ob_end_flush(); ?>
-    </div>
-</div>
-<script>
-jQuery(function($) {
-    $('.btn_more_opt.is_view_btn').on('click', function(e) {
-        e.stopPropagation();
-        $('.more_opt.is_view_btn').toggle();
-    });
-    $('.btn_share_opt').on('click', function(e) {
-        e.stopPropagation();
-        $('#bo_v_share').toggle();
-    });
-    $(document).on('click', function(e) {
-        if (!$(e.target).closest('.is_view_btn').length) {
-            $('.more_opt.is_view_btn').hide();
-            $('#bo_v_share').hide();
-        }
-    });
-});
-</script>
-
-<article id="bo_v" class="bb-view-clean-mo" style="width:<?php echo $width; ?>">
+<article id="bo_v" class="bb-view-clean-mo<?php echo $bb_mc_board ? ' bb-view-massage' : ''; ?>" style="width:<?php echo $width; ?>">
     <header class="bb-view-clean-mo__head">
         <h2 id="bo_v_title" class="bb-view-clean-mo__title">
-            <?php if ($category_name) { ?>
-            <span class="bb-view-clean-mo__cate"><?php echo $view['ca_name']; ?></span>
-            <?php } ?>
             <span class="bo_v_tit"><?php echo get_text($view['wr_subject']); ?></span>
         </h2>
         <div id="bo_v_info" class="bb-view-clean-mo__meta">
@@ -142,6 +86,44 @@ jQuery(function($) {
             ?>
         </ul>
     </section>
+    <?php } ?>
+
+    <?php if ($bb_super) { ?>
+    <div class="bb-mo-view-adminbar" aria-label="관리 메뉴">
+        <?php if ($list_href) { ?>
+        <a href="<?php echo $list_href ?>" class="bb-mo-view-adminbar__btn">목록</a>
+        <?php } ?>
+        <?php if ($admin_href) { ?>
+        <button type="button" class="bb-mo-view-adminbar__btn" onclick="window.open('<?php echo $admin_href ?>');">관리</button>
+        <?php } ?>
+        <?php if ($write_href && $bb_mc_can_edit) { ?>
+        <a href="<?php echo $write_href ?>" class="bb-mo-view-adminbar__btn bb-mo-view-adminbar__btn--primary">글쓰기</a>
+        <?php } ?>
+        <?php if ($scrap_href) { ?>
+        <a href="<?php echo $scrap_href; ?>" class="bb-mo-view-adminbar__btn" target="_blank" onclick="win_scrap(this.href); return false;">스크랩</a>
+        <?php } ?>
+        <?php if ($search_href) { ?>
+        <a href="<?php echo $search_href ?>" class="bb-mo-view-adminbar__btn">검색</a>
+        <?php } ?>
+        <?php if ($update_href && $bb_mc_can_edit) { ?>
+        <a href="<?php echo $update_href ?>" class="bb-mo-view-adminbar__btn">수정</a>
+        <?php } ?>
+        <?php if ($delete_href && $bb_mc_can_edit) { ?>
+        <a href="<?php echo $delete_href ?>" class="bb-mo-view-adminbar__btn" onclick="del(this.href); return false;">삭제</a>
+        <?php } ?>
+        <?php if ($reply_href && $bb_mc_can_edit) { ?>
+        <a href="<?php echo $reply_href ?>" class="bb-mo-view-adminbar__btn">답글</a>
+        <?php } ?>
+        <?php if ($copy_href && $bb_mc_can_edit) { ?>
+        <a href="<?php echo $copy_href ?>" class="bb-mo-view-adminbar__btn" onclick="board_move(this.href); return false;">복사</a>
+        <?php } ?>
+        <?php if ($move_href && $bb_mc_can_edit) { ?>
+        <a href="<?php echo $move_href ?>" class="bb-mo-view-adminbar__btn" onclick="board_move(this.href); return false;">이동</a>
+        <?php } ?>
+        <?php if ($board['bo_use_sns']) { ?>
+        <div class="bb-mo-view-adminbar__sns"><?php include_once G5_SNS_PATH.'/view.sns.skin.php'; ?></div>
+        <?php } ?>
+    </div>
     <?php } ?>
 </article>
 

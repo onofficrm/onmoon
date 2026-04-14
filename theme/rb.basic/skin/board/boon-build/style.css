@@ -1990,6 +1990,33 @@ box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1)}
     gap: 8px;
 }
 
+/* 서브페이지 게시판 제목(h2) 숨김 — 글보기 본문만 노출 */
+body:has(.bb-view-clean-wrap) #container_title {
+    display: none !important;
+}
+
+.bb-view-adminbar {
+    margin-top: 32px;
+    padding: 16px 0 8px;
+    border-top: 1px solid #e5e7eb;
+    background: #fafafa;
+    border-radius: 0 0 12px 12px;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: -8px;
+}
+
+.bb-view-adminbar__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    max-width: 920px;
+    margin: 0 auto;
+}
+
 @media (max-width: 767px) {
     .bb-view-clean {
         padding: 16px 14px 0;

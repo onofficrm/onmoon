@@ -6,26 +6,12 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
 $bb_mc_board = isset($bo_table) && in_array($bo_table, array('massage', 'massage2', 'massage3', 'massage4'), true);
 $bb_mc_can_edit = !$bb_mc_board || ($is_admin === 'super');
+$bb_super = ($is_admin === 'super');
 ?>
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
 
-<div class="rb_bbs_wrap bb-view-clean-wrap" id="scroll_container" style="width:<?php echo $width; ?>">
+<div class="rb_bbs_wrap bb-view-clean-wrap<?php echo $bb_mc_board ? ' bb-view-massage' : ''; ?>" id="scroll_container" style="width:<?php echo $width; ?>">
     <div class="bb-view-clean">
-
-        <div class="bb-view-toolbar">
-            <div class="bb-view-toolbar__inner" style="max-width:<?php echo isset($rb_core['sub_width']) ? (int) $rb_core['sub_width'] : 1200; ?>px;">
-                <?php if ($list_href) { ?>
-                <a href="<?php echo $list_href ?>" class="bb-view-btn bb-view-btn--ghost">목록</a>
-                <?php } ?>
-                <span class="bb-view-toolbar__sp"></span>
-                <?php if ($admin_href) { ?>
-                <button type="button" class="bb-view-btn bb-view-btn--ghost" onclick="window.open('<?php echo $admin_href ?>');">관리</button>
-                <?php } ?>
-                <?php if ($write_href && $bb_mc_can_edit) { ?>
-                <a href="<?php echo $write_href ?>" class="bb-view-btn bb-view-btn--primary">글 등록</a>
-                <?php } ?>
-            </div>
-        </div>
 
         <header class="bb-view-head">
             <h1 class="bb-view-title"><?php echo get_text($view['wr_subject']); ?></h1>
@@ -33,10 +19,6 @@ $bb_mc_can_edit = !$bb_mc_board || ($is_admin === 'super');
                 조회 <?php echo number_format($view['wr_hit']); ?>
                 <span class="bb-view-meta__sep">|</span>
                 등록 <?php echo date('Y.m.d', strtotime($view['wr_datetime'])); ?>
-                <?php if ($category_name && $view['ca_name']) { ?>
-                <span class="bb-view-meta__sep">|</span>
-                <a href="<?php echo $view['ca_name_href'] ?>"><?php echo get_text($view['ca_name']); ?></a>
-                <?php } ?>
             </p>
         </header>
 
@@ -112,10 +94,17 @@ $bb_mc_can_edit = !$bb_mc_board || ($is_admin === 'super');
         }
         ?>
 
-        <footer class="bb-view-foot">
-            <div class="bb-view-foot__inner">
+        <?php if ($bb_super) { ?>
+        <div class="bb-view-adminbar" aria-label="관리 메뉴">
+            <div class="bb-view-adminbar__inner">
                 <?php if ($list_href) { ?>
                 <a href="<?php echo $list_href ?>" class="bb-view-btn bb-view-btn--ghost">목록</a>
+                <?php } ?>
+                <?php if ($admin_href) { ?>
+                <button type="button" class="bb-view-btn bb-view-btn--ghost" onclick="window.open('<?php echo $admin_href ?>');">관리</button>
+                <?php } ?>
+                <?php if ($write_href && $bb_mc_can_edit) { ?>
+                <a href="<?php echo $write_href ?>" class="bb-view-btn bb-view-btn--primary">글 등록</a>
                 <?php } ?>
                 <?php if ($scrap_href) { ?>
                 <a href="<?php echo $scrap_href; ?>" class="bb-view-btn bb-view-btn--ghost" target="_blank" onclick="win_scrap(this.href); return false;">스크랩</a>
@@ -139,7 +128,8 @@ $bb_mc_can_edit = !$bb_mc_board || ($is_admin === 'super');
                 <a href="<?php echo $reply_href ?>" class="bb-view-btn bb-view-btn--ghost">답글</a>
                 <?php } ?>
             </div>
-        </footer>
+        </div>
+        <?php } ?>
     </div>
 </div>
 
