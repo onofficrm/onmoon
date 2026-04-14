@@ -2,7 +2,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 
-.boon-build--hanphil {
+.boon-build--massage {
     /* AI Studio / Tailwind luxury theme */
     --hp-bg: #0a192f;
     --hp-card: #112240;
@@ -55,52 +55,52 @@ body.boon-build-home #contents_wrap > section.index {
     scroll-margin-top: 5.5rem;
 }
 
-.boon-build--hanphil *,
-.boon-build--hanphil *::before,
-.boon-build--hanphil *::after {
+.boon-build--massage *,
+.boon-build--massage *::before,
+.boon-build--massage *::after {
     box-sizing: border-box;
 }
 
-.boon-build--hanphil a {
+.boon-build--massage a {
     color: inherit;
     text-decoration: none;
 }
 
-.boon-build--hanphil img {
+.boon-build--massage img {
     display: block;
     max-width: 100%;
     height: auto;
 }
 
-.boon-build--hanphil button {
+.boon-build--massage button {
     font: inherit;
     cursor: pointer;
     border: 0;
     background: transparent;
 }
 
-.boon-build--hanphil .hp-icon {
+.boon-build--massage .hp-icon {
     display: block;
     width: 1.25rem;
     height: 1.25rem;
 }
 
-.boon-build--hanphil .hp-icon--sm {
+.boon-build--massage .hp-icon--sm {
     width: 0.75rem;
     height: 0.75rem;
 }
 
-.boon-build--hanphil .hp-icon--md {
+.boon-build--massage .hp-icon--md {
     width: 1.5rem;
     height: 1.5rem;
 }
 
-.boon-build--hanphil .hp-icon--lg {
+.boon-build--massage .hp-icon--lg {
     width: 1.75rem;
     height: 1.75rem;
 }
 
-.boon-build--hanphil .hp-icon--xl {
+.boon-build--massage .hp-icon--xl {
     width: 2rem;
     height: 2rem;
 }
@@ -1828,7 +1828,7 @@ body.boon-build-home #contents_wrap > section.index {
 }
 
 /* Boards section (gnuboard latest) */
-.boon-build--hanphil .boon-build__section--boards {
+.boon-build--massage .boon-build__section--boards {
     padding: 4rem 0;
     background: var(--hp-slate-100);
 }
@@ -1843,18 +1843,18 @@ body.boon-build-home #contents_wrap > section.index {
     line-height: 1.55;
 }
 
-.boon-build--hanphil .boon-build__boards-grid {
+.boon-build--massage .boon-build__boards-grid {
     display: grid;
     gap: 1.5rem;
 }
 
 @media (min-width: 768px) {
-    .boon-build--hanphil .boon-build__boards-grid {
+    .boon-build--massage .boon-build__boards-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-.boon-build--hanphil .boon-build__board {
+.boon-build--massage .boon-build__board {
     height: 100%;
     padding: 1.75rem;
     border: 1px solid var(--hp-border);
@@ -1863,59 +1863,511 @@ body.boon-build-home #contents_wrap > section.index {
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
 }
 
-.boon-build--hanphil .boon-build__board-head h3 {
+.boon-build--massage .boon-build__board-head h3 {
     color: var(--hp-slate-900);
 }
 
-.boon-build--hanphil .boon-build__board-bar {
+.boon-build--massage .boon-build__board-bar {
     background: var(--hp-deep);
 }
 
-.boon-build--hanphil .boon-build__board-more {
+.boon-build--massage .boon-build__board-more {
     color: var(--hp-deep);
 }
 
-.boon-build--hanphil .boon-build__board-more:hover {
+.boon-build--massage .boon-build__board-more:hover {
     color: var(--hp-navy);
 }
 
-.boon-build--hanphil .boon-build__board-subject {
+.boon-build--massage .boon-build__board-subject {
     color: var(--hp-slate-700);
 }
 
-.boon-build--hanphil .boon-build__board-link:hover .boon-build__board-subject {
+.boon-build--massage .boon-build__board-link:hover .boon-build__board-subject {
     color: var(--hp-deep);
 }
 
-.boon-build--hanphil .boon-build__board-index {
+.boon-build--massage .boon-build__board-index {
     color: rgba(201, 168, 76, 0.45);
 }
 
-.boon-build--hanphil .boon-build__board-date {
+.boon-build--massage .boon-build__board-date {
     color: var(--hp-slate-500);
 }
 
-.boon-build--hanphil .boon-build__board-item {
+.boon-build--massage .boon-build__board-item {
     border-bottom-color: var(--hp-slate-100);
 }
 
-.boon-build--hanphil .boon-build__board-link:hover {
+.boon-build--massage .boon-build__board-link:hover {
     background: var(--hp-slate-50);
 }
 
-.boon-build--hanphil .boon-build__board-empty {
+.boon-build--massage .boon-build__board-empty {
     color: var(--hp-slate-500);
 }
 
-.boon-build--hanphil .boon-build__board-spinner {
+.boon-build--massage .boon-build__board-spinner {
     border-color: rgba(201, 168, 76, 0.2);
     border-top-color: var(--hp-gold);
 }
 
 /* 하단은 테마 tail.php #ft 사용 — 랜딩 전용 푸터 블록 제거 */
 
+.hp-text-rose {
+    color: var(--hp-rose);
+}
+
+/* 지역 그리드 (서울·경기·인천·기타) */
+.hp-massage-region {
+    padding: 0 0 2.5rem;
+    background: var(--hp-bg);
+}
+
+.hp-massage-region__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .hp-massage-region__grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.hp-massage-region__cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.5rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid var(--hp-border);
+    background: var(--hp-card);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: border-color 0.25s, transform 0.25s;
+}
+
+.hp-massage-region__cell:hover {
+    border-color: rgba(201, 168, 76, 0.45);
+    transform: translateY(-2px);
+}
+
+.hp-massage-region__ic {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(250, 204, 21, 0.1);
+    color: #facc15;
+}
+
+.hp-massage-region__name {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--hp-ink);
+}
+
+/* Features 블록 */
+.hp-massage-features {
+    padding: 2rem 1.5rem;
+    border-radius: 2.5rem;
+    border: 1px solid rgba(35, 53, 84, 0.5);
+    background: rgba(17, 34, 64, 0.85);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+@media (min-width: 768px) {
+    .hp-massage-features {
+        padding: 3rem 3.5rem;
+    }
+}
+
+.hp-massage-features__head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.hp-massage-features__grid {
+    display: grid;
+    gap: 1.75rem 2rem;
+}
+
+@media (min-width: 768px) {
+    .hp-massage-features__grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.hp-massage-feature {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.hp-massage-feature__ic {
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(230, 138, 138, 0.12);
+    color: var(--hp-primary);
+}
+
+.hp-massage-feature__ic svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.hp-massage-feature__t {
+    margin: 0 0 0.35rem;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--hp-primary);
+}
+
+.hp-massage-feature__d {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--hp-rose);
+}
+
+/* 코스 4열 */
+.hp-pricing--quad {
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .hp-pricing--quad {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .hp-pricing--quad {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.hp-price-card--featured {
+    position: relative;
+    box-shadow: 0 0 0 2px rgba(230, 138, 138, 0.45);
+}
+
+.hp-price-tag {
+    position: absolute;
+    top: -0.65rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.2rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.6rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    background: linear-gradient(90deg, var(--hp-primary), var(--hp-primary-dark));
+    color: #fff;
+}
+
+.hp-course-desc {
+    margin: 0 0 1.25rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--hp-slate-500);
+    min-height: 2.5rem;
+}
+
+.hp-price-list--plain {
+    margin: 0 0 1.5rem;
+}
+
+.hp-price-list--plain li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.65rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--hp-slate-600);
+}
+
+.hp-price-list--plain li::before {
+    display: none;
+}
+
+.hp-price-list--plain li span:last-child {
+    font-size: 1.05rem;
+    color: var(--hp-ink);
+}
+
+.hp-price-note {
+    margin-top: 2.5rem;
+    padding: 1.75rem;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(230, 138, 138, 0.15);
+    background: rgba(230, 138, 138, 0.06);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.hp-price-note__icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--hp-card);
+    border: 1px solid var(--hp-border);
+    color: var(--hp-primary);
+}
+
+.hp-price-note__t {
+    margin: 0 0 0.25rem;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--hp-ink);
+}
+
+.hp-price-note__p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--hp-slate-500);
+}
+
+.hp-price-note__chips {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-left: auto;
+}
+
+.hp-price-note__chips li {
+    padding: 0.4rem 0.85rem;
+    border-radius: 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 800;
+    background: var(--hp-card);
+    border: 1px solid rgba(230, 138, 138, 0.12);
+    color: var(--hp-ink);
+}
+
+/* 갤러리 */
+.hp-massage-gallery__head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.hp-massage-gallery {
+    padding: 2rem 1.5rem;
+    border-radius: 2.5rem;
+    border: 1px solid var(--hp-border);
+    background: rgba(17, 34, 64, 0.72);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 768px) {
+    .hp-massage-gallery {
+        padding: 2.5rem 3rem;
+    }
+}
+
+.hp-massage-gallery__grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+    .hp-massage-gallery__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.hp-massage-gallery__item {
+    border-radius: 1.5rem;
+    overflow: hidden;
+    border: 1px solid var(--hp-border);
+}
+
+.hp-massage-gallery__img {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+.hp-massage-gallery__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.hp-massage-gallery__item:hover .hp-massage-gallery__img img {
+    transform: scale(1.06);
+}
+
+.hp-massage-gallery__cap {
+    padding: 1rem 1.25rem;
+    text-align: center;
+    font-weight: 800;
+    color: var(--hp-bg);
+    background: linear-gradient(90deg, var(--hp-gold), var(--hp-rose));
+}
+
+/* 지역 배너 */
+.hp-massage-banner-wrap {
+    background: var(--hp-bg);
+}
+
+.hp-massage-banner {
+    display: grid;
+    gap: 0;
+    border-radius: 2.5rem;
+    overflow: hidden;
+    border: 1px solid var(--hp-border);
+    background: var(--hp-card);
+    box-shadow: 0 24px 55px rgba(0, 0, 0, 0.35);
+}
+
+@media (min-width: 900px) {
+    .hp-massage-banner {
+        grid-template-columns: 1fr 1fr;
+        min-height: 22rem;
+    }
+}
+
+.hp-massage-banner__media {
+    min-height: 14rem;
+}
+
+.hp-massage-banner__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hp-massage-banner__body {
+    padding: 2rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.hp-massage-banner__badge {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    background: rgba(230, 138, 138, 0.18);
+    border: 1px solid rgba(230, 138, 138, 0.3);
+    color: var(--hp-primary);
+}
+
+/* 이용 방법 */
+.hp-howto {
+    background: var(--hp-bg);
+}
+
+.hp-howto__head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+}
+
+.hp-howto__steps {
+    margin: 0 0 2rem;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.hp-howto__step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: 1.25rem 1.35rem;
+    border-radius: 1.25rem;
+    border: 1px solid var(--hp-border);
+    background: var(--hp-card);
+}
+
+.hp-howto__num {
+    flex-shrink: 0;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.1rem;
+    background: var(--hp-gold);
+    color: var(--hp-bg);
+}
+
+.hp-howto__st {
+    display: block;
+    font-size: 1.1rem;
+    color: var(--hp-ink);
+    margin-bottom: 0.35rem;
+}
+
+.hp-howto__sd {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--hp-rose);
+    line-height: 1.55;
+}
+
+.hp-howto__note {
+    padding: 1.75rem;
+    border-radius: 1.5rem;
+    border: 1px solid var(--hp-border);
+    background: rgba(17, 34, 64, 0.72);
+}
+
+.hp-howto__note-t {
+    margin: 0 0 1rem;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--hp-ink);
+}
+
+.hp-howto__note-ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--hp-slate-500);
+    line-height: 1.75;
+    font-size: 0.9rem;
+}
+
 /* Floating */
-.boon-build--hanphil .boon-build__floating {
+.boon-build--massage .boon-build__floating {
     position: fixed;
     right: 24px;
     bottom: 24px;
@@ -1925,7 +2377,7 @@ body.boon-build-home #contents_wrap > section.index {
     gap: 12px;
 }
 
-.boon-build--hanphil .boon-build__floating-button {
+.boon-build--massage .boon-build__floating-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1937,11 +2389,11 @@ body.boon-build-home #contents_wrap > section.index {
     transition: transform 0.2s;
 }
 
-.boon-build--hanphil .boon-build__floating-button:hover {
+.boon-build--massage .boon-build__floating-button:hover {
     transform: translateY(-3px) scale(1.05);
 }
 
-.boon-build--hanphil .boon-build__floating-button svg {
+.boon-build--massage .boon-build__floating-button svg {
     width: 26px;
     height: 26px;
 }
@@ -1965,7 +2417,7 @@ body.boon-build-home #contents_wrap > section.index {
         width: 100%;
     }
 
-    .boon-build--hanphil .boon-build__floating {
+    .boon-build--massage .boon-build__floating {
         right: 16px;
         bottom: 16px;
     }

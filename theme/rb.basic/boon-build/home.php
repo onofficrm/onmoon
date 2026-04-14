@@ -17,107 +17,112 @@ if (!function_exists('boon_build_icon')) {
     }
 }
 
-$boon_build_site_title = isset($config['cf_title']) && $config['cf_title'] ? $config['cf_title'] : 'ONLY CEBU';
+$boon_build_site_title = isset($config['cf_title']) && $config['cf_title'] ? $config['cf_title'] : '공감마사지';
 $boon_build_company_name = !empty($rb_builder['bu_1']) ? $rb_builder['bu_1'] : $boon_build_site_title;
 $boon_build_owner = !empty($rb_builder['bu_2']) ? $rb_builder['bu_2'] : '대표자 정보 준비중';
 $boon_build_phone = !empty($rb_builder['bu_3']) ? $rb_builder['bu_3'] : '';
 $boon_build_biz = !empty($rb_builder['bu_5']) ? $rb_builder['bu_5'] : '사업자등록번호 준비중';
-$boon_build_address = !empty($rb_builder['bu_10']) ? $rb_builder['bu_10'] : 'Cebu City, Philippines';
+$boon_build_address = !empty($rb_builder['bu_10']) ? $rb_builder['bu_10'] : '서울특별시';
 $boon_build_privacy = !empty($rb_builder['bu_11']) ? $rb_builder['bu_11'] : '';
-$boon_build_footer_note = !empty($rb_builder['bu_12']) ? strip_tags($rb_builder['bu_12']) : '본 정보는 안내 목적이며, 현지 법령 변동에 따라 달라질 수 있습니다. 상세는 개별 상담을 이용해 주세요.';
+$boon_build_footer_note = !empty($rb_builder['bu_12']) ? strip_tags($rb_builder['bu_12']) : '이용 전 코스·지역·요금은 상담을 통해 안내됩니다.';
 $boon_build_logo_url = !empty($rb_builder['bu_logo_pc']) ? G5_URL.'/data/logos/pc?ver='.G5_SERVER_TIME : '';
 $boon_build_kakao_url = !empty($rb_builder['bu_sns2']) ? $rb_builder['bu_sns2'] : (!empty($rb_builder['bu_sns1']) ? $rb_builder['bu_sns1'] : '');
 $boon_build_telegram_url = !empty($rb_builder['bu_sns8']) ? $rb_builder['bu_sns8'] : 'https://t.me/';
 $boon_build_extra_url = !empty($rb_builder['bu_sns10']) ? $rb_builder['bu_sns10'] : '';
 
-$hanphil_news = array(
-    '필리핀 이민국, 관광비자 연장 심사 강화 및 e-Travel 등록 의무화 안내',
-    '2026년 필리핀 최저임금 인상안 발표 - 세부 지역 사업장 적용 가이드',
-    '현지 법인 설립 절차 간소화 - SEC 온라인 등록 시스템 업데이트 소식',
-    '필리핀 세무국(BIR) 전자 세금 계산서(EIS) 도입 및 시행 일정 공유',
-    '세부 막탄 신규 도로 개통에 따른 물류 및 교통 흐름 개선 전망',
+$massage_ticker = array(
+    '예약비 없는 100% 후불제 · 유류비 포함 정찰제로 안내해 드립니다.',
+    '365일 24시간 상담 가능 · 평균 30분 이내 방문을 목표로 합니다.',
+    '전원 실력파 관리사 · 전문 교육 이수 및 위생 관리를 철저히 합니다.',
+    '타이 · 아로마 · 감성 힐링 · 스페셜 코스까지 맞춤 상담 가능합니다.',
+    '집·호텔·오피스텔·모텔 등 고객님이 계신 곳으로 찾아갑니다.',
 );
 
-$hanphil_faq = array(
+$massage_ticker_en = array(
+    'No booking fee, pay after service · transparent pricing including travel.',
+    '24/7 consultation · we aim to arrive within about 30 minutes.',
+    'Trained therapists · hygiene and professional standards come first.',
+    'Thai, aroma, healing, and special courses available after consultation.',
+    'We visit your home, hotel, officetel, or motel.',
+);
+
+$massage_faq = array(
     array(
-        'q' => '비자 연장 기간은 얼마나 걸리나요?',
-        'a' => '일반적으로 관광비자 연장은 접수 후 영업일 기준 3~5일 정도 소요됩니다. 급행 서비스 이용 시 당일 또는 익일 처리도 가능합니다.',
+        'q' => '예약은 어떻게 하나요?',
+        'a' => '카카오톡 또는 전화로 원하시는 날짜·시간·코스·지역을 말씀해 주시면 상담 후 예약을 잡아 드립니다.',
     ),
     array(
-        'q' => '북키퍼 대행 비용은 어떻게 되나요?',
-        'a' => '법인 규모와 매월 발생하는 전표 수에 따라 차등 적용됩니다. 기본 패키지는 상담을 통해 상세 견적을 안내해 드립니다.',
+        'q' => '결제는 언제 하면 되나요?',
+        'a' => '서비스 완료 후 후불제로 진행됩니다. 현금·카드·계좌이체 등 가능 여부는 상담 시 안내해 드립니다.',
     ),
     array(
-        'q' => '법인 설립 시 한국인이 100% 지분을 가질 수 있나요?',
-        'a' => '업종에 따라 다릅니다. 소매업 등 일부 업종은 필리핀인 지분이 필요하지만, 수출형 제조나 IT 서비스 등은 100% 외자 법인 설립이 가능합니다.',
+        'q' => '방문까지 얼마나 걸리나요?',
+        'a' => '지역과 교통 상황에 따라 다르지만, 보통 30분 이내 방문을 목표로 합니다. 일부 지역은 유류비가 추가될 수 있습니다.',
     ),
     array(
-        'q' => 'ECC(범죄기록증명)는 언제 발급받아야 하나요?',
-        'a' => '필리핀에 6개월 이상 체류한 외국인이 출국할 때 반드시 필요합니다. 출국 최소 3~5일 전에는 신청하시는 것이 안전합니다.',
+        'q' => '취소나 노쇼는 어떻게 되나요?',
+        'a' => '예약 시간 10분 이상 연락이 닿지 않으면 예약이 취소될 수 있습니다. 일정 변경은 미리 연락 부탁드립니다.',
     ),
     array(
-        'q' => '세부 외에 다른 지역 업무도 가능한가요?',
-        'a' => '네, 가능합니다. 세부를 본점으로 하고 있으나 마닐라, 클락 등 주요 지역의 이민국 및 BIR 업무도 네트워크를 통해 지원해 드리고 있습니다.',
+        'q' => '어떤 코스가 있는지 알고 싶어요.',
+        'a' => '타이·아로마·감성 힐링·스페셜 등 코스가 준비되어 있으며, 시간대별 요금은 홈페이지 코스 안내 또는 상담 시 안내됩니다.',
     ),
 );
 
-$hanphil_news_en = array(
-    'Philippine Bureau of Immigration: stricter tourist visa extension review and mandatory e-Travel registration',
-    '2026 Philippines minimum wage increase announced — guide for Cebu-area workplaces',
-    'Local corporation incorporation simplified — SEC online registration system update',
-    'Philippine BIR electronic sales invoice (EIS) rollout and implementation timeline',
-    'New Mactan Cebu road opening — logistics and traffic flow outlook',
-);
-
-$hanphil_faq_en = array(
+$massage_faq_en = array(
     array(
-        'q' => 'How long does a tourist visa extension take?',
-        'a' => 'Usually about 3–5 business days after submission. Express service may be same day or next day.',
+        'q' => 'How do I book?',
+        'a' => 'Contact us via KakaoTalk or phone with your preferred date, time, course, and area. We confirm after consultation.',
     ),
     array(
-        'q' => 'How much does bookkeeping agency service cost?',
-        'a' => 'It varies by company size and monthly transaction volume. We provide a detailed quote after consultation.',
+        'q' => 'When do I pay?',
+        'a' => 'Payment is after the service. Cash, card, or transfer may be available—ask during booking.',
     ),
     array(
-        'q' => 'Can a Korean national own 100% of a corporation?',
-        'a' => 'It depends on the industry. Some sectors require Filipino equity; export manufacturing or IT services may allow 100% foreign ownership.',
+        'q' => 'How long until arrival?',
+        'a' => 'It depends on area and traffic, but we typically aim for within about 30 minutes. Some areas may add a travel fee.',
     ),
     array(
-        'q' => 'When do I need an ECC (criminal record clearance)?',
-        'a' => 'Foreigners who stayed in the Philippines 6 months or more need it when leaving. Apply at least 3–5 days before departure.',
+        'q' => 'What about cancel or no-show?',
+        'a' => 'If we cannot reach you for more than about 10 minutes after the appointment time, the booking may be cancelled. Please contact us early for changes.',
     ),
     array(
-        'q' => 'Do you handle regions outside Cebu?',
-        'a' => 'Yes. Cebu is our base, but we support BI and BIR matters in Manila, Clark, and other major hubs through our network.',
+        'q' => 'What courses do you offer?',
+        'a' => 'We offer Thai, aroma, healing, special packages, and more. See the course section or ask during consultation for times and prices.',
     ),
 );
 
 $hp_reviews_ko = array(
-    array('t' => '세부에서 사업하며 세무 신고를 한필에 맡긴 뒤 벌금 걱정 없이 운영 중입니다. 카톡 소통이 특히 편했습니다.', 'c' => '막탄 다이빙 샵', 'n' => '박○ 사장님'),
-    array('t' => '법인 설립부터 BIR 등록까지 단계별로 안내해 주셔서 외국인 법인도 무리 없이 오픈했습니다.', 'c' => '세부 무역 법인', 'n' => '최○ 이사님'),
-    array('t' => '관광비자 연장을 대행해 주셔서 이민국 대기 시간을 크게 줄였습니다. 서류 검토가 꼼꼼합니다.', 'c' => '세부 거주 교민', 'n' => '김○ 님'),
-    array('t' => '은퇴비자(SRRV) 준비 시 예치금·공증 절차를 한 번에 정리해 주셔서 안심하고 진행했습니다.', 'c' => '은퇴 이민', 'n' => '정○ 님'),
+    array('t' => '처음 이용했는데 관리사분이 친절하고 실력이 좋아 어깨·목 뭉침이 풀렸어요. 집에서 받을 수 있어 최고였습니다.', 'c' => '프리미엄 아로마', 'n' => '김○현 님'),
+    array('t' => '시간 약속 잘 지키시고 매너가 좋았어요. 위생도 믿을 만했습니다. 강추합니다.', 'c' => '스웨디시', 'n' => '이○우 님'),
+    array('t' => '시설 가는 것보다 편하고 손길이 꼼꼼해서 근육이 다 풀린 느낌이에요.', 'c' => '타이 마사지', 'n' => '박○아 님'),
+    array('t' => '여러 곳 써봤는데 여기가 제일 깔끔하고 상담도 친절했어요. 아로마 향도 좋았습니다.', 'c' => '딥티슈', 'n' => '최○준 님'),
+    array('t' => '허리 통증 있었는데 부위 짚어서 풀어주셔서 한결 가벼워졌어요. 정기적으로 이용하고 싶네요.', 'c' => '아로마 테라피', 'n' => '정○민 님'),
+    array('t' => '집에서 이런 퀄리티라니 만족합니다. 이동 시간도 아끼고 마사지 후 바로 쉴 수 있어 좋았어요.', 'c' => '스웨디시', 'n' => '윤○성 님'),
 );
 
 $hp_reviews_en = array(
-    array('t' => 'Running a business in Cebu—we use Han-Phil for tax filings with no penalty worries. Kakao updates were especially convenient.', 'c' => 'Mactan dive shop', 'n' => 'Mr. Park○'),
-    array('t' => 'From incorporation to BIR registration, step-by-step guidance let our foreign-owned company open smoothly.', 'c' => 'Cebu trading company', 'n' => 'Director Choi○'),
-    array('t' => 'They handled our tourist visa extensions and cut BI waiting time a lot. Document review is thorough.', 'c' => 'Cebu resident', 'n' => 'Kim○'),
-    array('t' => 'For retirement visa (SRRV), they organized deposit and notarization in one flow so we could proceed with confidence.', 'c' => 'Retirement migration', 'n' => 'Jung○'),
+    array('t' => 'First time—therapist was kind and skilled; neck and shoulders felt much better. Loved having it at home.', 'c' => 'Premium aroma', 'n' => 'Kim○'),
+    array('t' => 'On time and very polite. Felt hygienic and professional. Highly recommend.', 'c' => 'Swedish', 'n' => 'Lee○'),
+    array('t' => 'More convenient than going out; thorough work on tight muscles.', 'c' => 'Thai', 'n' => 'Park○'),
+    array('t' => 'Cleanest experience so far; great consultation and nice oil aroma.', 'c' => 'Deep tissue', 'n' => 'Choi○'),
+    array('t' => 'They targeted my lower back well—felt lighter after. Want to book again.', 'c' => 'Aroma therapy', 'n' => 'Jung○'),
+    array('t' => 'Great quality at home; saved travel time and could rest right after.', 'c' => 'Swedish', 'n' => 'Yoon○'),
 );
 
 $hp_free_url = function_exists('get_pretty_url') ? get_pretty_url('free') : (G5_BBS_URL.'/board.php?bo_table=free');
+$massage_board_url = function_exists('get_pretty_url') ? get_pretty_url('massage') : (G5_BBS_URL.'/board.php?bo_table=massage');
 $lux_sfl = !empty($sfl) ? $sfl : 'wr_subject||wr_content';
 $lux_sop = (isset($sop) && $sop) ? $sop : 'and';
 $lux_search_url = G5_BBS_URL.'/search.php';
 ?>
 
-<div class="boon-build boon-build--hanphil">
+<div class="boon-build boon-build--massage">
 <script>
 window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
     array(
-        'news' => array_values($hanphil_news_en),
-        'faq' => $hanphil_faq_en,
+        'news' => array_values($massage_ticker_en),
+        'faq' => $massage_faq_en,
         'reviews' => $hp_reviews_en,
     ),
     JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
@@ -167,7 +172,7 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
                             <span data-i18n="hero.kakao">카카오톡 상담하기</span>
                         </a>
                         <?php } else { ?>
-                        <button type="button" class="hp-btn hp-btn--kakao" data-copy-text="HanPhilCebu">
+                        <button type="button" class="hp-btn hp-btn--kakao" data-copy-text="공감마사지">
                             <?php echo boon_build_icon('kakao'); ?> <span data-i18n="hero.kakao_copy">카카오톡 ID 복사</span>
                         </button>
                         <?php } ?>
@@ -221,38 +226,53 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
             <div class="hp-dash__grid">
                 <div class="hp-dash__card">
                     <div class="hp-dash__icon hp-dash__icon--amber">
-                        <svg class="hp-icon hp-icon--md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                        <svg class="hp-icon hp-icon--md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                     </div>
                     <div>
-                        <p class="hp-dash__label" data-i18n="dash.weather_label">오늘의 세부 날씨</p>
-                        <p class="hp-dash__value">☀️ 32°C / 26°C</p>
-                        <p class="hp-dash__hint" data-i18n="dash.weather_hint">대체로 맑음 (예시)</p>
+                        <p class="hp-dash__label">프리미엄 출장</p>
+                        <p class="hp-dash__value">365일 24시간</p>
+                        <p class="hp-dash__hint">언제든 상담·예약 가능</p>
                     </div>
                 </div>
-                <div class="hp-dash__card hp-dash__card--rate" id="hp-rate-card">
+                <div class="hp-dash__card">
                     <div class="hp-dash__icon hp-dash__icon--emerald">
-                        <svg class="hp-icon hp-icon--md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                        <svg class="hp-icon hp-icon--md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                     </div>
-                    <div class="hp-dash__rate-body">
-                        <div class="hp-dash__rate-head">
-                            <span class="hp-dash__label"><span data-i18n="dash.rate_label">오늘의 환율</span> <span class="hp-dash__live" data-i18n="dash.rate_live">LIVE</span></span>
-                            <button type="button" class="hp-rate-refresh" id="hp-rate-refresh" data-i18n-title="dash.rate_refresh_title" data-i18n-aria="dash.rate_refresh_aria" title="새로고침" aria-label="환율 새로고침">
-                                <svg class="hp-icon hp-icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-                            </button>
-                        </div>
-                        <p class="hp-dash__value"><span class="hp-muted" data-i18n="dash.rate_approx">100 PHP ≒</span> <strong id="hp-rate-value">—</strong><span class="hp-muted" data-i18n="dash.won">원</span></p>
-                        <p class="hp-dash__hint" id="hp-rate-meta">open.er-api.com 연동</p>
+                    <div>
+                        <p class="hp-dash__label">빠른 방문</p>
+                        <p class="hp-dash__value">약 30분 이내</p>
+                        <p class="hp-dash__hint">지역·교통에 따라 달라질 수 있음</p>
                     </div>
                 </div>
                 <div class="hp-dash__card hp-dash__card--accent">
                     <div class="hp-dash__icon hp-dash__icon--light">
-                        <svg class="hp-icon hp-icon--md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                        <svg class="hp-icon hp-icon--md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                     </div>
                     <div>
-                        <p class="hp-dash__label hp-dash__label--light"><span data-i18n="dash.policy_label">최신 비자 정책</span> <span class="hp-tag-new" data-i18n="dash.policy_new">NEW</span></p>
-                        <p class="hp-dash__policy" data-i18n="dash.policy_text">e-Travel 등록 필수 및 관광비자 연장 증빙 강화 안내</p>
+                        <p class="hp-dash__label hp-dash__label--light">후불제 · 정찰제 <span class="hp-tag-new">TIP</span></p>
+                        <p class="hp-dash__policy">예약비 없이 이용 후 결제. 유류비 포함 금액을 상담 시 안내합니다.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hp-section hp-massage-region">
+        <div class="boon-build__container">
+            <div class="hp-massage-region__grid">
+                <?php
+                $lux_regions = array(
+                    array('서울', '서울'),
+                    array('경기', '경기'),
+                    array('인천', '인천'),
+                    array('기타', '출장마사지'),
+                );
+                foreach ($lux_regions as $lr) {
+                    $rq = urlencode($lr[1]);
+                    $href = $lux_search_url.'?stx='.$rq.'&amp;sfl='.urlencode($lux_sfl).'&amp;sop='.urlencode($lux_sop === 'or' ? 'or' : 'and');
+                    echo '<a class="hp-massage-region__cell" href="'.$href.'"><span class="hp-massage-region__ic"><svg class="hp-icon hp-icon--md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span class="hp-massage-region__name">'.get_text($lr[0]).'</span></a>';
+                }
+                ?>
             </div>
         </div>
     </section>
@@ -260,28 +280,28 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
     <section class="hp-section">
         <div class="boon-build__container hp-split">
             <div class="hp-split__text">
-                <p class="hp-eyebrow" data-i18n="consult.eyebrow">장기적인 성장을 위한</p>
-                <h2 class="hp-h2" data-i18n="consult.h2">한필 1:1 맞춤 컨설팅</h2>
-                <p class="hp-prose" data-i18n="consult.prose">
-                    필리핀 현지 비즈니스 운영 중 발생하는 복잡한 행정 및 법률 문제로 어려움을 겪고 계신가요?
-                    한필의 전문가들이 비즈니스에만 집중하실 수 있도록 밀착 지원해 드립니다.
+                <p class="hp-eyebrow">프리미엄 홈케어</p>
+                <h2 class="hp-h2">공감마사지 1:1 맞춤 케어</h2>
+                <p class="hp-prose">
+                    엄격한 기준으로 선별된 테라피스트가 고객님의 공간으로 찾아갑니다.
+                    컨디션과 일정에 맞춰 코스·시간을 상담해 드립니다.
                 </p>
                 <ul class="hp-checklist">
-                    <li><span class="hp-check-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span><span data-i18n-html="consult.li1"><strong>세무 컨설팅</strong> — 절세 및 세제혜택 안내</span></li>
-                    <li><span class="hp-check-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span><span data-i18n-html="consult.li2"><strong>법무 컨설팅</strong> — 정관·계약 검토 및 리스크 관리</span></li>
-                    <li><span class="hp-check-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span><span data-i18n-html="consult.li3"><strong>노무 컨설팅</strong> — 근로계약 및 DOLE 대응 지원</span></li>
+                    <li><span class="hp-check-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span><span><strong>출장 방문</strong> — 집·호텔·오피스텔 등 원하시는 장소로</span></li>
+                    <li><span class="hp-check-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span><span><strong>다양한 코스</strong> — 타이·아로마·힐링·스페셜까지</span></li>
+                    <li><span class="hp-check-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span><span><strong>투명한 안내</strong> — 정찰제·후불제로 부담 없이</span></li>
                 </ul>
             </div>
             <div class="hp-split__panel">
                 <div class="hp-news-panel">
                     <div class="hp-news-panel__head">
                         <span class="hp-news-dot"></span>
-                        <span class="hp-news-panel__title" data-i18n="news.title">실시간 주요 소식</span>
-                        <span class="hp-news-panel__sub" data-i18n="news.sub">Han-Phil News</span>
+                        <span class="hp-news-panel__title">이용 안내</span>
+                        <span class="hp-news-panel__sub">Gonggam Guide</span>
                     </div>
                     <div class="hp-news-panel__viewport">
                         <ul class="hp-news-panel__list" id="hp-news-list">
-                            <?php foreach ($hanphil_news as $i => $line) { ?>
+                            <?php foreach ($massage_ticker as $i => $line) { ?>
                             <li class="hp-news-item<?php echo $i === 0 ? ' is-active' : ''; ?>" data-index="<?php echo $i; ?>">
                                 <span class="hp-news-item__no"><?php echo $i + 1; ?></span>
                                 <span class="hp-news-item__text" data-i18n-news-index="<?php echo $i; ?>"><?php echo get_text($line); ?></span>
@@ -289,9 +309,9 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
                             <?php } ?>
                         </ul>
                     </div>
-                    <div class="hp-news-panel__dots" id="hp-news-dots" role="tablist" data-i18n-aria="news.dots_label" aria-label="뉴스 슬라이드">
-                        <?php foreach ($hanphil_news as $i => $line) { ?>
-                        <button type="button" class="hp-news-dot-btn<?php echo $i === 0 ? ' is-active' : ''; ?>" data-index="<?php echo $i; ?>" aria-label="소식 <?php echo $i + 1; ?>"></button>
+                    <div class="hp-news-panel__dots" id="hp-news-dots" role="tablist" aria-label="안내 슬라이드">
+                        <?php foreach ($massage_ticker as $i => $line) { ?>
+                        <button type="button" class="hp-news-dot-btn<?php echo $i === 0 ? ' is-active' : ''; ?>" data-index="<?php echo $i; ?>" aria-label="안내 <?php echo $i + 1; ?>"></button>
                         <?php } ?>
                     </div>
                 </div>
@@ -301,54 +321,26 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
 
     <section class="hp-section hp-section--white" id="hp-services">
         <div class="boon-build__container">
-            <div class="hp-section__head">
-                <div>
-                    <p class="hp-eyebrow" data-i18n="services.eyebrow">전문적인 대행 서비스</p>
-                    <h2 class="hp-h2 hp-h2--tight" data-i18n="services.h2">한필 세부 비즈니스 통합 솔루션</h2>
+            <div class="hp-massage-features">
+                <div class="hp-massage-features__head">
+                    <span class="hp-lux-gold-bar" aria-hidden="true"></span>
+                    <h2 class="hp-h2 hp-h2--tight">저희 서비스만의 특별함</h2>
                 </div>
-                <p class="hp-section__lead" data-i18n="services.lead">비자부터 세무, 법인 설립까지 세부 현지에서 필요한 행정 업무를 전문가가 직접 관리합니다.</p>
-            </div>
-            <div class="hp-services">
-                <article class="hp-service-card">
-                    <div class="hp-service-card__icon hp-service-card__icon--blue">
-                        <svg class="hp-icon hp-icon--xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    </div>
-                    <h3 class="hp-h3" data-i18n="service.visa_h3">비자 서비스 (Visa)</h3>
-                    <ul class="hp-bullets">
-                        <li data-i18n="service.visa_b1">관광비자 연장</li>
-                        <li data-i18n="service.visa_b2">9G 워킹비자</li>
-                        <li data-i18n="service.visa_b3">은퇴비자 (SRRV)</li>
-                        <li data-i18n="service.visa_b4">결혼비자 &amp; 다운그레이딩</li>
-                        <li data-i18n="service.visa_b5">ECC 발급 &amp; 이민국 에스코트</li>
-                    </ul>
-                    <a href="#hp-contact" class="hp-link-arrow"><span data-i18n="service.inquiry">상담 문의</span></a>
-                </article>
-                <article class="hp-service-card">
-                    <div class="hp-service-card__icon hp-service-card__icon--emerald">
-                        <svg class="hp-icon hp-icon--xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                    </div>
-                    <h3 class="hp-h3" data-i18n="service.biz_h3">비즈니스 지원</h3>
-                    <ul class="hp-bullets">
-                        <li data-i18n="service.biz_b1">법인 설립 대행 (SEC/DTI)</li>
-                        <li data-i18n="service.biz_b2">사업자 등록 &amp; Permit 갱신</li>
-                        <li data-i18n="service.biz_b3">공증 및 서류 작성 대행</li>
-                        <li data-i18n="service.biz_b4">노동법 컨설팅 (DOLE)</li>
-                    </ul>
-                    <a href="#hp-contact" class="hp-link-arrow"><span data-i18n="service.inquiry">상담 문의</span></a>
-                </article>
-                <article class="hp-service-card">
-                    <div class="hp-service-card__icon hp-service-card__icon--amber">
-                        <svg class="hp-icon hp-icon--xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
-                    </div>
-                    <h3 class="hp-h3" data-i18n="service.acct_h3">회계/세무 서비스</h3>
-                    <ul class="hp-bullets">
-                        <li data-i18n="service.acct_b1">한필 전담 북키퍼 서비스</li>
-                        <li data-i18n="service.acct_b2">매월 BIR 세무 신고 대행</li>
-                        <li data-i18n="service.acct_b3">Mayor's Permit 갱신 지원</li>
-                        <li data-i18n="service.acct_b4">회계 감사 및 AFS 준비</li>
-                    </ul>
-                    <a href="#hp-contact" class="hp-link-arrow"><span data-i18n="service.inquiry">상담 문의</span></a>
-                </article>
+                <div class="hp-massage-features__grid">
+                    <?php
+                    $feat = array(
+                        array('최고의 관리사', '전원 실력파 관리사가 직접 방문합니다.'),
+                        array('24시간 서비스', '365일 언제든지 예약 가능하며 빠른 방문을 지향합니다.'),
+                        array('다양한 결제방법', '현금, 카드결제, 계좌이체 등 상담 시 안내해 드립니다.'),
+                        array('맞춤형 케어', '고객 컨디션에 맞춘 마사지를 제공합니다.'),
+                        array('전문 교육 이수', '전문 교육을 이수한 테라피스트로 구성됩니다.'),
+                        array('편안한 출장', '집, 호텔, 오피스 등 고객님이 계신 곳으로 찾아갑니다.'),
+                    );
+                    foreach ($feat as $f) {
+                        echo '<div class="hp-massage-feature"><span class="hp-massage-feature__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></span><div><h3 class="hp-massage-feature__t">'.get_text($f[0]).'</h3><p class="hp-massage-feature__d">'.get_text($f[1]).'</p></div></div>';
+                    }
+                    ?>
+                </div>
             </div>
         </div>
     </section>
@@ -356,9 +348,9 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
     <section class="hp-section hp-section--muted">
         <div class="boon-build__container">
             <div class="hp-kakao-head">
-                <p class="hp-eyebrow" data-i18n="kakao.eyebrow">가장 편리한 방식은</p>
-                <h2 class="hp-h2" data-i18n="kakao.h2">카카오톡으로 실시간 소통</h2>
-                <p class="hp-prose hp-prose--center" data-i18n="kakao.prose">복잡한 비자·세무 상담을 고객이 익숙한 채널에서 이어갑니다.</p>
+                <p class="hp-eyebrow">가장 편리한 방식은</p>
+                <h2 class="hp-h2">카카오톡으로 실시간 소통</h2>
+                <p class="hp-prose hp-prose--center">예약·코스·방문 시간을 익숙한 카톡으로 빠르게 상담해 드립니다.</p>
             </div>
             <div class="hp-kakao-grid">
                 <div class="hp-phone">
@@ -369,30 +361,30 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
                     </div>
                     <div class="hp-phone__screen">
                         <div class="hp-kakao-top">
-                            <div class="hp-kakao-avatar">한필</div>
+                            <div class="hp-kakao-avatar">공감</div>
                             <div>
-                                <p class="hp-kakao-name" data-i18n="kakao.center_name">한필 세부 지원센터</p>
-                                <p class="hp-kakao-sub" data-i18n="kakao.center_sub">대화 중</p>
+                                <p class="hp-kakao-name">공감마사지 상담</p>
+                                <p class="hp-kakao-sub">대화 중</p>
                             </div>
                         </div>
                         <div class="hp-kakao-msgs">
                             <div class="hp-kakao-row">
-                                <div class="hp-kakao-avatar hp-kakao-avatar--sm">한필</div>
-                                <div class="hp-kakao-bubble hp-kakao-bubble--white" data-i18n-html="kakao.bubble1">
-                                    안녕하세요! 요청하신 <strong>9G 워킹비자</strong> 진행 상황을 안내드립니다. 방문 일정 확인 부탁드려요.
+                                <div class="hp-kakao-avatar hp-kakao-avatar--sm">공감</div>
+                                <div class="hp-kakao-bubble hp-kakao-bubble--white">
+                                    안녕하세요! 오늘 저녁 <strong>아로마 90분</strong> 예약 도와드릴게요. 방문 주소만 알려 주세요.
                                 </div>
                             </div>
                             <div class="hp-kakao-row hp-kakao-row--end">
-                                <div class="hp-kakao-bubble hp-kakao-bubble--yellow" data-i18n="kakao.bubble2">네, 내일 오전 10시 방문 가능합니다.</div>
+                                <div class="hp-kakao-bubble hp-kakao-bubble--yellow">네, 강남구 ○○동으로 부탁드립니다.</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="hp-review-card">
-                    <h3 class="hp-h3" data-i18n="kakao.reviews_h3">고객 후기</h3>
-                    <p class="hp-review-quote" data-i18n="kakao.quote">“서류 준비부터 예치금 송금까지 단계별로 카톡으로 안내해 주셔서 필리핀 행정이 훨씬 수월했습니다.”</p>
-                    <p class="hp-review-meta" data-i18n-html="kakao.meta"><strong>세부 거주 3년차</strong> · 이○ 님</p>
-                    <a href="<?php echo $boon_build_kakao_url ? $boon_build_kakao_url : '#hp-contact'; ?>" class="hp-btn hp-btn--deep"<?php echo $boon_build_kakao_url ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><span data-i18n="kakao.cta">1:1 상담 시작하기</span></a>
+                    <h3 class="hp-h3">고객 한마디</h3>
+                    <p class="hp-review-quote">“집에서 편하게 받을 수 있어서 좋았고, 시간 약속도 잘 지켜주셨어요. 다음에도 이용할게요!”</p>
+                    <p class="hp-review-meta"><strong>강남 거주</strong> · 김○ 님</p>
+                    <a href="<?php echo $boon_build_kakao_url ? $boon_build_kakao_url : '#hp-contact'; ?>" class="hp-btn hp-btn--deep"<?php echo $boon_build_kakao_url ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>>1:1 상담 시작하기</a>
                 </div>
             </div>
         </div>
@@ -401,43 +393,107 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
     <section class="hp-section hp-section--white">
         <div class="boon-build__container">
             <div class="hp-pricing-head">
-                <p class="hp-eyebrow" data-i18n="pricing.eyebrow">합리적인 패키지</p>
-                <h2 class="hp-h2" data-i18n="pricing.h2">한필의 주요 서비스 라인</h2>
+                <p class="hp-eyebrow">Service Menu</p>
+                <h2 class="hp-h2">프리미엄 <span class="hp-text-rose">힐링 코스</span> 안내</h2>
+                <p class="hp-muted hp-text-center" style="max-width:36rem;margin:0.5rem auto 0;">합리적인 구성으로, 상세 요금은 상담 시 지역·시간에 맞춰 안내합니다.</p>
             </div>
-            <div class="hp-pricing">
-                <article class="hp-price-card hp-price-card--dark">
-                    <h3 class="hp-h3 hp-h3--light" data-i18n="price.tourist_h3">관광비자 연장</h3>
-                    <ul class="hp-price-list">
-                        <li data-i18n="price.tourist_b1">관광비자 단계별 연장</li>
-                        <li data-i18n="price.tourist_b2">이민국 방문 동행·대행</li>
-                        <li data-i18n="price.tourist_b3">급행(Express) 처리 지원</li>
-                        <li data-i18n="price.tourist_b4">여권 수령·배송 안내</li>
-                        <li data-i18n="price.tourist_b5">ECC 발급 대행</li>
+            <div class="hp-pricing hp-pricing--quad">
+                <article class="hp-price-card">
+                    <h3 class="hp-h3">타이 코스</h3>
+                    <p class="hp-course-desc">전통 스트레칭과 압을 이용한 전신 케어</p>
+                    <ul class="hp-price-list hp-price-list--plain">
+                        <li><span>60분</span><span>7만원~</span></li>
+                        <li><span>90분</span><span>8만원~</span></li>
+                        <li><span>120분</span><span>10만원~</span></li>
                     </ul>
-                    <a href="#hp-contact" class="hp-btn hp-btn--deep hp-btn--block"><span data-i18n="price.cta_dark">상담 신청하기</span></a>
+                    <a href="<?php echo $lux_search_url; ?>" class="hp-btn hp-btn--outline hp-btn--block">지역별 상담</a>
                 </article>
                 <article class="hp-price-card">
-                    <h3 class="hp-h3" data-i18n="price.biz_h3">비즈니스 &amp; 특수 비자</h3>
-                    <ul class="hp-price-list">
-                        <li data-i18n="price.biz_b1">9G 워킹비자 (신규/갱신)</li>
-                        <li data-i18n="price.biz_b2">은퇴비자 (SRRV) 컨설팅</li>
-                        <li data-i18n="price.biz_b3">법인 설립 대행 (SEC/DTI)</li>
-                        <li data-i18n="price.biz_b4">비자 다운그레이딩</li>
-                        <li data-i18n="price.biz_b5">Permit 갱신 지원</li>
+                    <h3 class="hp-h3">아로마 코스</h3>
+                    <p class="hp-course-desc">오일 테라피로 심신 안정을 돕는 케어</p>
+                    <ul class="hp-price-list hp-price-list--plain">
+                        <li><span>60분</span><span>8만원~</span></li>
+                        <li><span>90분</span><span>9만원~</span></li>
+                        <li><span>120분</span><span>11만원~</span></li>
                     </ul>
-                    <a href="#hp-contact" class="hp-btn hp-btn--outline hp-btn--block"><span data-i18n="price.cta_outline">상담 신청하기</span></a>
+                    <a href="<?php echo $lux_search_url; ?>" class="hp-btn hp-btn--outline hp-btn--block">지역별 상담</a>
+                </article>
+                <article class="hp-price-card hp-price-card--featured">
+                    <span class="hp-price-tag">인기</span>
+                    <h3 class="hp-h3">감성 힐링 코스</h3>
+                    <p class="hp-course-desc">섬세한 터치와 릴렉싱 전문 케어</p>
+                    <ul class="hp-price-list hp-price-list--plain">
+                        <li><span>60분</span><span>9만원~</span></li>
+                        <li><span>90분</span><span>11만원~</span></li>
+                        <li><span>120분</span><span>13만원~</span></li>
+                    </ul>
+                    <a href="<?php echo $lux_search_url; ?>" class="hp-btn hp-btn--deep hp-btn--block">지역별 상담</a>
                 </article>
                 <article class="hp-price-card">
-                    <h3 class="hp-h3" data-i18n="price.book_h3">북키퍼 &amp; 세무</h3>
-                    <ul class="hp-price-list">
-                        <li data-i18n="price.book_b1">매월 BIR 세무 신고</li>
-                        <li data-i18n="price.book_b2">전담 북키퍼 매칭</li>
-                        <li data-i18n="price.book_b3">장부 작성·관리</li>
-                        <li data-i18n="price.book_b4">회계 감사·AFS 준비</li>
-                        <li data-i18n="price.book_b5">Mayor's Permit 갱신</li>
+                    <h3 class="hp-h3">스페셜 코스</h3>
+                    <p class="hp-course-desc">타이·힐링·풋 등 결합 프리미엄 패키지</p>
+                    <ul class="hp-price-list hp-price-list--plain">
+                        <li><span>60분</span><span>10만원~</span></li>
+                        <li><span>90분</span><span>12만원~</span></li>
+                        <li><span>120분</span><span>14만원~</span></li>
+                        <li><span>150분</span><span>16만원~</span></li>
                     </ul>
-                    <a href="#hp-contact" class="hp-btn hp-btn--outline hp-btn--block"><span data-i18n="price.cta_outline">상담 신청하기</span></a>
+                    <a href="<?php echo $lux_search_url; ?>" class="hp-btn hp-btn--outline hp-btn--block">지역별 상담</a>
                 </article>
+            </div>
+            <div class="hp-price-note">
+                <div class="hp-price-note__icon"><svg class="hp-icon hp-icon--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+                <div>
+                    <h4 class="hp-price-note__t">모든 코스 공통</h4>
+                    <p class="hp-price-note__p">유류비·출장비 포함 여부는 상담 시 안내 · 정찰제 운영</p>
+                </div>
+                <ul class="hp-price-note__chips">
+                    <li>카드결제 가능</li>
+                    <li>현금영수증</li>
+                    <li>정찰제</li>
+                    <li>후불제</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="hp-section hp-section--muted">
+        <div class="boon-build__container">
+            <div class="hp-massage-gallery">
+                <div class="hp-massage-gallery__head">
+                    <span class="hp-lux-gold-bar" aria-hidden="true"></span>
+                    <h2 class="hp-h2 hp-h2--tight">마사지 갤러리</h2>
+                </div>
+                <div class="hp-massage-gallery__grid">
+                    <div class="hp-massage-gallery__item">
+                        <div class="hp-massage-gallery__img"><img src="https://onmoon.co.kr/data/editor/2512/thumb-6be7981a180c0dbd5c6299d45aba48da_1765260954_5087_835x470.jpg" alt="태국식 마사지" loading="lazy" width="835" height="470"></div>
+                        <div class="hp-massage-gallery__cap">태국식 마사지</div>
+                    </div>
+                    <div class="hp-massage-gallery__item">
+                        <div class="hp-massage-gallery__img"><img src="https://onmoon.co.kr/data/editor/2512/thumb-6be7981a180c0dbd5c6299d45aba48da_1765260956_3011_835x470.jpg" alt="아로마 테라피" loading="lazy" width="835" height="470"></div>
+                        <div class="hp-massage-gallery__cap">아로마 테라피</div>
+                    </div>
+                    <div class="hp-massage-gallery__item">
+                        <div class="hp-massage-gallery__img"><img src="https://onmoon.co.kr/data/editor/2512/thumb-6be7981a180c0dbd5c6299d45aba48da_1765260958_8943_835x470.jpg" alt="힐링 스웨디시" loading="lazy" width="835" height="470"></div>
+                        <div class="hp-massage-gallery__cap">힐링 스웨디시</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hp-section hp-massage-banner-wrap">
+        <div class="boon-build__container">
+            <div class="hp-massage-banner">
+                <div class="hp-massage-banner__media">
+                    <img src="https://enjoytokyo.co.kr/wp-content/uploads/2025/09/%ED%9B%84%EA%B8%B0_3.png" alt="" loading="lazy" width="800" height="420" referrerpolicy="no-referrer">
+                </div>
+                <div class="hp-massage-banner__body">
+                    <span class="hp-massage-banner__badge">MASSAGE NO.1 GUIDE</span>
+                    <h2 class="hp-h2 hp-h2--tight">전국 출장마사지<br><span class="hp-text-rose">지역별 바로가기</span></h2>
+                    <p class="hp-prose">내 지역 정보를 한눈에 — 가격·코스·후기를 검색으로 확인해 보세요.</p>
+                    <a href="<?php echo $lux_search_url; ?>" class="hp-btn hp-btn--deep">통합 검색 바로가기</a>
+                </div>
             </div>
         </div>
     </section>
@@ -446,32 +502,32 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
         <div class="boon-build__container">
             <div class="hp-life-head">
                 <div>
-                    <h2 class="hp-h2 hp-h2--tight" data-i18n="life.h2">세부 생활 &amp; 꿀팁</h2>
-                    <p class="hp-muted" data-i18n="life.muted">커뮤니티에서 최신 글을 확인해 보세요.</p>
+                    <h2 class="hp-h2 hp-h2--tight">지역별 출장 안내</h2>
+                    <p class="hp-muted">업체 정보·후기는 게시판에서 확인해 보세요.</p>
                 </div>
-                <a href="<?php echo $hp_free_url; ?>" class="hp-link-arrow"><span data-i18n="life.view_all">전체보기</span></a>
+                <a href="<?php echo $massage_board_url; ?>" class="hp-link-arrow">출장마사지 게시판</a>
             </div>
             <div class="hp-life-grid">
                 <div class="hp-life-card">
                     <div class="hp-life-card__title">
                         <span class="hp-life-ic hp-life-ic--blue">
-                            <svg class="hp-icon hp-icon--md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <svg class="hp-icon hp-icon--md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
                         </span>
-                        <h3 class="hp-h3" data-i18n="life.card1_h3">현재 세부는</h3>
+                        <h3 class="hp-h3">지역 검색</h3>
                     </div>
-                    <p class="hp-prose" data-i18n="life.card1_p">교통·날씨·행정 소식은 자유게시판과 공지에서 업데이트됩니다.</p>
-                    <a href="<?php echo $hp_free_url; ?>" class="hp-text-deep hp-link-arrow"><span data-i18n="life.card1_link">자유게시판으로 이동</span></a>
+                    <p class="hp-prose">강남·수원·인천 등 원하시는 지역명으로 검색해 업체를 찾아보세요.</p>
+                    <a href="<?php echo $lux_search_url; ?>" class="hp-text-deep hp-link-arrow">통합 검색으로 이동</a>
                 </div>
                 <div class="hp-life-card">
                     <div class="hp-life-card__title">
                         <span class="hp-life-ic hp-life-ic--green">
-                            <svg class="hp-icon hp-icon--md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                            <svg class="hp-icon hp-icon--md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                         </span>
-                        <h3 class="hp-h3" data-i18n="life.card2_h3">생활 꿀팁</h3>
+                        <h3 class="hp-h3">커뮤니티</h3>
                     </div>
                     <div class="hp-life-tips">
-                        <a href="<?php echo $hp_free_url; ?>" class="hp-tip"><span class="hp-tip__t" data-i18n="life.tip1_t">이건 이렇게 해봐!</span><span class="hp-tip__d" data-i18n="life.tip1_d">현지 행정 팁</span></a>
-                        <a href="<?php echo $hp_free_url; ?>" class="hp-tip"><span class="hp-tip__t" data-i18n="life.tip2_t">여기서 사면 돼!</span><span class="hp-tip__d" data-i18n="life.tip2_d">쇼핑·마트 정보</span></a>
+                        <a href="<?php echo $massage_board_url; ?>" class="hp-tip"><span class="hp-tip__t">출장마사지 정보</span><span class="hp-tip__d">지역별 업체 보기</span></a>
+                        <a href="<?php echo $hp_free_url; ?>" class="hp-tip"><span class="hp-tip__t">자유게시판</span><span class="hp-tip__d">소통·질문</span></a>
                     </div>
                 </div>
             </div>
@@ -480,8 +536,8 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
 
     <section class="hp-section hp-reviews-wrap">
         <div class="boon-build__container">
-            <h2 class="hp-h2 hp-h2--tight" data-i18n="reviews.section_h2">한필과 함께한 고객 후기</h2>
-            <p class="hp-muted hp-reviews-sub" data-i18n="reviews.section_sub">실제 상담·대행 경험을 바탕으로 한 피드백입니다.</p>
+            <h2 class="hp-h2 hp-h2--tight">고객 후기</h2>
+            <p class="hp-muted hp-reviews-sub">실제 이용 고객님들이 남겨주신 소중한 피드백입니다.</p>
             <div class="hp-reviews-scroll">
                 <?php foreach ($hp_reviews_ko as $ri => $rv) { ?>
                 <article class="hp-review-tile">
@@ -493,12 +549,37 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
         </div>
     </section>
 
+    <section class="hp-section hp-howto">
+        <div class="boon-build__container">
+            <div class="hp-howto__head">
+                <span class="hp-lux-gold-bar" aria-hidden="true"></span>
+                <h2 class="hp-h2 hp-h2--tight">이용 방법</h2>
+            </div>
+            <ol class="hp-howto__steps">
+                <li class="hp-howto__step"><span class="hp-howto__num">1</span><div><strong class="hp-howto__st">예약하기</strong><p class="hp-howto__sd">상담전화·카톡으로 날짜·시간·코스를 예약해 주세요.</p></div></li>
+                <li class="hp-howto__step"><span class="hp-howto__num">2</span><div><strong class="hp-howto__st">방문</strong><p class="hp-howto__sd">예약 시간에 맞춰 관리사가 빠르게 방문합니다.</p></div></li>
+                <li class="hp-howto__step"><span class="hp-howto__num">3</span><div><strong class="hp-howto__st">상담</strong><p class="hp-howto__sd">컨디션과 요구사항을 확인하고 최적의 케어를 안내합니다.</p></div></li>
+                <li class="hp-howto__step"><span class="hp-howto__num">4</span><div><strong class="hp-howto__st">마사지</strong><p class="hp-howto__sd">선택하신 코스로 정성껏 시술을 진행합니다.</p></div></li>
+            </ol>
+            <div class="hp-howto__note">
+                <h3 class="hp-howto__note-t">이용 시 유의사항</h3>
+                <ul class="hp-howto__note-ul">
+                    <li>예약시간 10분 초과 시 예약이 자동 취소될 수 있습니다.</li>
+                    <li>연락이 닿지 않을 경우 일정 조정이 필요할 수 있습니다.</li>
+                    <li>카드결제(부가세 별도) 및 계좌이체 가능 여부는 상담 시 안내합니다.</li>
+                    <li>일부 지역은 방문이 어렵거나 유류비가 추가될 수 있습니다.</li>
+                    <li>비매너·퇴폐 문의 등에는 서비스가 제한될 수 있습니다.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <section class="hp-section hp-faq-wrap">
         <div class="boon-build__container hp-faq-inner">
             <h2 class="hp-h2 hp-text-center" data-i18n="faq.h2">자주 묻는 질문</h2>
             <p class="hp-muted hp-text-center hp-faq-lead" data-i18n="faq.lead">궁금하신 사항을 미리 확인해 보세요.</p>
             <div class="hp-faq">
-                <?php foreach ($hanphil_faq as $fi => $faq) { ?>
+                <?php foreach ($massage_faq as $fi => $faq) { ?>
                 <div class="hp-faq__item">
                     <button type="button" class="hp-faq__q" aria-expanded="false" aria-controls="hp-faq-a-<?php echo $fi; ?>" id="hp-faq-q-<?php echo $fi; ?>">
                         <span data-i18n-faq-q="<?php echo $fi; ?>"><?php echo get_text($faq['q']); ?></span>
@@ -511,8 +592,8 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
                 <?php } ?>
             </div>
             <div class="hp-cta-banner" id="hp-contact">
-                <h3 class="hp-cta-banner__title" data-i18n="cta.title">다년간의 현지 경험으로 빈틈없는 서류 검토</h3>
-                <p class="hp-cta-banner__sub" data-i18n="cta.sub">정확한 정보와 신속한 처리로 비즈니스를 지원합니다.</p>
+                <h3 class="hp-cta-banner__title">지금 바로 편하게 상담해 보세요</h3>
+                <p class="hp-cta-banner__sub">카카오톡 또는 전화로 코스·시간·지역을 문의해 주시면 친절히 안내해 드립니다.</p>
                 <div class="hp-cta-banner__actions">
                     <?php if ($boon_build_kakao_url) { ?>
                     <a href="<?php echo $boon_build_kakao_url; ?>" class="hp-btn hp-btn--white" target="_blank" rel="noopener noreferrer"><span data-i18n="cta.kakao">카카오톡 상담</span></a>
@@ -545,7 +626,7 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
             <?php echo boon_build_icon('kakao'); ?>
         </a>
         <?php } else { ?>
-        <button type="button" class="boon-build__floating-button boon-build__floating-button--kakao" data-copy-text="HanPhilCebu" data-i18n-title="float.kakao_copy" title="카카오톡 ID 복사">
+        <button type="button" class="boon-build__floating-button boon-build__floating-button--kakao" data-copy-text="공감마사지" data-i18n-title="float.kakao_copy" title="카카오톡 ID 복사">
             <?php echo boon_build_icon('kakao'); ?>
         </button>
         <?php } ?>
@@ -564,7 +645,7 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
 
 <script>
 (function() {
-    var root = document.querySelector('.boon-build--hanphil');
+    var root = document.querySelector('.boon-build--massage');
     var body = document.body;
 
     if (!root) return;
@@ -602,45 +683,6 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
             }
         });
     });
-
-    function hpFetchRate() {
-        var el = document.getElementById('hp-rate-value');
-        var meta = document.getElementById('hp-rate-meta');
-        var card = document.getElementById('hp-rate-card');
-        if (!el) return;
-        el.classList.add('is-loading');
-        if (card) card.classList.add('is-rate-loading');
-        var loc = hpUiLang() === 'en' ? 'en-US' : 'ko-KR';
-        var g = window.RB_STATIC_I18N;
-        fetch('https://open.er-api.com/v6/latest/PHP')
-            .then(function(r) { return r.json(); })
-            .then(function(data) {
-                if (data && data.rates && data.rates.KRW) {
-                    var n = Math.round(Number(data.rates.KRW) * 100);
-                    el.textContent = n.toLocaleString(loc);
-                    if (meta) {
-                        meta.textContent = new Date().toLocaleString(loc, { hour: '2-digit', minute: '2-digit' }) +
-                            (hpUiLang() === 'en' && g ? (g.t('rate.suffix') || ' updated') : ' 기준');
-                    }
-                } else {
-                    el.textContent = '41.50';
-                    if (meta) meta.textContent = hpUiLang() === 'en' && g ? (g.t('rate.fallback_api') || '') : '기본값 (API 오류)';
-                }
-            })
-            .catch(function() {
-                el.textContent = '41.50';
-                if (meta) meta.textContent = hpUiLang() === 'en' && g ? (g.t('rate.fallback_offline') || '') : '오프라인 시 기본값';
-            })
-            .finally(function() {
-                el.classList.remove('is-loading');
-                if (card) card.classList.remove('is-rate-loading');
-            });
-    }
-    hpFetchRate();
-    var refreshBtn = document.getElementById('hp-rate-refresh');
-    if (refreshBtn) refreshBtn.addEventListener('click', hpFetchRate);
-    setInterval(hpFetchRate, 30 * 60 * 1000);
-    document.addEventListener('rb-static-lang', function() { hpFetchRate(); });
 
     var newsItems = root.querySelectorAll('.hp-news-item');
     var newsDots = root.querySelectorAll('.hp-news-dot-btn');
