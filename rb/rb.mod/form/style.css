@@ -1,0 +1,60 @@
+@charset "utf-8";
+
+.ctt_img img {max-width: 100%;}
+.rb_form_wrap .rb_form_wrap_inner {border-top:1px solid #eee;}
+.rb_form_wrap .rb_form_item {position: relative;}
+.rb_form_wrap .rb_form_item .rb_form_item_tit {}
+.rb_form_wrap .rb_form_item .rb_form_item_data {padding-left: 200px; border-bottom:1px solid #eee; padding-bottom: 20px; padding-top: 20px;}
+.rb_form_wrap .rb_form_item .rb_form_item_tit span {position: absolute; top:50%; transform: translateY(-50%); font-size: 16px; max-width: 180px; word-break: keep-all;}
+.rb_form_wrap .rb_form_item .rb_form_item_data input {height:40px; padding: 0px 15px;}
+.rb_form_wrap .rb_form_item .rb_form_item_data select {height:40px; padding: 0px 15px;}
+.rb_form_wrap .rb_form_item .rb_form_item_data textarea {min-height: 100px;}
+.rb_form_wrap .rb_form_item .rb_form_item_data .datepicker_inp {width: 140px !important; min-width: 140px !important}
+.rb_form_wrap .rb_form_item .rb_form_item_data .times_inp {width: 140px !important;}
+.rb_form_wrap .rb_form_item .rb_form_item_data .dates_inp {width: 140px !important;}
+.rb_form_wrap .rb_form_item .rb_form_item_data .files_inp {padding-top: 8px; font-size: 12px;}
+.rb_form_wrap .rb_form_item textarea {min-height: 250px;}
+.rb_form_wrap .win_btn {text-align: center; margin-top: 40px;} 
+.rb_form_wrap .rb_form_item .rb_form_item_data .help_text {font-size: 12px; color:#999; display: block; margin-bottom: 7px;}
+.rb_form_wrap_top {margin-bottom: 20px;}
+
+.rb_form_wrap .rb_form_item .rb_form_item_data .btn_frmline {
+    background-color: #fff;
+    color: #485172;
+    border: 1px solid #485172;
+    border-radius: 10px;
+}
+
+.rb_form_wrap .reply_btn {
+    display: inline-block;
+    width: 150px;
+    height: 45px;
+    line-height: 50px;
+    background: #000;
+    color: #fff;
+    font-size: 16px;
+    font-weight: normal
+}
+.rb_form_wrap .rb_form_item .rb_form_item_data dl {
+    display: flex;
+    gap: 5px 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.rb_form_wrap .rb_form_item .rb_form_item_data .requireds {
+    background-image: url(../../../../../img/require.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: right top !important;
+}
+
+@media all and (max-width:1024px) {
+    .rb_form_wrap {padding: 20px; padding-top: 0px;}
+    .rb_form_wrap .rb_form_item .rb_form_item_tit span {position: inherit; margin-top: 20px; display: block; top:auto; transform: none;}
+    .rb_form_wrap .rb_form_item .rb_form_item_data {padding-left: 0px; padding-top: 10px; padding-bottom: 20px;}
+    .rb_form_wrap .rb_form_item .rb_form_item_data input {width: 100% !important;}
+    .rb_form_wrap .rb_form_item .rb_form_item_data select {width: 100% !important;}
+    .rb_form_wrap .rb_form_item .rb_form_item_data textarea {width: 100% !important;}
+    .rb_form_wrap .rb_form_item .rb_form_item_data .twopart_input {width: 30% !important;}
+    .rb_form_wrap_top {padding-left: 20px; padding-right: 20px;}
+}
