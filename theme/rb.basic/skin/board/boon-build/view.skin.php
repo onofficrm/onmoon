@@ -3,6 +3,9 @@ if (!defined('_GNUBOARD_')) exit;
 include_once G5_LIB_PATH.'/thumbnail.lib.php';
 
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
+
+$bb_mc_board = isset($bo_table) && in_array($bo_table, array('massage', 'massage2', 'massage3', 'massage4'), true);
+$bb_mc_can_edit = !$bb_mc_board || ($is_admin === 'super');
 ?>
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
 
@@ -10,7 +13,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     <div class="bb-view-clean">
 
         <div class="bb-view-toolbar">
-            <div class="bb-view-toolbar__inner" style="max-width:<?php echo (int) $rb_core['sub_width']; ?>px;">
+            <div class="bb-view-toolbar__inner" style="max-width:<?php echo isset($rb_core['sub_width']) ? (int) $rb_core['sub_width'] : 1200; ?>px;">
                 <?php if ($list_href) { ?>
                 <a href="<?php echo $list_href ?>" class="bb-view-btn bb-view-btn--ghost">목록</a>
                 <?php } ?>
@@ -18,7 +21,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                 <?php if ($admin_href) { ?>
                 <button type="button" class="bb-view-btn bb-view-btn--ghost" onclick="window.open('<?php echo $admin_href ?>');">관리</button>
                 <?php } ?>
-                <?php if ($write_href) { ?>
+                <?php if ($write_href && $bb_mc_can_edit) { ?>
                 <a href="<?php echo $write_href ?>" class="bb-view-btn bb-view-btn--primary">글 등록</a>
                 <?php } ?>
             </div>
@@ -120,19 +123,19 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
                 <?php if ($search_href) { ?>
                 <a href="<?php echo $search_href ?>" class="bb-view-btn bb-view-btn--ghost">검색</a>
                 <?php } ?>
-                <?php if ($update_href) { ?>
+                <?php if ($update_href && $bb_mc_can_edit) { ?>
                 <a href="<?php echo $update_href ?>" class="bb-view-btn bb-view-btn--ghost">수정</a>
                 <?php } ?>
-                <?php if ($delete_href) { ?>
+                <?php if ($delete_href && $bb_mc_can_edit) { ?>
                 <a href="<?php echo $delete_href ?>" class="bb-view-btn bb-view-btn--ghost" onclick="del(this.href); return false;">삭제</a>
                 <?php } ?>
-                <?php if ($copy_href) { ?>
+                <?php if ($copy_href && $bb_mc_can_edit) { ?>
                 <a href="<?php echo $copy_href ?>" class="bb-view-btn bb-view-btn--ghost" onclick="board_move(this.href); return false;">복사</a>
                 <?php } ?>
-                <?php if ($move_href) { ?>
+                <?php if ($move_href && $bb_mc_can_edit) { ?>
                 <a href="<?php echo $move_href ?>" class="bb-view-btn bb-view-btn--ghost" onclick="board_move(this.href); return false;">이동</a>
                 <?php } ?>
-                <?php if ($reply_href) { ?>
+                <?php if ($reply_href && $bb_mc_can_edit) { ?>
                 <a href="<?php echo $reply_href ?>" class="bb-view-btn bb-view-btn--ghost">답글</a>
                 <?php } ?>
             </div>

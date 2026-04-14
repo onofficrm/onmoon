@@ -2,8 +2,10 @@
 if (!defined('_GNUBOARD_')) exit;
 
 /**
- * massage / massage2 / massage3 / massage4 목록·글보기 등에 카드형 스킨 경로 적용
- * (DB의 bo_skin 설정과 무관하게 동일 UI를 쓰도록 함)
+ * massage / massage2 / massage3 / massage4
+ * - 목록: theme/rb.basic/skin/board/rb.massage_cards (카드형)
+ * - 글보기·글쓰기 등: rb.massage_cards 가 프록시로 boon-build / boon-build_mo·rb.basic_bbs 를 로드
+ *   (글보기 UI는 _proxy_open.php → boon-build, boon-build_mo)
  */
 if (!isset($bo_table) || $bo_table === '' || !in_array($bo_table, array('massage', 'massage2', 'massage3', 'massage4'), true)) {
     return;

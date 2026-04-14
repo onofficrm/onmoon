@@ -2,20 +2,93 @@
 
 /* 공감마사지 카드형 목록 (gonggam listing) */
 .gonggam-massage-list {
-    background: #f3f4f6;
+    background: #fff !important;
     border-radius: 0;
-    padding-bottom: 32px;
+    padding: 0 0 40px;
+    box-shadow: none;
 }
 
-.gonggam-massage-list .rb_bbs_top {
-    background: transparent;
+.contents_wrap .gonggam-massage-list,
+#bo_list .gonggam-massage-list,
+.rb_bbs_wrap.gonggam-massage-list {
+    background: #fff !important;
+}
+
+.gonggam-massage-cate {
+    margin: 0 0 16px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 4px 0;
+}
+
+.gonggam-massage-cate #bo_cate_ul {
+    background: #fff;
+    border: 0;
+}
+
+.gonggam-massage-superbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 0 20px;
+    padding: 12px 14px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.gonggam-massage-superbar__chk {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #374151;
+    cursor: pointer;
+}
+
+.gonggam-massage-superbar__acts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.gonggam-massage-superbar__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    background: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.gonggam-massage-superbar__btn--primary {
+    background: #111827;
+    color: #fff !important;
+    border-color: #111827;
+}
+
+.gonggam-massage-superbar__btn:hover {
+    border-color: #9ca3af;
+}
+
+.gonggam-massage-superbar__btn--primary:hover {
+    background: #1f2937;
 }
 
 .gonggam-card-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
-    margin: 20px 0 32px;
+    margin: 0 0 28px;
     padding: 0 4px;
 }
 
@@ -229,4 +302,47 @@
     padding: 48px 16px;
     color: #64748b;
     font-size: 15px;
+}
+
+/* 페이지네이션 (rb.basic_bbs 미로드 시) */
+.gonggam-massage-pages {
+    clear: both;
+    margin-top: 8px;
+    padding: 8px 0 0;
+    text-align: center;
+}
+
+.gonggam-massage-pages .pg_wrap {
+    margin: 0;
+}
+
+.gonggam-massage-pages .pg {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.gonggam-massage-pages a,
+.gonggam-massage-pages strong {
+    display: inline-block;
+    min-width: 36px;
+    padding: 8px 10px;
+    margin: 2px;
+    font-size: 14px;
+    color: #374151;
+    text-decoration: none;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.gonggam-massage-pages .pg_current {
+    color: #fff !important;
+    background: #111827;
+    border-color: #111827;
+    font-weight: 700;
+}
+
+.gonggam-massage-pages a:hover {
+    border-color: #cbd5e1;
+    background: #f9fafb;
 }
