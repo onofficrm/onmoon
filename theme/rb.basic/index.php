@@ -17,7 +17,16 @@ include_once(G5_THEME_PATH.'/head.php');
     
 
     <?php 
-    $rb_main_layout = isset($rb_core['layout']) && $rb_core['layout'] ? $rb_core['layout'] : 'boon-build';
+    /**
+     * 메인 레이아웃: DB(rb_config.co_layout)가 비어 있으면 boon-build(랜딩).
+     * co_layout 이 'basic' 인 경우 flex_box 만 출력되어 모듈 미배치 시 본문이 빈 화면이 되므로
+     * boon-build 로 전환해 theme/rb.basic/boon-build/home.php 를 불러옵니다.
+     */
+    $rb_main_layout_raw = isset($rb_core['layout']) ? trim((string) $rb_core['layout']) : '';
+    $rb_main_layout = $rb_main_layout_raw !== '' ? $rb_main_layout_raw : 'boon-build';
+    if (strcasecmp($rb_main_layout, 'basic') === 0) {
+        $rb_main_layout = 'boon-build';
+    }
 
     if (is_dir(G5_THEME_PATH . '/rb.layout/' . $rb_main_layout)) {
         // 레이아웃 인클루드
