@@ -11,16 +11,7 @@ $bb_super = ($is_admin === 'super');
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
 
 <article id="bo_v" class="bb-view-clean-mo<?php echo $bb_mc_board ? ' bb-view-massage' : ''; ?>" style="width:<?php echo $width; ?>">
-    <header class="bb-view-clean-mo__head">
-        <h2 id="bo_v_title" class="bb-view-clean-mo__title">
-            <span class="bo_v_tit"><?php echo get_text($view['wr_subject']); ?></span>
-        </h2>
-        <div id="bo_v_info" class="bb-view-clean-mo__meta">
-            <span>조회 <?php echo number_format($view['wr_hit']); ?></span>
-            <span class="bb-view-clean-mo__meta-sep">·</span>
-            <span><?php echo date('Y.m.d', strtotime($view['wr_datetime'])); ?></span>
-        </div>
-    </header>
+    <h2 id="bo_v_title" class="sound_only"><?php echo get_text($view['wr_subject']); ?></h2>
 
     <section id="bo_v_atc" class="bb-view-clean-mo__body">
         <?php

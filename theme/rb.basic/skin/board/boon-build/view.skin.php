@@ -12,15 +12,7 @@ $bb_super = ($is_admin === 'super');
 
 <div class="rb_bbs_wrap bb-view-clean-wrap<?php echo $bb_mc_board ? ' bb-view-massage' : ''; ?>" id="scroll_container" style="width:<?php echo $width; ?>">
     <div class="bb-view-clean">
-
-        <header class="bb-view-head">
-            <h1 class="bb-view-title"><?php echo get_text($view['wr_subject']); ?></h1>
-            <p class="bb-view-meta">
-                조회 <?php echo number_format($view['wr_hit']); ?>
-                <span class="bb-view-meta__sep">|</span>
-                등록 <?php echo date('Y.m.d', strtotime($view['wr_datetime'])); ?>
-            </p>
-        </header>
+        <h1 class="sound_only"><?php echo get_text($view['wr_subject']); ?></h1>
 
         <?php
         $cnt_dl = 0;

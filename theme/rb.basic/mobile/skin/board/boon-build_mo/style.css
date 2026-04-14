@@ -432,8 +432,12 @@
     color: #111827;
     border: 1px solid #e5e7eb;
     border-radius: 12px;
-    margin: 10px;
+    margin: 6px 10px 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+body:has(#bo_v.bb-view-clean-mo) section.sub {
+    padding-top: 4px !important;
 }
 
 .bb-view-clean-mo__head {
@@ -473,7 +477,7 @@
 }
 
 .bb-view-clean-mo__body {
-    padding: 16px;
+    padding: 10px 12px 14px;
     background: #fff;
 }
 

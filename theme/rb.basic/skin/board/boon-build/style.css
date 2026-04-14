@@ -1801,7 +1801,7 @@ box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1)}
 .bb-view-clean-wrap {
     background: #fff !important;
     margin-top: 0 !important;
-    padding: 0 0 48px;
+    padding: 0 0 40px;
     border-radius: 0;
     box-shadow: none !important;
 }
@@ -1809,9 +1809,14 @@ box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1)}
 .bb-view-clean {
     max-width: 920px;
     margin: 0 auto;
-    padding: 24px 20px 0;
+    padding: 4px 16px 0;
     background: #fff;
     color: #111827;
+}
+
+/* 글보기: 서브 본문 상단 여백만 축소(헤더 오프셋은 테마 JS 유지) */
+body:has(.bb-view-clean-wrap) section.sub {
+    padding-top: 4px !important;
 }
 
 .bb-view-toolbar {
@@ -1949,9 +1954,14 @@ box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1)}
 }
 
 .bb-view-body {
-    margin: 0 0 32px;
+    margin: 0 0 28px;
     padding: 0;
     background: #fff;
+}
+
+/* 제목 제거 후: 첫 첨부 블록 상단 여백 없음 */
+.bb-view-clean > h1.sound_only + .bb-view-section {
+    margin-top: 0;
 }
 
 .bb-view-body #bo_v_img {
@@ -2001,10 +2011,10 @@ body:has(.bb-view-clean-wrap) #container_title {
     border-top: 1px solid #e5e7eb;
     background: #fafafa;
     border-radius: 0 0 12px 12px;
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    margin-left: -16px;
+    margin-right: -16px;
+    padding-left: 16px;
+    padding-right: 16px;
     margin-bottom: -8px;
 }
 
@@ -2019,10 +2029,13 @@ body:has(.bb-view-clean-wrap) #container_title {
 
 @media (max-width: 767px) {
     .bb-view-clean {
-        padding: 16px 14px 0;
+        padding: 4px 12px 0;
     }
 
-    .bb-view-title {
-        font-size: 1.35rem;
+    .bb-view-adminbar {
+        margin-left: -12px;
+        margin-right: -12px;
+        padding-left: 12px;
+        padding-right: 12px;
     }
 }
