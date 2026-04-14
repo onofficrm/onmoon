@@ -92,24 +92,6 @@ $massage_faq_en = array(
     ),
 );
 
-$hp_reviews_ko = array(
-    array('t' => '처음 이용했는데 관리사분이 친절하고 실력이 좋아 어깨·목 뭉침이 풀렸어요. 집에서 받을 수 있어 최고였습니다.', 'c' => '프리미엄 아로마', 'n' => '김○현 님'),
-    array('t' => '시간 약속 잘 지키시고 매너가 좋았어요. 위생도 믿을 만했습니다. 강추합니다.', 'c' => '스웨디시', 'n' => '이○우 님'),
-    array('t' => '시설 가는 것보다 편하고 손길이 꼼꼼해서 근육이 다 풀린 느낌이에요.', 'c' => '타이 마사지', 'n' => '박○아 님'),
-    array('t' => '여러 곳 써봤는데 여기가 제일 깔끔하고 상담도 친절했어요. 아로마 향도 좋았습니다.', 'c' => '딥티슈', 'n' => '최○준 님'),
-    array('t' => '허리 통증 있었는데 부위 짚어서 풀어주셔서 한결 가벼워졌어요. 정기적으로 이용하고 싶네요.', 'c' => '아로마 테라피', 'n' => '정○민 님'),
-    array('t' => '집에서 이런 퀄리티라니 만족합니다. 이동 시간도 아끼고 마사지 후 바로 쉴 수 있어 좋았어요.', 'c' => '스웨디시', 'n' => '윤○성 님'),
-);
-
-$hp_reviews_en = array(
-    array('t' => 'First time—therapist was kind and skilled; neck and shoulders felt much better. Loved having it at home.', 'c' => 'Premium aroma', 'n' => 'Kim○'),
-    array('t' => 'On time and very polite. Felt hygienic and professional. Highly recommend.', 'c' => 'Swedish', 'n' => 'Lee○'),
-    array('t' => 'More convenient than going out; thorough work on tight muscles.', 'c' => 'Thai', 'n' => 'Park○'),
-    array('t' => 'Cleanest experience so far; great consultation and nice oil aroma.', 'c' => 'Deep tissue', 'n' => 'Choi○'),
-    array('t' => 'They targeted my lower back well—felt lighter after. Want to book again.', 'c' => 'Aroma therapy', 'n' => 'Jung○'),
-    array('t' => 'Great quality at home; saved travel time and could rest right after.', 'c' => 'Swedish', 'n' => 'Yoon○'),
-);
-
 $hp_free_url = function_exists('get_pretty_url') ? get_pretty_url('free') : (G5_BBS_URL.'/board.php?bo_table=free');
 $massage_board_url = function_exists('get_pretty_url') ? get_pretty_url('massage') : (G5_BBS_URL.'/board.php?bo_table=massage');
 $lux_sfl = !empty($sfl) ? $sfl : 'wr_subject||wr_content';
@@ -123,7 +105,6 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
     array(
         'news' => array_values($massage_ticker_en),
         'faq' => $massage_faq_en,
-        'reviews' => $hp_reviews_en,
     ),
     JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
 ); ?>;
@@ -530,21 +511,6 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
                         <a href="<?php echo $hp_free_url; ?>" class="hp-tip"><span class="hp-tip__t">자유게시판</span><span class="hp-tip__d">소통·질문</span></a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="hp-section hp-reviews-wrap">
-        <div class="boon-build__container">
-            <h2 class="hp-h2 hp-h2--tight">고객 후기</h2>
-            <p class="hp-muted hp-reviews-sub">실제 이용 고객님들이 남겨주신 소중한 피드백입니다.</p>
-            <div class="hp-reviews-scroll">
-                <?php foreach ($hp_reviews_ko as $ri => $rv) { ?>
-                <article class="hp-review-tile">
-                    <p class="hp-review-tile__text" data-i18n-review-t="<?php echo $ri; ?>"><?php echo get_text($rv['t']); ?></p>
-                    <p class="hp-review-tile__who" data-i18n-review-who="<?php echo $ri; ?>"><strong><?php echo get_text($rv['c']); ?></strong><br><?php echo get_text($rv['n']); ?></p>
-                </article>
-                <?php } ?>
             </div>
         </div>
     </section>

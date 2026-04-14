@@ -1,0 +1,232 @@
+@charset "utf-8";
+
+/* 공감마사지 카드형 목록 (gonggam listing) */
+.gonggam-massage-list {
+    background: #f3f4f6;
+    border-radius: 0;
+    padding-bottom: 32px;
+}
+
+.gonggam-massage-list .rb_bbs_top {
+    background: transparent;
+}
+
+.gonggam-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin: 20px 0 32px;
+    padding: 0 4px;
+}
+
+@media (max-width: 1024px) {
+    .gonggam-card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+}
+
+@media (max-width: 640px) {
+    .gonggam-card-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 0;
+    }
+}
+
+.gonggam-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.gonggam-card__media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: #e8eaef;
+    overflow: hidden;
+}
+
+.gonggam-card__media-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.gonggam-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gonggam-card__badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.gonggam-card__badge {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 6px 10px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.gonggam-card__badge--region {
+    background: #ff9800;
+    color: #fff;
+}
+
+.gonggam-card__badge--rating {
+    background: rgba(255, 255, 255, 0.95);
+    color: #111;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 999px;
+    padding: 6px 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.gonggam-card__star {
+    color: #ffc107;
+    font-size: 13px;
+    line-height: 1;
+}
+
+.gonggam-card__chk {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 3;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 6px;
+    padding: 4px 6px;
+    pointer-events: auto;
+}
+
+.gonggam-card__body {
+    padding: 20px 22px 12px;
+    flex: 1;
+}
+
+.gonggam-card__title {
+    margin: 0 0 12px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    line-height: 1.35;
+    color: #0f172a;
+}
+
+.gonggam-card__title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.gonggam-card__title a:hover {
+    color: #ff9800;
+}
+
+.gonggam-card__tags {
+    list-style: none;
+    margin: 0 0 14px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.gonggam-card__tags li {
+    font-size: 11px;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 4px 8px;
+    line-height: 1.2;
+}
+
+.gonggam-card__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ff9800;
+    text-decoration: none;
+}
+
+.gonggam-card__more:hover {
+    text-decoration: underline;
+}
+
+.gonggam-card__footer {
+    margin-top: auto;
+    padding: 16px 22px 20px;
+    border-top: 1px solid #f1f5f9;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.gonggam-card__booking-label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: #94a3b8;
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.gonggam-card__phone {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0f172a;
+    text-decoration: none;
+    word-break: keep-all;
+}
+
+.gonggam-card__phone:hover {
+    color: #ff9800;
+}
+
+.gonggam-card__call {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #0f172a;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+}
+
+.gonggam-card__call:hover {
+    background: #1e293b;
+    color: #fff;
+}
+
+.gonggam-card-empty {
+    text-align: center;
+    padding: 48px 16px;
+    color: #64748b;
+    font-size: 15px;
+}

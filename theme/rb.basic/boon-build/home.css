@@ -1648,49 +1648,6 @@ body.boon-build-home #contents_wrap > section.index {
     color: var(--hp-slate-500);
 }
 
-/* Reviews scroll */
-.hp-reviews-wrap {
-    background: var(--hp-bg);
-}
-
-.hp-reviews-sub {
-    margin: 0 0 1.5rem;
-}
-
-.hp-reviews-scroll {
-    display: flex;
-    gap: 1.25rem;
-    overflow-x: auto;
-    padding-bottom: 0.5rem;
-    margin: 0 -24px;
-    padding-left: 24px;
-    padding-right: 24px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-}
-
-.hp-review-tile {
-    flex: 0 0 min(320px, 85vw);
-    scroll-snap-align: start;
-    padding: 1.75rem;
-    border-radius: 1.75rem;
-    background: var(--hp-card);
-    border: 1px solid var(--hp-border);
-}
-
-.hp-review-tile__text {
-    margin: 0 0 1rem;
-    font-size: 0.9rem;
-    line-height: 1.65;
-    color: var(--hp-slate-700);
-}
-
-.hp-review-tile__who {
-    margin: 0;
-    font-size: 0.8rem;
-    color: var(--hp-slate-500);
-}
-
 /* FAQ */
 .hp-faq-wrap {
     background: var(--hp-slate-50);
@@ -2401,12 +2358,6 @@ body.boon-build-home #contents_wrap > section.index {
 @media all and (max-width: 768px) {
     .boon-build__container {
         padding: 0 16px;
-    }
-
-    .hp-reviews-scroll {
-        margin: 0 -16px;
-        padding-left: 16px;
-        padding-right: 16px;
     }
 
     .hp-hero__actions {
