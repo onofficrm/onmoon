@@ -97,6 +97,22 @@ $massage_board_url = function_exists('get_pretty_url') ? get_pretty_url('massage
 $lux_sfl = !empty($sfl) ? $sfl : 'wr_subject||wr_content';
 $lux_sop = (isset($sop) && $sop) ? $sop : 'and';
 $lux_search_url = G5_BBS_URL.'/search.php';
+$gg_home_items = array(
+    array('region' => '인천', 'short' => '연수구', 'title' => '연수구 프리미엄 케어', 'phone' => '0503-6982-1032', 'url' => 'https://onmoon.co.kr/bbs/board.php?bo_table=massage3&wr_id=1', 'rating' => '4.9'),
+    array('region' => '인천', 'short' => '부평', 'title' => '부평 감성 스웨디시', 'phone' => '0503-6982-1033', 'url' => 'https://onmoon.co.kr/bbs/board.php?bo_table=massage3&wr_id=2', 'rating' => '4.8'),
+    array('region' => '인천', 'short' => '남동구', 'title' => '남동구 힐링 아로마', 'phone' => '0503-6982-1034', 'url' => 'https://onmoon.co.kr/bbs/board.php?bo_table=massage3&wr_id=3', 'rating' => '4.7'),
+    array('region' => '인천', 'short' => '미추홀', 'title' => '미추홀 스웨디시 라운지', 'phone' => '0503-6982-1035', 'url' => 'https://onmoon.co.kr/bbs/board.php?bo_table=massage3&wr_id=4', 'rating' => '4.8'),
+    array('region' => '인천', 'short' => '서구', 'title' => '서구 프리미엄 힐링', 'phone' => '0503-6982-1036', 'url' => 'https://onmoon.co.kr/bbs/board.php?bo_table=massage3&wr_id=5', 'rating' => '4.9'),
+    array('region' => '인천', 'short' => '동구', 'title' => '동구 아로마 테라피', 'phone' => '0503-6982-1037', 'url' => 'https://onmoon.co.kr/bbs/board.php?bo_table=massage3&wr_id=6', 'rating' => '4.6'),
+    array('region' => '인천', 'short' => '계양', 'title' => '계양 스웨디시 케어', 'phone' => '0503-6982-1152', 'url' => 'https://onmoon.co.kr/bbs/board.php?bo_table=massage3&wr_id=7', 'rating' => '4.8'),
+    array('region' => '인천', 'short' => '송도', 'title' => '송도 프리미엄 마사지', 'phone' => '0503-6982-1153', 'url' => 'https://onmoon.co.kr/bbs/board.php?bo_table=massage3&wr_id=8', 'rating' => '4.9'),
+    array('region' => '인천', 'short' => '주안', 'title' => '주안 감성 스웨디시', 'phone' => '0503-6982-1154', 'url' => 'https://onmoon.co.kr/bbs/board.php?bo_table=massage3&wr_id=9', 'rating' => '4.8'),
+);
+$gg_home_images = array(
+    'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=600&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=600&auto=format&fit=crop',
+);
 ?>
 
 <div class="boon-build boon-build--massage">
@@ -109,6 +125,101 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
     JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
 ); ?>;
 </script>
+    <section class="gg-home gg-home-section boon-build__full-bleed">
+        <div class="gg-home__container">
+            <div class="gg-home__hero">
+                <p class="gg-home__eyebrow">GONGGAM MASSAGE</p>
+                <h1 class="gg-home__title">진심으로 <span>GONGGAM</span>하는<br>완벽한 휴식의 순간</h1>
+                <p class="gg-home__lead">
+                    공감마사지는 단순한 케어를 넘어 고객님의 컨디션을 최상으로 끌어올립니다.<br>
+                    출장마사지 · 스웨디시 · 출장안마 전문가가 찾아갑니다.
+                </p>
+                <form class="gg-search" method="get" action="<?php echo $lux_search_url; ?>" onsubmit="return false;">
+                    <span class="gg-search__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    </span>
+                    <input type="search" id="gg-home-search" class="gg-search__input" placeholder="마사지/에스테틱 검색" autocomplete="off">
+                    <button type="button" class="gg-search__button">검색</button>
+                </form>
+                <div class="gg-benefits" aria-label="서비스 안내">
+                    <article class="gg-benefit">
+                        <span class="gg-benefit__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                        <h3>출장마사지 전문</h3>
+                        <p>숙련된 관리사가 직접 방문하여 지친 몸의 피로를 해소합니다.</p>
+                    </article>
+                    <article class="gg-benefit">
+                        <span class="gg-benefit__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2.5S5 10 5 15a7 7 0 0 0 14 0c0-5-7-12.5-7-12.5z"/></svg></span>
+                        <h3>스웨디시 케어</h3>
+                        <p>부드러운 아로마 핸들링으로 편안한 휴식을 제공합니다.</p>
+                    </article>
+                    <article class="gg-benefit">
+                        <span class="gg-benefit__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-8 0v2"/><circle cx="12" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                        <h3>출장안마 서비스</h3>
+                        <p>24시간 예약상담으로 안전하고 프라이빗한 홈 케어를 돕습니다.</p>
+                    </article>
+                </div>
+            </div>
+
+            <div class="gg-region-filter" aria-label="지역 필터">
+                <?php
+                $gg_regions = array('전체지역', '서울', '경기', '인천', '기타');
+                foreach ($gg_regions as $idx => $region_name) {
+                    echo '<button type="button" class="gg-region-filter__button'.($idx === 0 ? ' is-active' : '').'" data-region="'.get_text($region_name).'">';
+                    echo '<span class="gg-region-filter__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>';
+                    echo '<span>'.get_text($region_name).'</span></button>';
+                }
+                ?>
+            </div>
+
+            <div class="gg-list-head">
+                <div>
+                    <p class="gg-list-head__eyebrow">RECOMMENDED</p>
+                    <h2 id="gg-list-title">추천 마사지 업체</h2>
+                </div>
+                <p class="gg-list-count">총 <span id="gg-list-count"><?php echo count($gg_home_items); ?></span>개 결과</p>
+            </div>
+
+            <div class="gg-card-grid" id="gg-card-grid">
+                <?php foreach ($gg_home_items as $i => $item) {
+                    $image = $gg_home_images[$i % count($gg_home_images)];
+                    $search_text = $item['region'].' '.$item['short'].' '.$item['title'];
+                ?>
+                <article class="gg-card" data-region="<?php echo get_text($item['region']); ?>" data-search="<?php echo get_text($search_text); ?>">
+                    <div class="gg-card__image" style="background-image:url('<?php echo $image; ?>')">
+                        <div class="gg-card__shade"></div>
+                        <div class="gg-card__badges">
+                            <?php if ($i % 3 === 0) { ?><span class="gg-badge gg-badge--hot">HOT 출장</span><?php } ?>
+                            <?php if ($i % 5 === 0) { ?><span class="gg-badge gg-badge--new">NEW 업체</span><?php } ?>
+                        </div>
+                        <div class="gg-card__overlay">
+                            <p><?php echo get_text($item['region']); ?> 출장마사지</p>
+                            <h3><span><?php echo get_text($item['short']); ?></span> 프리미엄</h3>
+                        </div>
+                    </div>
+                    <div class="gg-card__body">
+                        <div class="gg-card__top">
+                            <h4><?php echo get_text($item['title']); ?></h4>
+                            <span class="gg-rating">★ <?php echo get_text($item['rating']); ?></span>
+                        </div>
+                        <div class="gg-tags">
+                            <span>출장 전문</span><span>방문예약</span><span>100% 예약제</span>
+                        </div>
+                        <p class="gg-card__meta"><?php echo get_text($item['short']); ?> 전지역 · 주차 가능 · 24시 예약</p>
+                        <div class="gg-card__contact">
+                            <strong><?php echo get_text($item['phone']); ?></strong>
+                            <a href="tel:<?php echo preg_replace('/[^0-9+]/', '', $item['phone']); ?>" aria-label="전화 상담">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.77.63 2.6a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.47-1.19a2 2 0 0 1 2.11-.45c.83.3 1.7.51 2.6.63A2 2 0 0 1 22 16.92z"/></svg>
+                            </a>
+                        </div>
+                        <a href="<?php echo $item['url']; ?>" class="gg-card__more">코스 안내 및 상세 정보 보기 <span>›</span></a>
+                    </div>
+                </article>
+                <?php } ?>
+            </div>
+            <div class="gg-empty" id="gg-empty" hidden>검색 결과가 없습니다.</div>
+        </div>
+    </section>
+
     <section class="hp-hero hp-lux-hero boon-build__full-bleed">
         <div class="boon-build__container hp-lux-hero__inner">
             <div class="hp-lux-hero__grid">
@@ -617,6 +728,51 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
     if (!root) return;
 
     body.classList.add('boon-build-home');
+
+    var ggSearch = root.querySelector('#gg-home-search');
+    var ggCards = Array.prototype.slice.call(root.querySelectorAll('.gg-card'));
+    var ggButtons = Array.prototype.slice.call(root.querySelectorAll('.gg-region-filter__button'));
+    var ggCount = root.querySelector('#gg-list-count');
+    var ggTitle = root.querySelector('#gg-list-title');
+    var ggEmpty = root.querySelector('#gg-empty');
+    var ggActiveRegion = '전체지역';
+
+    function ggApplyFilter() {
+        var query = ggSearch ? ggSearch.value.trim().toLowerCase() : '';
+        var visible = 0;
+
+        ggCards.forEach(function(card) {
+            var region = card.getAttribute('data-region') || '';
+            var search = (card.getAttribute('data-search') || '').toLowerCase();
+            var matchesRegion = ggActiveRegion === '전체지역' || region === ggActiveRegion;
+            var matchesSearch = !query || search.indexOf(query) !== -1;
+            var show = matchesRegion && matchesSearch;
+            card.hidden = !show;
+            if (show) visible += 1;
+        });
+
+        if (ggCount) ggCount.textContent = visible;
+        if (ggTitle) ggTitle.textContent = ggActiveRegion === '전체지역' ? '추천 마사지 업체' : ggActiveRegion + ' 추천 마사지 업체';
+        if (ggEmpty) ggEmpty.hidden = visible !== 0;
+    }
+
+    ggButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            ggActiveRegion = button.getAttribute('data-region') || '전체지역';
+            ggButtons.forEach(function(item) {
+                item.classList.toggle('is-active', item === button);
+            });
+            ggApplyFilter();
+        });
+    });
+
+    if (ggSearch) {
+        ggSearch.addEventListener('input', ggApplyFilter);
+        var ggSearchButton = root.querySelector('.gg-search__button');
+        if (ggSearchButton) {
+            ggSearchButton.addEventListener('click', ggApplyFilter);
+        }
+    }
 
     function hpUiLang() {
         if (document.documentElement.lang === 'en') return 'en';
