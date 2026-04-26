@@ -22,7 +22,7 @@ export const Hero = () => {
   };
 
   return (
-    <div className="relative bg-luxury-bg overflow-hidden">
+    <div className="relative bg-white text-black overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-12 lg:pt-24">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="flex-1 text-center lg:text-left">
@@ -31,15 +31,15 @@ export const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="inline-block px-4 py-1.5 rounded-full bg-primary/25 text-white text-xs font-bold uppercase tracking-widest mb-4 border border-white/10">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-white text-black text-xs font-bold uppercase tracking-widest mb-4 border border-gray-200 shadow-sm">
                 Premium Home Care & Wellness
               </span>
               <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.1] tracking-tighter mb-6 text-balance flex flex-col gap-2">
-                <span className="text-[#E6B8A2] drop-shadow-[0_0_15px_rgba(230,184,162,0.3)]">신뢰할 수 있는</span>
-                <span className="text-[#E6B8A2] drop-shadow-[0_0_15px_rgba(230,184,162,0.3)]">프리미엄 홈케어</span>
-                <span className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">공감마사지</span>
+                <span className="text-black">신뢰할 수 있는</span>
+                <span className="text-black">프리미엄 홈케어</span>
+                <span className="text-black">공감마사지</span>
               </h1>
-              <p className="text-lg text-white/90 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-8 font-bold drop-shadow-sm">
+              <p className="text-lg text-gray-700 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-8 font-bold">
                 엄격한 기준으로 선별된 최고의 테라피스트들이<br className="hidden md:block" />
                 당신의 공간으로 직접 찾아가는 프리미엄 힐링 서비스입니다.
               </p>
@@ -52,30 +52,30 @@ export const Hero = () => {
               className="max-w-2xl mx-auto lg:mx-0"
             >
               <div className="relative group">
-                <form onSubmit={handleSearch} className="relative flex items-center bg-luxury-card/50 backdrop-blur-md rounded-full p-1.5 shadow-2xl shadow-black/50 border border-luxury-border/30">
+                <form onSubmit={handleSearch} className="relative flex items-center bg-white rounded-full p-1.5 shadow-xl shadow-gray-200/70 border border-gray-200">
                   <div className="pl-6 flex items-center pointer-events-none">
-                    <Search className="h-5 w-5 text-gold stroke-[3px]" />
+                    <Search className="h-5 w-5 text-black stroke-[3px]" />
                   </div>
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    className="block w-full pl-4 pr-4 py-3 bg-transparent border-none focus:ring-0 text-gold placeholder-gold/50 sm:text-base font-bold"
+                    className="block w-full pl-4 pr-4 py-3 bg-transparent border-none focus:ring-0 text-black placeholder-gray-400 sm:text-base font-bold"
                     placeholder="지역명 또는 업체명을 검색하세요"
                   />
                   <button 
                     type="submit"
-                    className="px-8 py-3 bg-gradient-to-r from-primary to-primary-dark text-white font-bold rounded-full hover:shadow-lg hover:shadow-primary/30 transition-all shadow-lg active:scale-95"
+                    className="px-8 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all shadow-lg active:scale-95"
                   >
                     검색하기
                   </button>
                 </form>
               </div>
 
-              <div className="mt-6 flex items-center justify-center lg:justify-start gap-4 text-xs font-medium text-luxury-text">
+              <div className="mt-6 flex items-center justify-center lg:justify-start gap-4 text-xs font-medium text-gray-700">
                 <span className="flex items-center gap-1.5">
-                  <Icons.Flame className="w-3.5 h-3.5 text-orange-500" />
+                  <Icons.Flame className="w-3.5 h-3.5 text-black" />
                   인기지역
                 </span>
                 <div className="flex gap-3">
@@ -83,7 +83,7 @@ export const Hero = () => {
                     <button 
                       key={city} 
                       onClick={() => navigate(`/search?q=${encodeURIComponent(city)}`)}
-                      className="hover:text-primary transition-colors border-b border-transparent hover:border-primary pb-0.5"
+                      className="hover:text-black transition-colors border-b border-transparent hover:border-black pb-0.5"
                     >
                       {city}
                     </button>
@@ -115,7 +115,7 @@ export const Hero = () => {
               <div className="absolute bottom-8 left-8 right-8">
                 <div className="bg-white/40 backdrop-blur-xl border border-white/40 rounded-2xl p-6 shadow-2xl">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg">
+                    <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center shadow-lg">
                       <Icons.Star className="w-6 h-6 text-white fill-current" />
                     </div>
                     <div>
@@ -126,26 +126,26 @@ export const Hero = () => {
                 </div>
               </div>
             </div>
-            <div className="absolute -bottom-10 -left-10 bg-luxury-card shadow-xl rounded-3xl p-6 border border-luxury-border z-20">
+            <div className="absolute -bottom-10 -left-10 bg-white shadow-xl rounded-3xl p-6 border border-gray-200 z-20">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-success/10 rounded-full flex items-center justify-center">
-                  <Icons.CheckCircle2 className="w-6 h-6 text-success" />
+                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                  <Icons.CheckCircle2 className="w-6 h-6 text-black" />
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-luxury-ink">검증된 테라피스트</p>
-                  <p className="text-xs text-luxury-text">100% 자격증 보유</p>
+                  <p className="text-sm font-bold text-black">검증된 테라피스트</p>
+                  <p className="text-xs text-gray-600">100% 자격증 보유</p>
                 </div>
               </div>
             </div>
           </motion.div>
         </div>
 
-        <div className="mt-16 flex items-center justify-between border-b border-luxury-border pb-6">
+        <div className="mt-16 flex items-center justify-between border-b border-gray-200 pb-6">
           <div className="flex items-center gap-3">
-            <div className="w-1 h-8 bg-gold rounded-full" />
-            <h2 className="text-3xl font-extrabold text-luxury-ink tracking-tight">지역별 카테고리</h2>
+            <div className="w-1 h-8 bg-black rounded-full" />
+            <h2 className="text-3xl font-extrabold text-black tracking-tight">지역별 카테고리</h2>
           </div>
-          <Link to="/search" className="group flex items-center gap-2 text-sm font-bold text-gold">
+          <Link to="/search" className="group flex items-center gap-2 text-sm font-bold text-black">
             전체보기
             <Icons.ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>

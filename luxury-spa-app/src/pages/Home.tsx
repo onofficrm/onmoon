@@ -21,15 +21,15 @@ export const Home = () => {
   const marqueeListings = [...recommendedListings, ...recommendedListings];
 
   return (
-    <main>
+    <main className="bg-white text-black">
       <Hero />
       <RegionGrid />
       
-      <section className="max-w-full overflow-hidden py-16 bg-luxury-card/30">
+      <section className="max-w-full overflow-hidden py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
           <div className="flex items-center gap-3">
-            <div className="w-1 h-7 bg-gold rounded-full" />
-            <h2 className="text-2xl font-bold text-luxury-ink tracking-tight">추천 마사지 업체</h2>
+            <div className="w-1 h-7 bg-black rounded-full" />
+            <h2 className="text-2xl font-bold text-black tracking-tight">추천 마사지 업체</h2>
           </div>
         </div>
         
@@ -47,8 +47,8 @@ export const Home = () => {
           </div>
           
           {/* Gradient Edges for better visual transition */}
-          <div className="absolute top-0 left-0 h-full w-24 bg-gradient-to-r from-luxury-bg/80 to-transparent pointer-events-none z-10" />
-          <div className="absolute top-0 right-0 h-full w-24 bg-gradient-to-l from-luxury-bg/80 to-transparent pointer-events-none z-10" />
+          <div className="absolute top-0 left-0 h-full w-24 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
+          <div className="absolute top-0 right-0 h-full w-24 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
         </div>
       </section>
 

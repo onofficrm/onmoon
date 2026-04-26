@@ -20,7 +20,7 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col bg-luxury-bg">
+      <div className="min-h-screen flex flex-col bg-white text-black">
         <div className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />

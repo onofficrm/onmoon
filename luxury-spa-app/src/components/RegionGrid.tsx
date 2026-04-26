@@ -13,12 +13,12 @@ export const RegionGrid = () => {
             <Link
               key={region.id}
               to={`/category/${region.id}`}
-              className="flex flex-col items-center justify-center p-6 bg-luxury-card border border-luxury-border/30 rounded-2xl hover:border-gold/50 shadow-xl shadow-black/20 transition-all group"
+              className="flex flex-col items-center justify-center p-6 bg-white border border-gray-200 rounded-2xl hover:border-black shadow-sm transition-all group"
             >
-              <div className="w-14 h-14 bg-yellow-400/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-yellow-400 transition-all duration-300">
-                <IconComponent className="w-7 h-7 text-yellow-400 group-hover:text-luxury-bg transition-colors" />
+              <div className="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center mb-4 group-hover:bg-black transition-all duration-300">
+                <IconComponent className="w-7 h-7 text-black group-hover:text-white transition-colors" />
               </div>
-              <span className="text-lg font-bold text-luxury-ink tracking-tight group-hover:text-yellow-400 transition-colors">{region.name}</span>
+              <span className="text-lg font-bold text-black tracking-tight">{region.name}</span>
             </Link>
           );
         })}
