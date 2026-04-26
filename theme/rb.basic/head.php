@@ -23,7 +23,10 @@ if(defined('_INDEX_')) { // index에서만 실행
     include G5_BBS_PATH.'/newwin.inc.php'; // 팝업레이어
 }
 
-include_once(G5_PATH.'/rb/rb.mod/alarm/alarm.php'); // 실시간 알림
+$rb_alarm_path = G5_PATH.'/rb/rb.mod/alarm/alarm.php';
+if (is_file($rb_alarm_path)) {
+    include_once($rb_alarm_path); // 실시간 알림
+}
 ?>
 
 

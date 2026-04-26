@@ -43,15 +43,21 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
 			$i = 0;
 			foreach( $menu_datas as $row ){
 				if( empty($row) ) continue;
+                $sub_menus = array();
+                foreach ((array) $row['sub'] as $row2) {
+                    if (!empty($row2)) {
+                        $sub_menus[] = $row2;
+                    }
+                }
+                $has_sub_menu = count($sub_menus) > 0;
             ?>
-                <li class="gnb_1dli">
-                    <a href="<?php echo $row['me_link']; ?>" target="_<?php echo $row['me_target']; ?>" class="gnb_1da"><?php echo $row['me_name'] ?></a>
+                <li class="gnb_1dli<?php echo $has_sub_menu ? ' gnb_1dli_has_sub' : ''; ?>">
+                    <a href="<?php echo $row['me_link']; ?>" target="_<?php echo $row['me_target']; ?>" class="gnb_1da<?php echo $has_sub_menu ? ' gnb_1da_toggle' : ''; ?>"><?php echo $row['me_name'] ?></a>
                     <?php
                     $k = 0;
-                    foreach( (array) $row['sub'] as $row2 ){
-						if( empty($row2) ) continue;
+                    foreach( $sub_menus as $row2 ){
                         if($k == 0)
-                            echo '<button type="button" class="btn_gnb_op btn_gnb_cl"><span class="sound_only">하위분류</span></button><ul class="gnb_2dul">'.PHP_EOL;
+                            echo '<button type="button" class="btn_gnb_op btn_gnb_cl" aria-expanded="false"><span class="sound_only">하위분류</span></button><ul class="gnb_2dul">'.PHP_EOL;
                     ?>
                         <li class="gnb_2dli"><a href="<?php echo $row2['me_link']; ?>" target="_<?php echo $row2['me_target']; ?>" class="gnb_2da"><span></span><?php echo $row2['me_name'] ?></a></li>
                     <?php
@@ -167,9 +173,34 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
 
             });
 
+            function toggleMobileSubMenu($item) {
+                var $button = $item.children(".btn_gnb_op");
+                var $submenu = $item.children(".gnb_2dul");
+
+                if (!$submenu.length) return;
+
+                $item.siblings(".gnb_1dli").removeClass("is-open").children(".gnb_2dul").slideUp(200);
+                $item.siblings(".gnb_1dli").children(".btn_gnb_op").addClass("btn_gnb_cl").attr("aria-expanded", "false");
+
+                var isOpen = $submenu.is(":visible");
+                if (isOpen) {
+                    $item.removeClass("is-open");
+                    $button.addClass("btn_gnb_cl").attr("aria-expanded", "false");
+                    $submenu.stop(true, true).slideUp(220);
+                } else {
+                    $item.addClass("is-open");
+                    $button.removeClass("btn_gnb_cl").attr("aria-expanded", "true");
+                    $submenu.stop(true, true).slideDown(220);
+                }
+            }
+
+            $(".gnb_1da_toggle").on("click", function(e){
+                e.preventDefault();
+                toggleMobileSubMenu($(this).closest(".gnb_1dli"));
+            });
+
             $(".btn_gnb_op").click(function(){
-                $(this).toggleClass("btn_gnb_cl").next(".gnb_2dul").slideToggle(300);
-                
+                toggleMobileSubMenu($(this).closest(".gnb_1dli"));
             });
 
             $(".hd_closer").on("click", function() {

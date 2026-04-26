@@ -55,7 +55,7 @@ box-shadow:0 0 5px rgba(55,55,5,0.4)}
 .gnb_1dli button {position:absolute;top:5px;right:0;width:40px;height:40px;overflow:hidden;border:0;font-size:1.2em;background:#fff;background:url(../img/mobile/gnb_bg2.png) no-repeat 50% 50%;text-indent:-9999px}
 .gnb_1dli button.btn_gnb_cl {background:url(../img/mobile/gnb_bg.png) no-repeat 50% 50%}
 .gnb_1da {padding:5px 20px;border-bottom:1px solid #eee;font-weight:bold;font-size:1.2em;}
-.gnb_2dul {display:block;background:#fafafa}
+.gnb_2dul {display:none;background:#fafafa}
 .gnb_2da {padding-left:30px}
 #gnb_close {display:block;position:absolute;right:8px;top:10px;z-index:99;font-weight:bold;margin:0;height:40px;width:40px;border:0;color:#bfb8b2;font-size:2em;background:transparent}
 

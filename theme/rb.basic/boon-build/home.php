@@ -801,6 +801,8 @@ window.__RB_STATIC_EXTRA__ = <?php echo json_encode(
             var matchesSearch = !query || search.indexOf(query) !== -1;
             var show = matchesRegion && matchesSearch;
             card.hidden = !show;
+            card.classList.toggle('is-hidden', !show);
+            card.style.display = show ? '' : 'none';
             if (show) visible += 1;
         });
 

@@ -2845,6 +2845,11 @@ body.boon-build-home footer .footer_lux_tagline__sub {
     box-shadow: 0 18px 36px rgba(17, 24, 39, 0.11);
 }
 
+.gg-card.is-hidden,
+.gg-card[hidden] {
+    display: none !important;
+}
+
 .gg-card__image {
     position: relative;
     height: 13rem;
