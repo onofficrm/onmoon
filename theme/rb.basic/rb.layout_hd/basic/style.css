@@ -153,6 +153,29 @@
     gap: 6px;
 }
 
+@media all and (min-width: 1025px) {
+    #header .cbp-hrmenu .cbp-hrsub {
+        width: auto !important;
+        max-width: min(920px, calc(100vw - 48px));
+    }
+
+    #header .cbp-hrmenu .cbp-hrsub-inner > div {
+        width: auto !important;
+        min-width: 180px;
+        max-width: 920px;
+    }
+
+    #header .cbp-hrmenu .cbp-hrsub-inner > div > ul {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-rows: repeat(5, minmax(42px, auto));
+        grid-auto-columns: minmax(180px, 1fr);
+        gap: 6px 10px;
+        width: max-content;
+        max-width: calc(100vw - 80px);
+    }
+}
+
 #header .cbp-hrmenu .cbp-hrsub-inner > div a {
     display: flex;
     align-items: center;
