@@ -558,3 +558,96 @@
         padding-right: 0;
     }
 }
+
+/* Global white header theme */
+#header {
+    background: rgba(255, 255, 255, 0.96) !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08) !important;
+    color: #111111 !important;
+}
+
+#header a,
+#header button,
+#header .member_info_wrap,
+#header .member_info_wrap a,
+#header .member_info_wrap a span,
+#header .cbp-hrmenu > ul > li > a {
+    color: #111111 !important;
+}
+
+#header .cbp-hrmenu > ul > li:hover > a,
+#header .cbp-hrmenu > ul > li.cbp-hropen > a {
+    background: #f3f4f6 !important;
+    color: #111111 !important;
+    box-shadow: inset 0 0 0 1px #e5e7eb !important;
+}
+
+#header .cbp-hrmenu > ul > li > a::before {
+    background: #111111 !important;
+}
+
+#header .cbp-hrmenu .cbp-hrsub,
+#header .cbp-hrmenu .cbp-hrsub::before,
+#header #search_box_wrap {
+    background: #ffffff !important;
+    border-color: #e5e7eb !important;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12) !important;
+}
+
+#header .cbp-hrmenu .cbp-hrsub-inner > div a,
+#header .gnb_wrap .snb_wrap .qm_wrap a,
+#header .gnb_wrap .snb_wrap .qm_wrap button:not(.rb-translate-button),
+#header .gnb_wrap .snb_wrap .my_btn_wrap .btn_round,
+#header #search_box_wrap input[type="text"],
+#header #search_box_wrap .ser_ul_pd .popular-word a,
+#header #search_box_wrap .ser_label,
+#header .tog_wrap button {
+    background: #ffffff !important;
+    border-color: #e5e7eb !important;
+    color: #111111 !important;
+}
+
+#header .gnb_wrap .snb_wrap .my_btn_wrap .btn_round.arr_bg {
+    background: #111111 !important;
+    color: #ffffff !important;
+    box-shadow: 0 12px 24px rgba(17, 17, 17, 0.14) !important;
+}
+
+#header .gnb_wrap .snb_wrap .qm_wrap a svg path,
+#header .gnb_wrap .snb_wrap .qm_wrap button:not(.rb-translate-button) svg path,
+#header .tog_wrap button svg path {
+    fill: #111111 !important;
+}
+
+#header .gnb_wrap .snb_wrap .qm_wrap a span {
+    background: #8b5cf6 !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+@media all and (max-width: 1024px) {
+    .cbp-hrmenu-btm,
+    .cbp-hrmenu-btm > .user_prof_bg {
+        background: #ffffff !important;
+        color: #111111 !important;
+        box-shadow: 18px 0 44px rgba(15, 23, 42, 0.12) !important;
+    }
+
+    .cbp-hrmenu-btm > .user_prof_btns {
+        border-bottom-color: #e5e7eb !important;
+    }
+
+    .cbp-hrmenu-btm > ul > li {
+        border-bottom-color: #e5e7eb !important;
+    }
+
+    .cbp-hrmenu-btm > ul > li > a {
+        color: #111111 !important;
+    }
+
+    #m_gnb_close_btn {
+        background: #ffffff !important;
+        border-color: #e5e7eb !important;
+    }
+}

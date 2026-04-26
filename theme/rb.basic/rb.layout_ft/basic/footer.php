@@ -22,27 +22,6 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_THEME_URL.'/rb.layout_ft/'.$rb
                 <p class="footer_lux_tagline__sub">언제나 고객님의 편안한 휴식을 위해 최선을 다하겠습니다.</p>
             </div>
         </div>
-        <div class="footer_gnb">
-            <div class="inner" style="width:<?php echo $tb_width_inner ?>; <?php echo $tb_width_padding ?>">
-                <ul class="footer_gnb_ul1 pc">
-                    <a href="<?php echo get_pretty_url('content', 'provision'); ?>">서비스 이용약관</a>
-                    <a href="<?php echo get_pretty_url('content', 'privacy'); ?>">개인정보 처리방침</a>
-                </ul>
-                <ul class="footer_gnb_ul2">
-                    <?php if(defined('G5_COMMUNITY_USE') == false || G5_COMMUNITY_USE) { ?>
-                        <?php if (defined('G5_USE_SHOP') && G5_USE_SHOP) { ?>
-                        <a href="<?php echo G5_SHOP_URL ?>/">마켓</a>
-                        <?php } ?>
-                    <?php } ?>
-
-                    <a href="<?php echo G5_BBS_URL ?>/qalist.php">1:1 문의</a>
-                    <a href="<?php echo G5_BBS_URL ?>/faq.php">FAQ</a>
-                    <a href="<?php echo G5_URL ?>/rb/new.php">새글</a>
-                    <a href="<?php echo G5_BBS_URL ?>/current_connect.php">접속자 <?php echo connect("theme/rb.connect"); ?></a>
-                </ul>
-                <div class="cb"></div>
-            </div>
-        </div>
         <div class="footer_copy">
             <div class="inner" style="width:<?php echo $tb_width_inner ?>; <?php echo $tb_width_padding ?>">
                 <ul class="footer_copy_ul1">

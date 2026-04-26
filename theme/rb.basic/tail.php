@@ -104,9 +104,11 @@ if(G5_COMMUNITY_USE === false) {
 
 
 
+<?php if (!defined('_INDEX_')) { ?>
 <button type="button" id="m_gnb_close_btn" class="mobile">
     <img src="<?php echo G5_URL ?>/rb/rb.config/image/icon_close.svg">
 </button>
+<?php } ?>
 
 <script>
     $(document).ready(function() {

@@ -269,3 +269,51 @@ footer .footer_btn i img {
         justify-content: center;
     }
 }
+
+/* Global white footer theme */
+footer {
+    background: #ffffff !important;
+    color: #111111 !important;
+    border-top: 1px solid #e5e7eb !important;
+}
+
+footer a,
+footer dd,
+footer .footer_lux_tagline__main,
+footer .footer_lux_tagline__accent,
+footer .footer_lux_tagline__sub,
+footer .footer_copy_ul1_li2 dd,
+footer .footer_copy_ul1_li2 dd:first-child,
+footer .footer_copy_ul1_li3 {
+    color: #111111 !important;
+}
+
+footer .footer_lux_tagline,
+footer .footer_gnb,
+footer .footer_copy,
+footer .footer_copy_ul1_li3,
+footer .footer_sns_ico,
+footer .footer_btn,
+footer .footer_copy_ul1_li1 .mobile a {
+    background: #ffffff !important;
+    border-color: #e5e7eb !important;
+    color: #111111 !important;
+    box-shadow: none !important;
+}
+
+footer .footer_lux_tagline {
+    padding: 3rem 0 2rem;
+}
+
+footer .footer_copy {
+    padding: 2rem 0 3rem;
+}
+
+footer .footer_copy_ul1_li3 {
+    border: 1px solid #e5e7eb !important;
+}
+
+footer .footer_btn {
+    border: 1px solid #111111 !important;
+    border-radius: 999px;
+}

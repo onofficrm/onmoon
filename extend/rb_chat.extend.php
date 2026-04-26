@@ -32,30 +32,7 @@ function user_online($mb_id) {
 if (isset($chat_set['ch_use']) && $chat_set['ch_use'] == 1) {
     if ($is_member) { 
         if (isset($chat_set['ch_level']) && $member['mb_level'] >= $chat_set['ch_level']) {
-            // 하단부 버튼을 HOOK으로 추가
-            add_event('tail_sub', 'chat_btn');
-
-            function chat_btn() {
-                global $rb_hook_tail, $member, $chat_set; // 전역 변수 선언
-                if ($rb_hook_tail) {
-                    // 읽지 않은 메세지 갯수 확인
-                    $recv_member_id = isset($member['mb_id']) ? $member['mb_id'] : '';
-                    $chat_recv = sql_fetch("SELECT COUNT(*) as cnt FROM rb_chat WHERE me_recv_mb_id = '{$recv_member_id}' AND me_read_datetime = '0000-00-00 00:00:00'");
-
-                    echo '<a href="'.G5_URL.'/rb/chat.php" class="chat_open_btn chat_btn_pos_'.$chat_set['ch_position'].'" onclick="win_chat(this.href); return false;" title="메세지" style="left:auto; right:auto; '.$chat_set['ch_position'].':'.$chat_set['ch_position_x'].'px; bottom:'.$chat_set['ch_position_y'].'px;"><div class="chat_open_btn_inner"><img src="'.G5_URL.'/rb/rb.mod/chat/image/chat_ci.svg">';
-                    if (isset($chat_recv['cnt']) && $chat_recv['cnt'] > 0) {
-                        echo '<span class="font-B">'.$chat_recv['cnt'].'</span>';
-                    }
-                    echo '</div></a>
-                    <script>
-                    var win_chat = function(href) {
-                        var new_win = window.open(href, "win_chat", "left=100,top=100,width=500,height=700,scrollbars=1");
-                        new_win.focus();
-                    }
-                    </script>';
-                }
-
-            }
+            // 플로팅 채팅 버튼은 메인 화면에서 노출하지 않습니다.
         }
     }
     
