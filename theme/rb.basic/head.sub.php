@@ -15,6 +15,10 @@ else {
 
 $g5['title'] = strip_tags($g5['title']);
 $g5_head_title = strip_tags($g5_head_title);
+$gg_board_seo_meta = function_exists('gg_get_board_view_seo_meta') ? gg_get_board_view_seo_meta() : null;
+if (!empty($gg_board_seo_meta['title'])) {
+    $g5_head_title = $gg_board_seo_meta['title'];
+}
 
 // 현재 접속자
 // 게시판 제목에 ' 포함되면 오류 발생
@@ -48,62 +52,38 @@ header("Pragma: no-cache"); // HTTP/1.0
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <!-- } -->
 
-<?php if(isset($seo['se_title']) && $seo['se_title'] || isset($seo['se_keywords']) && $seo['se_keywords'] || isset($seo['se_description']) && $seo['se_description']) { ?>
+<?php if(!$gg_board_seo_meta && (isset($seo['se_title']) && $seo['se_title'] || isset($seo['se_keywords']) && $seo['se_keywords'] || isset($seo['se_description']) && $seo['se_description'])) { ?>
 <!-- META { -->
 <meta name="title" content="<?php echo $seo['se_title'] ?>" />
 <meta name="keywords" content="<?php echo $seo['se_keywords'] ?>" />
 <meta name="description" content="<?php echo $seo['se_description'] ?>" />
 <meta name="robots" content="index,follow" />
-<!-- } --
+<!-- } -->
 <?php } ?>
 
+<?php if($gg_board_seo_meta) { ?>
+<!-- BOARD SEO { -->
+<?php echo gg_render_board_view_seo_meta($gg_board_seo_meta); ?>
+<!-- } -->
+<?php } else { ?>
 <!-- OG { -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="<?php echo getCurrentUrl() ?>" />
-<?php if(isset($bo_table) && $bo_table && $wr_id) { ?>
-   
-    <?php                     
-        //게시물 정보
-        $views = get_view($write, $board, $board_skin_path);
-        $meta_title = $views['wr_subject']; 
-
-        if(isset($views['file'][0]['file']) && $views['file'][0]['file']) {
-            $meta_img = G5_DATA_URL.'/file/'.$bo_table.'/'.urlencode($views['file'][0]['file']);
-        } else { 
-            $matches = get_editor_image($views['wr_content']);
-            for ($i = 0; $i < count($matches[1]); $i++){
-                $img = $matches[1][$i];
-                preg_match("/src=[\'\"]?([^>\'\"]+[^>\'\"]+)/i", $img, $m); $src = $m[1];
-            }
-            $meta_img = isset($src) ? $src : '';
-        }
-        $meta_description_cut = strip_tags($views['wr_content']);
-        $meta_description_cut = preg_replace("/<(.*?)\>/","",$meta_description_cut);
-        $meta_description_cut = preg_replace("/&nbsp;/","",$meta_description_cut);
-        $meta_description = cut_str($meta_description_cut,100);
-    ?>
-    <meta property="og:title" content="<?php echo $views['wr_subject'] ?>"/>
-    <meta property="og:description" content="<?php echo $meta_description; ?>" />
-    <meta property="og:image" content="<?php echo $meta_img ?>?ver=<?php echo G5_TIME_YMDHIS ?>"/>
-    
-<?php } else { ?>
-   
-    <?php if(isset($seo['se_og_title']) && $seo['se_og_title']) { ?>
-        <meta property="og:title" content="<?php echo $seo['se_og_title'] ?>" />
+<?php if(isset($seo['se_og_title']) && $seo['se_og_title']) { ?>
+    <meta property="og:title" content="<?php echo $seo['se_og_title'] ?>" />
+<?php } ?>
+<?php if(isset($seo['se_og_description']) && $seo['se_og_description']) { ?>
+    <?php if(defined('_INDEX_')) { ?>
+        <meta property="og:description" content="<?php echo $seo['se_og_description'] ?>" />
+    <?php } else { ?>
+        <meta property="og:description" content="<?php echo $g5_head_title; ?>" />
     <?php } ?>
-    <?php if(isset($seo['se_og_description']) && $seo['se_og_description']) { ?>
-        <?php if(defined('_INDEX_')) { ?>
-            <meta property="og:description" content="<?php echo $seo['se_og_description'] ?>" />
-        <?php } else { ?>
-            <meta property="og:description" content="<?php echo $g5_head_title; ?>" />
-        <?php } ?>
-    <?php } ?>
-    <?php if(isset($seo['se_og_image']) && $seo['se_og_image']) { ?>
-        <meta property="og:image" content="<?php echo G5_URL ?>/data/seo/og_image?ver=<?php echo G5_TIME_YMDHIS ?>" />
-    <?php } ?>
-
+<?php } ?>
+<?php if(isset($seo['se_og_image']) && $seo['se_og_image']) { ?>
+    <meta property="og:image" content="<?php echo G5_URL ?>/data/seo/og_image?ver=<?php echo G5_TIME_YMDHIS ?>" />
 <?php } ?>
 <!-- } -->
+<?php } ?>
 
 <!-- ICO { -->
 <?php if(isset($seo['se_favicon']) && $seo['se_favicon']) { ?>
@@ -125,8 +105,15 @@ if(isset($seo['se_google_meta']) && $seo['se_google_meta']) {
 
 
 <?php
-if(isset($config['cf_add_meta']) && $config['cf_add_meta'])
-    echo $config['cf_add_meta'].PHP_EOL;
+if(isset($config['cf_add_meta']) && $config['cf_add_meta']) {
+    $gg_add_meta = $config['cf_add_meta'];
+    if ($gg_board_seo_meta && function_exists('gg_filter_duplicate_board_seo_meta')) {
+        $gg_add_meta = gg_filter_duplicate_board_seo_meta($gg_add_meta);
+    }
+    if (trim($gg_add_meta) !== '') {
+        echo $gg_add_meta.PHP_EOL;
+    }
+}
 ?>
 
 <title><?php echo $g5_head_title; ?></title>
